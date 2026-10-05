@@ -149,8 +149,7 @@ html.a11y-contrast .glass-plate { background: #000; border-color: #fff; -webkit-
 
 /* hero slideshow */
 .hero-slide { opacity: 0; transform: scale(1); transition: opacity 1.4s ease; will-change: opacity; }
-.hero-slide.is-active { opacity: 1; animation: hero-zoom 9s ease-out both; }
-@keyframes hero-zoom { from { transform: scale(1); } to { transform: scale(1.07); } }
+.hero-slide.is-active { opacity: 1; }
 .hero-fill { animation-name: hero-fill; animation-timing-function: linear; animation-fill-mode: both; width: 0; }
 @keyframes hero-fill { from { width: 0; } to { width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; animation: none !important; } .hero-slide.is-active { transform: none; } }
