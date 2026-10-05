@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'About us',
   description: 'Fresca Premier Fresh Ltd is a Kenyan fresh produce export company supplying premium-quality vegetables to international markets.',
 })
@@ -19,7 +19,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
 
 <template>
   <div>
-    <PageHero eyebrow="About us" image="/img/stock/field-hills.jpg" alt="Green crop fields under a soft evening sky" text="A Kenyan fresh produce exporter built on quality, food safety and long-term partnerships.">
+    <PageHero eyebrow="About us" image="/img/stock/field-hills.webp" alt="Green crop fields under a soft evening sky" text="A Kenyan fresh produce exporter built on quality, food safety and long-term partnerships.">
       Premium produce, <span class="serif font-normal">grown with care.</span>
     </PageHero>
 
@@ -33,7 +33,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
         <NuxtLink to="/products" class="btn btn-dark mt-8">See what we grow <span class="arr">↗</span></NuxtLink>
       </div>
       <div class="reveal relative">
-        <img :src="$img('/img/packhouse.jpg')" alt="Packhouse team grading green beans" class="w-full aspect-[4/5] object-cover rounded-[2rem]" width="960" height="1280" loading="lazy">
+        <img :src="$img('/img/packhouse.webp')" alt="Packhouse team grading green beans" class="w-full aspect-[4/5] object-cover rounded-[2rem]" width="960" height="1280" loading="lazy">
         <div class="glass absolute left-4 bottom-4 right-4 sm:right-auto rounded-2xl px-5 py-4 text-white">
           <p class="serif text-xl">Graded by hand, packed with care.</p>
         </div>
@@ -79,6 +79,8 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
       </ul>
     </section>
 
-    <CtaBand image="/img/stock/crop-rows.jpg" />
+    <DownloadCard />
+
+    <CtaBand image="/img/stock/crop-rows.webp" />
   </div>
 </template>

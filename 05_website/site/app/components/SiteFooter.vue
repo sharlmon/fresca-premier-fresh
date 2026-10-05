@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] bg-forest text-white border border-white/10">
       <div class="px-7 sm:px-12 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <img :src="$img('/img/logo.png')" alt="Fresca Premier Fresh" class="h-16 w-auto rounded-2xl bg-white p-2" width="80" height="64">
+          <img :src="$img('/img/logo.webp')" alt="Fresca Premier Fresh" class="h-16 w-auto rounded-2xl bg-white p-2" width="80" height="64">
           <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/70">Premium Kenyan fresh vegetables, responsibly grown and carefully delivered to international markets.</p>
           <NuxtLink to="/contact" class="btn btn-lime mt-6">Request a quote <span class="arr">↗</span></NuxtLink>
         </div>
@@ -24,7 +24,7 @@
       </div>
       <div class="border-t border-white/10 px-7 sm:px-12 py-5 text-xs text-white/50 flex flex-wrap justify-between gap-2">
         <span>© {{ new Date().getFullYear() }} Fresca Premier Fresh Ltd. All rights reserved.</span>
-        <span>Quality · Reliability · Trust</span>
+        <span class="flex flex-wrap gap-x-5 gap-y-1"><NuxtLink to="/privacy/" class="hover:text-lime transition">Privacy Policy</NuxtLink><span>Quality · Reliability · Trust</span></span>
       </div>
     </div>
   </footer>

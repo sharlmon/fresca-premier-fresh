@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { $img } = useNuxtApp()
-withDefaults(defineProps<{ image?: string }>(), { image: '/img/stock/farmer.jpg' })
+withDefaults(defineProps<{ image?: string }>(), { image: '/img/stock/farmer.webp' })
 </script>
 
 <template>

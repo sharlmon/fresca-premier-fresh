@@ -1,35 +1,35 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Products',
   description: 'French beans, snow peas, sugar snap peas, baby corn and a wider range of fresh produce, packed to your specification and exported from Kenya.',
 })
 const { $img } = useNuxtApp()
 
 const core = [
-  { t: 'French Beans', tag: 'Extra fine & fine', d: 'Also known as haricot verts. Tender, slender pods, grown from seedlings and graded for consistency.', img: '/img/stock/beans-dark.jpg' },
-  { t: 'Snow Peas', tag: 'Mangetout', d: 'Flat, tender-podded peas with an excellent fibre content, sorted and packed for freshness.', img: '/img/stock/snow-peas-dew.jpg' },
-  { t: 'Sugar Snap Peas', tag: 'Crisp & sweet', d: 'Rounded, crunchy pods with a naturally sweet flavour and good fibre content.', img: '/img/stock/snap-pea-vine.jpg' },
-  { t: 'Baby Corn', tag: 'Tray-packed', d: 'Tender baby corn, trimmed and packed in punnets ready for retail.', img: '/img/baby-corn.jpg' },
+  { t: 'French Beans', tag: 'Extra fine & fine', d: 'Also known as haricot verts. Tender, slender pods, grown from seedlings and graded for consistency.', img: '/img/stock/beans-dark.webp' },
+  { t: 'Snow Peas', tag: 'Mangetout', d: 'Flat, tender-podded peas with an excellent fibre content, sorted and packed for freshness.', img: '/img/stock/snow-peas-dew.webp' },
+  { t: 'Sugar Snap Peas', tag: 'Crisp & sweet', d: 'Rounded, crunchy pods with a naturally sweet flavour and good fibre content.', img: '/img/stock/snap-pea-vine.webp' },
+  { t: 'Baby Corn', tag: 'Tray-packed', d: 'Tender baby corn, trimmed and packed in punnets ready for retail.', img: '/img/baby-corn.webp' },
 ]
 const range = [
-  { t: 'Avocados', d: 'Creamy, oil-rich fruit with a rich, buttery flavour.', img: '/img/products/avocado.png' },
-  { t: 'Mangoes', d: 'Juicy, sweet fruit that is as good fresh as it is in desserts.', img: '/img/products/mango.png' },
-  { t: 'Passion Fruit', d: 'Aromatic, tangy pulp that is a good source of vitamin C.', img: '/img/products/passion-fruit.png' },
-  { t: 'Carrots', d: 'Crisp, naturally sweet roots rich in beta-carotene.', img: '/img/products/carrots.png' },
-  { t: 'Chillies', d: 'Bird’s-eye chillies with a clean, fiery heat; green, red or mixed punnets.', img: '/img/products/chillies.png' },
-  { t: 'Rosemary', d: 'A fragrant herb, prized in the kitchen for its aroma and flavour.', img: '/img/products/rosemary.png' },
-  { t: 'Chives', d: 'Mild, onion-flavoured herb for garnishing and flavouring.', img: '/img/products/chives.png' },
+  { t: 'Avocados', d: 'Creamy, oil-rich fruit with a rich, buttery flavour.', img: '/img/products/avocado.webp' },
+  { t: 'Mangoes', d: 'Juicy, sweet fruit that is as good fresh as it is in desserts.', img: '/img/products/mango.webp' },
+  { t: 'Passion Fruit', d: 'Aromatic, tangy pulp that is a good source of vitamin C.', img: '/img/products/passion-fruit.webp' },
+  { t: 'Carrots', d: 'Crisp, naturally sweet roots rich in beta-carotene.', img: '/img/products/carrots.webp' },
+  { t: 'Chillies', d: 'Bird’s-eye chillies with a clean, fiery heat; green, red or mixed punnets.', img: '/img/products/chillies.webp' },
+  { t: 'Rosemary', d: 'A fragrant herb, prized in the kitchen for its aroma and flavour.', img: '/img/products/rosemary.webp' },
+  { t: 'Chives', d: 'Mild, onion-flavoured herb for garnishing and flavouring.', img: '/img/products/chives.webp' },
 ]
 const pack = [
-  { t: 'Extra-fine beans carton', s: '12 × 250 g', img: '/img/packaging/beans-carton.jpg' },
-  { t: 'Mangetout carton', s: '12 × 250 g', img: '/img/packaging/mangetout-carton.jpg' },
-  { t: 'Retail punnets', s: 'Beans, peas, baby corn, chillies', img: '/img/packaging/punnet.jpg' },
+  { t: 'Extra-fine beans carton', s: '12 × 250 g', img: '/img/packaging/beans-carton.webp' },
+  { t: 'Mangetout carton', s: '12 × 250 g', img: '/img/packaging/mangetout-carton.webp' },
+  { t: 'Retail punnets', s: 'Beans, peas, baby corn, chillies', img: '/img/packaging/punnet.webp' },
 ]
 </script>
 
 <template>
   <div>
-    <PageHero eyebrow="What we grow" image="/img/stock/snap-pea-vine.jpg" alt="A sugar snap pea hanging on the vine" pos="center 40%" text="Premium vegetables, carefully selected, graded and packed for importers, retailers and food-service companies.">
+    <PageHero eyebrow="What we grow" image="/img/stock/snap-pea-vine.webp" alt="A sugar snap pea hanging on the vine" pos="center 40%" text="Premium vegetables, carefully selected, graded and packed for importers, retailers and food-service companies.">
       Fresh from <span class="serif font-normal">our farms.</span>
     </PageHero>
 
@@ -95,6 +95,8 @@ const pack = [
       </div>
     </section>
 
-    <CtaBand image="/img/stock/crop-rows.jpg" />
+    <DownloadCard />
+
+    <CtaBand image="/img/stock/crop-rows.webp" />
   </div>
 </template>

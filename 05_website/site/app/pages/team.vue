@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Team',
   description: 'Meet the people behind Fresca Premier Fresh Ltd: leadership, operations, compliance and finance.',
 })
@@ -20,7 +20,7 @@ const initials = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((w)
 
 <template>
   <div>
-    <PageHero eyebrow="Our team" image="/img/stock/bean-plant.jpg" alt="Green bean plant" text="Experienced people across leadership, operations, compliance and finance, all focused on one thing: dependable produce.">
+    <PageHero eyebrow="Our team" image="/img/stock/bean-plant.webp" alt="Green bean plant" text="Experienced people across leadership, operations, compliance and finance, all focused on one thing: dependable produce.">
       The people behind <span class="serif font-normal">every carton.</span>
     </PageHero>
 
@@ -71,6 +71,6 @@ const initials = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((w)
       </div>
     </section>
 
-    <CtaBand image="/img/stock/farmer.jpg" />
+    <CtaBand image="/img/stock/farmer.webp" />
   </div>
 </template>

@@ -1,4 +1,24 @@
 <script setup lang="ts">
+const root = String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Fresca Premier Fresh Ltd',
+      alternateName: 'Fresca Premier Fresh',
+      url: root + '/',
+      logo: root + '/img/logo.png',
+      image: root + '/og.jpg',
+      description: 'Kenyan fresh produce exporter: French beans, snow peas, sugar snap peas, baby corn and fresh vegetables for international markets.',
+      email: 'info@frescapremierfresh.com',
+      telephone: '+254700752341',
+      address: { '@type': 'PostalAddress', streetAddress: 'Trystar Go Down, Airport North Road, P.O. Box 3468-00200', addressLocality: 'Nairobi', addressCountry: 'KE' },
+      contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', telephone: '+254700752341', email: 'info@frescapremierfresh.com' }],
+    }),
+  }],
+})
 // fade sections in as they scroll into view
 onMounted(() => {
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }), { threshold: 0.12 })
@@ -13,5 +33,6 @@ onMounted(() => {
     <SiteHeader />
     <main class="flex-1"><NuxtPage /></main>
     <SiteFooter />
+    <WhatsAppButton />
   </div>
 </template>

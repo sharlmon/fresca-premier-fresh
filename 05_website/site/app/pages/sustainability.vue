@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Sustainability',
   description: 'We work with local farmers and communities to promote sustainable agriculture, protect the environment and deliver goodness that lasts.',
 })
@@ -14,7 +14,7 @@ const items = [
 
 <template>
   <div>
-    <PageHero eyebrow="Sustainability" image="/img/stock/farmer.jpg" alt="A farmer tending green crops" pos="center 30%" text="We work with local farmers and communities to promote sustainable agriculture, protect the environment and deliver goodness that lasts.">
+    <PageHero eyebrow="Sustainability" image="/img/stock/farmer.webp" alt="A farmer tending green crops" pos="center 30%" text="We work with local farmers and communities to promote sustainable agriculture, protect the environment and deliver goodness that lasts.">
       Sustainable today, <span class="serif font-normal">better tomorrow.</span>
     </PageHero>
 
@@ -33,7 +33,7 @@ const items = [
     </section>
 
     <section class="relative isolate overflow-hidden mx-3 sm:mx-4 rounded-[2rem] sm:rounded-[3rem]">
-      <img :src="$img('/img/sustainability.jpg')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="1600" height="900" loading="lazy">
+      <img :src="$img('/img/sustainability.webp')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="1600" height="900" loading="lazy">
       <div class="absolute inset-0 -z-10 bg-gradient-to-r from-forest/95 via-forest/75 to-forest/30" />
       <div class="mx-auto max-w-6xl px-6 sm:px-10 py-24 text-white">
         <p class="reveal serif text-3xl sm:text-5xl leading-tight max-w-2xl">Growing together with our farmers, season after season.</p>
@@ -44,6 +44,6 @@ const items = [
       </div>
     </section>
 
-    <CtaBand image="/img/stock/crop-rows.jpg" />
+    <CtaBand image="/img/stock/crop-rows.webp" />
   </div>
 </template>

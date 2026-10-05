@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   ssr: true,
   css: ['~/assets/css/main.css'],
   vite: { plugins: [tailwindcss()] },
-  nitro: { prerender: { crawlLinks: true, routes: ['/'] } },
+  runtimeConfig: { public: { siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://frescapremierfresh.com', preview } },
+  nitro: { prerender: { crawlLinks: true, routes: ['/', '/sitemap.xml', '/robots.txt', '/404.html'] } },
   app: {
     baseURL: base,
     head: {

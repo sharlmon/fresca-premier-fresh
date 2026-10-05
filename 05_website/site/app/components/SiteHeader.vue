@@ -23,7 +23,7 @@ watch(() => route.fullPath, () => (open.value = false))
     <div class="mx-auto max-w-6xl rounded-full h-16 pl-3 pr-2 flex items-center justify-between transition-all duration-300"
          :class="overHero ? 'glass text-white' : 'bg-surface/85 backdrop-blur-xl text-fg shadow-lg shadow-black/10 border border-fg/10'">
       <NuxtLink to="/" class="flex items-center gap-3" aria-label="Fresca Premier Fresh – home">
-        <img :src="$img('/img/logo.png')" alt="" class="h-11 w-auto rounded-full bg-white p-1" width="52" height="40">
+        <img :src="$img('/img/logo.webp')" alt="" class="h-11 w-auto rounded-full bg-white p-1" width="52" height="40">
         <span class="font-semibold tracking-tight hidden sm:block">Fresca <span class="serif font-normal">Premier Fresh</span></span>
       </NuxtLink>
       <nav class="hidden lg:flex items-center gap-1 text-sm font-medium" aria-label="Main">

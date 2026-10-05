@@ -61,6 +61,8 @@ async function submit() {
         <a :href="mailto" class="font-semibold text-accent underline">send it by email instead</a>.
       </div>
 
+      <p class="text-xs text-fg/55 leading-relaxed">By sending this message you agree that we may use your details to reply to you. See our <NuxtLink to="/privacy/" class="font-semibold text-accent underline">Privacy Policy</NuxtLink>.</p>
+
       <div class="flex flex-wrap items-center gap-4 pt-1">
         <button type="submit" class="btn btn-dark" :disabled="state === 'sending'">{{ state === 'sending' ? 'Sending…' : 'Send message' }} <span class="arr">↗</span></button>
         <span class="text-xs text-fg/55">Or email <a href="mailto:info@frescapremierfresh.com" class="font-semibold text-accent hover:underline">info@frescapremierfresh.com</a></span>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Quality & Safety',
   description: 'Strict quality control, full traceability and international food safety compliance at every step from farm to export.',
 })
@@ -17,7 +17,7 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
 
 <template>
   <div>
-    <PageHero eyebrow="Quality & Safety" image="/img/stock/beans-noir.jpg" alt="Fresh green beans" text="Food safety and quality are at the heart of everything we do.">
+    <PageHero eyebrow="Quality & Safety" image="/img/stock/beans-noir.webp" alt="Fresh green beans" text="Food safety and quality are at the heart of everything we do.">
       Quality you can <span class="serif font-normal">trace.</span>
     </PageHero>
 
@@ -40,7 +40,7 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
 
     <!-- chain -->
     <section class="relative isolate overflow-hidden mx-3 sm:mx-4 rounded-[2rem] sm:rounded-[3rem]">
-      <img :src="$img('/img/stock/crop-rows.jpg')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="2000" height="1499" loading="lazy">
+      <img :src="$img('/img/stock/crop-rows.webp')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="2000" height="1499" loading="lazy">
       <div class="absolute inset-0 -z-10 bg-forest/85" />
       <div class="mx-auto max-w-6xl px-5 py-20 text-white">
         <div class="reveal text-center">
@@ -56,6 +56,6 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
       </div>
     </section>
 
-    <CtaBand image="/img/stock/farmer.jpg" />
+    <CtaBand image="/img/stock/farmer.webp" />
   </div>
 </template>
