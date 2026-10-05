@@ -86,19 +86,19 @@ const real = [
 
     <!-- TRUST / STATS -->
     <section class="mx-auto max-w-6xl px-5 py-14 text-center">
-      <p class="reveal text-sm font-semibold text-forest/70">Trusted by importers, retailers &amp; food-service companies across Europe</p>
+      <p class="reveal text-sm font-semibold text-fg/70">Trusted by importers, retailers &amp; food-service companies across Europe</p>
       <div class="reveal mt-8 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
         <div v-for="s in stats" :key="s[1]">
-          <div class="text-4xl sm:text-6xl font-semibold text-forest tracking-tight">{{ s[0] }}</div>
-          <div class="mt-1 text-xs sm:text-sm font-medium text-forest/60">{{ s[1] }}</div>
+          <div class="text-4xl sm:text-6xl font-semibold text-fg tracking-tight">{{ s[0] }}</div>
+          <div class="mt-1 text-xs sm:text-sm font-medium text-fg/60">{{ s[1] }}</div>
         </div>
       </div>
     </section>
 
     <!-- ABOUT / STORY -->
     <section class="mx-auto max-w-6xl px-5 pb-24">
-      <span class="chip bg-pale text-leaf-700 reveal"><i />About us</span>
-      <h2 class="reveal mt-6 text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.2] text-forest">
+      <span class="chip chip-soft reveal"><i />About us</span>
+      <h2 class="reveal mt-6 text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.2] text-fg">
         Premium vegetables from Kenyan
         <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/stock/beans-dark.jpg')})` }" />
         farms, graded and packed for
@@ -108,29 +108,29 @@ const real = [
         <span class="serif font-normal">world.</span>
       </h2>
       <div class="reveal mt-10 grid md:grid-cols-[1fr_auto] gap-8 items-end">
-        <p class="max-w-2xl text-forest/70 leading-relaxed">Fresca Premier Fresh is a Kenyan fresh produce export company. We specialise in the production, sourcing, packing and export of vegetables that meet the highest international standards for quality, food safety and traceability.</p>
+        <p class="max-w-2xl text-fg/70 leading-relaxed">Fresca Premier Fresh is a Kenyan fresh produce export company. We specialise in the production, sourcing, packing and export of vegetables that meet the highest international standards for quality, food safety and traceability.</p>
         <NuxtLink to="/about" class="btn btn-dark">Learn more about us <span class="arr">↗</span></NuxtLink>
       </div>
     </section>
 
     <!-- PRODUCTS -->
-    <section class="bg-pale rounded-[2rem] sm:rounded-[3rem] mx-3 sm:mx-4">
+    <section class="bg-soft rounded-[2rem] sm:rounded-[3rem] mx-3 sm:mx-4">
       <div class="mx-auto max-w-6xl px-5 py-20">
         <div class="reveal flex flex-wrap items-end justify-between gap-5">
           <div>
-            <span class="chip bg-white text-leaf-700"><i />What we grow</span>
-            <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-forest">Our <span class="serif font-normal">products</span></h2>
+            <span class="chip bg-surface text-accent"><i />What we grow</span>
+            <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-fg">Our <span class="serif font-normal">products</span></h2>
           </div>
           <NuxtLink to="/products" class="btn btn-dark">View all products <span class="arr">↗</span></NuxtLink>
         </div>
         <div class="mt-12 grid gap-5 grid-cols-2 lg:grid-cols-4">
           <NuxtLink v-for="(p, n) in products" :key="p.t" to="/products" class="reveal group block" :style="{ transitionDelay: n * 80 + 'ms' }">
-            <div class="overflow-hidden rounded-[1.75rem] aspect-[4/5] bg-white">
+            <div class="overflow-hidden rounded-[1.75rem] aspect-[4/5] bg-surface">
               <img :src="$img(p.img)" :alt="p.t" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" width="800" height="1000" loading="lazy">
             </div>
             <div class="mt-4 flex items-center justify-between gap-3 px-1">
-              <div><h3 class="font-semibold text-forest">{{ p.t }}</h3><p class="text-sm text-forest/60">{{ p.s }}</p></div>
-              <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-forest text-white group-hover:bg-lime group-hover:text-forest group-hover:rotate-45 transition">↗</span>
+              <div><h3 class="font-semibold text-fg">{{ p.t }}</h3><p class="text-sm text-fg/60">{{ p.s }}</p></div>
+              <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-fg text-surface group-hover:bg-lime group-hover:text-forest group-hover:rotate-45 transition">↗</span>
             </div>
           </NuxtLink>
         </div>
@@ -140,17 +140,17 @@ const real = [
     <!-- WHY -->
     <section class="mx-auto max-w-6xl px-5 py-24 grid lg:grid-cols-[.9fr_1.1fr] gap-12">
       <div class="reveal">
-        <span class="chip bg-pale text-leaf-700"><i />Why choose us</span>
-        <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05] text-forest">Quality. Reliability. <span class="serif font-normal">Trust.</span></h2>
-        <p class="mt-6 text-forest/70 leading-relaxed max-w-md">Our products are carefully selected, graded, packed and prepared to meet the specifications of wholesale importers, retailers and food-service companies.</p>
+        <span class="chip chip-soft"><i />Why choose us</span>
+        <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05] text-fg">Quality. Reliability. <span class="serif font-normal">Trust.</span></h2>
+        <p class="mt-6 text-fg/70 leading-relaxed max-w-md">Our products are carefully selected, graded, packed and prepared to meet the specifications of wholesale importers, retailers and food-service companies.</p>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
-        <article v-for="(p, n) in pillars" :key="p.t" class="reveal rounded-[1.75rem] bg-mist border border-forest/5 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-forest/5 transition" :style="{ transitionDelay: n * 80 + 'ms' }">
-          <span class="grid place-items-center h-12 w-12 rounded-full bg-forest text-lime">
+        <article v-for="(p, n) in pillars" :key="p.t" class="reveal rounded-[1.75rem] bg-card border border-fg/10 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-forest/5 transition" :style="{ transitionDelay: n * 80 + 'ms' }">
+          <span class="icon-circle h-12 w-12">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" v-html="p.i" />
           </span>
-          <h3 class="mt-5 font-semibold text-lg text-forest">{{ p.t }}</h3>
-          <p class="mt-1.5 text-sm leading-relaxed text-forest/65">{{ p.d }}</p>
+          <h3 class="mt-5 font-semibold text-lg text-fg">{{ p.t }}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-fg/65">{{ p.d }}</p>
         </article>
       </div>
     </section>
@@ -177,8 +177,8 @@ const real = [
     <!-- BEHIND THE SCENES -->
     <section class="mx-auto max-w-6xl px-5 py-24">
       <div class="reveal">
-        <span class="chip bg-pale text-leaf-700"><i />Behind the scenes</span>
-        <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-forest">Our operation, <span class="serif font-normal">up close</span></h2>
+        <span class="chip chip-soft"><i />Behind the scenes</span>
+        <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-fg">Our operation, <span class="serif font-normal">up close</span></h2>
       </div>
       <div class="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2 md:h-[640px]">
         <figure v-for="(r, n) in real" :key="r.cap" class="reveal group relative overflow-hidden rounded-[1.75rem] aspect-[4/5] md:aspect-auto" :class="r.cls" :style="{ transitionDelay: n * 80 + 'ms' }">
@@ -188,27 +188,13 @@ const real = [
         <figure class="reveal relative overflow-hidden rounded-[1.75rem] aspect-[4/5] md:aspect-auto md:col-span-2 bg-forest flex items-center">
           <img :src="$img('/img/stock/beans-noir.jpg')" alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" width="1800" height="1200" loading="lazy">
           <div class="relative p-8 sm:p-12 text-white">
-            <p class="serif text-3xl sm:text-5xl leading-tight">“Quality is not an act,<br>it is a habit.”</p>
-            <p class="mt-4 text-sm text-white/70">Every carton traced from farm to destination.</p>
+            <p class="serif text-3xl sm:text-5xl leading-tight">Every carton, traced<br>from farm to destination.</p>
+            <p class="mt-4 text-sm text-white/70">Strict quality control and full traceability at every step.</p>
           </div>
         </figure>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="mx-3 sm:mx-4 mb-3">
-      <div class="reveal relative isolate overflow-hidden rounded-[2rem] sm:rounded-[3rem] bg-leaf-700">
-        <img :src="$img('/img/stock/farmer.jpg')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="2000" height="1335" loading="lazy">
-        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-forest/95 via-forest/70 to-forest/20" />
-        <div class="mx-auto max-w-6xl px-6 sm:px-10 py-20 sm:py-28 text-white">
-          <h2 class="text-4xl sm:text-6xl font-semibold leading-[1.05] max-w-xl">Let’s grow <span class="serif font-normal">together.</span></h2>
-          <p class="mt-5 max-w-md text-white/80">Tell us about your market requirements and we’ll respond quickly.</p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <NuxtLink to="/contact" class="btn btn-lime">Request a quote <span class="arr">↗</span></NuxtLink>
-            <a href="mailto:info@frescapremierfresh.com" class="btn btn-white">Email us <span class="arr">↗</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaBand />
   </div>
 </template>

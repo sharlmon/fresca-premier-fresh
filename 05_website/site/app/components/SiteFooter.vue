@@ -1,6 +1,6 @@
 <template>
   <footer class="px-3 sm:px-4 pb-4 pt-6">
-    <div class="mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] bg-forest text-white">
+    <div class="mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] bg-forest text-white border border-white/10">
       <div class="px-7 sm:px-12 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <img :src="$img('/img/logo.png')" alt="Fresca Premier Fresh" class="h-16 w-auto rounded-2xl bg-white p-2" width="80" height="64">

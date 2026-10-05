@@ -22,6 +22,7 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Kaushan+Script&family=Montserrat:wght@400;500;600;700&display=swap' },
       ],
+      script: [{ innerHTML: "try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}", tagPosition: 'head' }],
       meta: [{ name: 'theme-color', content: '#072a1b' }, ...(preview ? [{ name: 'robots', content: 'noindex, nofollow' }] : [])],
     },
   },
