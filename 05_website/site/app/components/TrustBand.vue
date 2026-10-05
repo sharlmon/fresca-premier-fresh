@@ -8,9 +8,9 @@ withDefaults(defineProps<{ parts?: 'all' | 'certs' | 'network' }>(), { parts: 'a
   <section class="mx-auto max-w-6xl px-5 pb-24" aria-labelledby="trust-title">
     <div class="reveal rounded-[2rem] sm:rounded-[2.5rem] bg-soft p-6 sm:p-10">
       <div class="max-w-2xl">
-        <span class="chip bg-surface text-accent"><i />Credentials &amp; network</span>
+        <span class="chip bg-surface text-accent"><i />Credentials &amp; partners</span>
         <h2 id="trust-title" class="mt-5 text-3xl sm:text-5xl font-semibold leading-[1.08]">
-          {{ parts === 'certs' ? 'Certified and' : parts === 'network' ? 'Trusted by and' : 'Certified, connected and' }} <span class="serif font-normal">trusted.</span>
+          {{ parts === 'certs' ? 'Certified and' : parts === 'network' ? 'Connected and' : 'Certified, connected and' }} <span class="serif font-normal">trusted.</span>
         </h2>
       </div>
 
@@ -29,9 +29,9 @@ withDefaults(defineProps<{ parts?: 'all' | 'certs' | 'network' }>(), { parts: 'a
           </ul>
         </div>
 
-        <!-- partner + client -->
+        <!-- partner -->
         <div v-if="parts !== 'certs'">
-          <h3 class="font-sans text-xs font-bold uppercase tracking-[.2em] text-accent">Our network</h3>
+          <h3 class="font-sans text-xs font-bold uppercase tracking-[.2em] text-accent">Our partner</h3>
           <ul class="mt-4 grid gap-3 sm:grid-cols-2">
             <li v-for="n in network" :key="n.key" class="flex flex-col items-center rounded-[1.5rem] bg-white border border-fg/10 p-5 text-center text-forest">
               <a v-if="n.href" :href="n.href" target="_blank" rel="noopener" class="grid h-28 w-full place-items-center" :aria-label="n.name + ' (opens in a new tab)'">

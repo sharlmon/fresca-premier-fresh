@@ -11,7 +11,7 @@ Everything below can be done from cPanel File Manager and Terminal. Nothing need
 - [ ] **Credentials band** (Home, Quality, About) – needs the client's confirmation and a few details:
   - GLOBALG.A.P.: send the **GGN** (13-digit number) and, if available, the link to the live status in the GLOBALG.A.P. database. Add them in `app/data/trust.ts` (`ggn`, `verifyUrl`). GLOBALG.A.P.'s trademark policy only lets certificate holders show the logo, for B2B use, **with the GGN or a status link**; its logo files are issued by the certification body. Until then the site uses an icon badge, not the logo. When the client has the official logo file, it can replace the icon.
   - KEPHIS and AFA: confirm what the client holds (certificate / licence / registration) so the wording can be made specific. Their official logos were not used: the KEPHIS logo contains Kenya's coat of arms (restricted emblem) and the AFA logo is only 45 px.
-  - Partner (Premier Veg Mondo) and client (Mitrofresh): logos were taken from their own websites. Get both companies' OK to show their logo.
+  - Partner (Premier Veg Mondo): logo taken from their website. Get their OK to show it. Clients are deliberately not shown (client request: others could poach them).
 
 ## 1. Build
 ```

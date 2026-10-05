@@ -24,5 +24,4 @@ export const certifications = [
 
 export const network = [
   { key: 'pvm', role: 'Partner', name: 'Premier Veg Mondo', logo: '/img/partners/premier-veg-mondo.webp', w: 512, h: 512, href: 'https://premierveg.com' },
-  { key: 'mitro', role: 'Client', name: 'Mitrofresh', logo: '/img/partners/mitrofresh.svg', w: 1190, h: 1417 },
 ]
