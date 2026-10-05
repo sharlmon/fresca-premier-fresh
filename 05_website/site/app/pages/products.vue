@@ -92,9 +92,9 @@ onMounted(() => {
         </div>
         <div class="mt-12 grid gap-4 grid-cols-2 lg:grid-cols-4">
           <button v-for="(p, n) in range" :key="p.slug" type="button" class="reveal group overflow-hidden rounded-[1.75rem] border border-fg/10 bg-surface text-left transition hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5" :style="{ transitionDelay: (n % 4) * 70 + 'ms' }" aria-haspopup="dialog" :aria-label="'View ' + p.name" @click="open(p, $event)">
-            <span v-if="p.photos[0]" class="relative grid aspect-[4/3] place-items-center bg-card">
-              <img :src="$img(p.photos[0].src)" :alt="p.photos[0].alt" class="max-h-[85%] w-auto object-contain transition duration-500 group-hover:scale-105" width="640" height="470" loading="lazy">
-              <span class="absolute right-3 top-3 rounded-full bg-surface/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[.15em]">{{ p.category }}</span>
+            <span v-if="p.photos[0]" class="relative block aspect-[4/3] overflow-hidden bg-card">
+              <img :src="$img(p.photos[0].src)" :alt="p.photos[0].alt" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" width="1280" height="960" loading="lazy">
+              <span class="glass-plate absolute right-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[.15em] text-white">{{ p.category }}</span>
             </span>
             <span v-else class="relative flex items-end justify-between bg-gradient-to-br px-5 pb-4 pt-12" :class="tones[p.category]">
               <span class="serif text-6xl leading-none opacity-90" aria-hidden="true">{{ p.name[0] }}</span>

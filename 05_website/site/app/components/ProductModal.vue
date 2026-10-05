@@ -49,9 +49,9 @@ onBeforeUnmount(() => {
 
       <div ref="panel" class="pm-panel relative grid w-full max-w-5xl max-h-[94svh] overflow-hidden rounded-[2rem] bg-surface text-fg shadow-2xl shadow-black/50 md:grid-cols-[1.1fr_1fr]" @touchstart.passive="touchStart" @touchend.passive="touchEnd">
         <!-- visual -->
-        <div class="relative isolate min-h-[260px] md:min-h-[520px]" :class="photo?.cutout ? 'bg-soft' : 'bg-forest'">
+        <div class="relative isolate min-h-[260px] bg-forest md:min-h-[520px]">
           <template v-if="photo">
-            <img :key="photo.src" :src="$img(photo.src)" :alt="photo.alt" class="pm-img absolute inset-0 h-full w-full object-contain" :class="photo.cutout ? 'p-8 sm:p-12' : ''" width="1500" height="2000">
+            <img :key="photo.src" :src="$img(photo.src)" :alt="photo.alt" class="pm-img absolute inset-0 h-full w-full object-contain" width="1500" height="2000">
             <div v-if="product.photos.length > 1" class="absolute inset-x-0 bottom-3 flex justify-center gap-2" role="group" aria-label="Product photos">
               <button v-for="(ph, i) in product.photos" :key="ph.src" type="button" class="h-14 w-14 overflow-hidden rounded-xl ring-2 transition" :class="i === shot ? 'ring-lime' : 'ring-white/40 opacity-80 hover:opacity-100'" :aria-label="'Show photo ' + (i + 1) + ' of ' + product.photos.length" :aria-pressed="i === shot" @click="shot = i">
                 <img :src="$img(ph.src)" alt="" class="h-full w-full object-cover" width="56" height="56">
