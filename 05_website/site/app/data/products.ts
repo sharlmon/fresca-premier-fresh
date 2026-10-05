@@ -8,7 +8,7 @@ export type Product = {
   tag: string                       // short label shown on the card
   description: string
   facts: { label: string; value: string }[]
-  photos: { src: string; alt: string }[]   // empty = no photo yet (a designed tile is shown instead)
+  photos: { src: string; alt: string; cutout?: boolean }[]   // cutout = isolated product on transparent background; empty = no photo (a designed tile is shown)
 }
 
 export const products: Product[] = [
@@ -48,17 +48,17 @@ export const products: Product[] = [
     facts: [{ label: 'Packing', value: 'Retail punnets' }],
     photos: [{ src: '/img/baby-corn.webp', alt: 'Baby corn packed in black trays' }],
   },
-  { slug: 'avocados', name: 'Avocados', group: 'range', category: 'Fruit', tag: 'Fruit', description: 'Creamy, oil-rich fruit with a rich, buttery flavour.', facts: [], photos: [] },
-  { slug: 'mangoes', name: 'Mangoes', group: 'range', category: 'Fruit', tag: 'Fruit', description: 'Juicy, sweet fruit that is as good fresh as it is in desserts.', facts: [], photos: [] },
-  { slug: 'passion-fruit', name: 'Passion Fruit', group: 'range', category: 'Fruit', tag: 'Fruit', description: 'Aromatic, tangy pulp that is a good source of vitamin C.', facts: [], photos: [] },
-  { slug: 'carrots', name: 'Carrots', group: 'range', category: 'Vegetable', tag: 'Vegetable', description: 'Crisp, naturally sweet roots rich in beta-carotene.', facts: [], photos: [] },
+  { slug: 'avocados', name: 'Avocados', group: 'range', category: 'Fruit', tag: 'Fruit', description: 'Creamy, oil-rich fruit with a rich, buttery flavour.', facts: [], photos: [{ src: '/img/products/avocado.webp', alt: 'Avocado, whole and halved', cutout: true }] },
+  { slug: 'mangoes', name: 'Mangoes', group: 'range', category: 'Fruit', tag: 'Fruit', description: 'Juicy, sweet fruit that is as good fresh as it is in desserts.', facts: [], photos: [{ src: '/img/products/mango.webp', alt: 'Mango, whole and halved', cutout: true }] },
+  { slug: 'passion-fruit', name: 'Passion Fruit', group: 'range', category: 'Fruit', tag: 'Fruit', description: 'Aromatic, tangy pulp that is a good source of vitamin C.', facts: [], photos: [{ src: '/img/products/passion-fruit.webp', alt: 'Passion fruit, whole and halved', cutout: true }] },
+  { slug: 'carrots', name: 'Carrots', group: 'range', category: 'Vegetable', tag: 'Vegetable', description: 'Crisp, naturally sweet roots rich in beta-carotene.', facts: [], photos: [{ src: '/img/products/carrots.webp', alt: 'A bunch of carrots', cutout: true }] },
   {
     slug: 'chillies', name: 'Chillies', group: 'range', category: 'Vegetable', tag: 'Vegetable',
     description: 'Bird’s-eye chillies with a clean, fiery heat; a good source of vitamin C and B6.',
-    facts: [{ label: 'Packing', value: 'Punnets of green, red, or red and green' }], photos: [],
+    facts: [{ label: 'Packing', value: 'Punnets of green, red, or red and green' }], photos: [{ src: '/img/products/chillies.webp', alt: 'Red chillies', cutout: true }],
   },
-  { slug: 'rosemary', name: 'Rosemary', group: 'range', category: 'Herb', tag: 'Herb', description: 'A fragrant herb, prized in the kitchen for its aroma and flavour.', facts: [], photos: [] },
-  { slug: 'chives', name: 'Chives', group: 'range', category: 'Herb', tag: 'Herb', description: 'Mild, onion-flavoured herb for garnishing and flavouring.', facts: [], photos: [] },
+  { slug: 'rosemary', name: 'Rosemary', group: 'range', category: 'Herb', tag: 'Herb', description: 'A fragrant herb, prized in the kitchen for its aroma and flavour.', facts: [], photos: [{ src: '/img/products/rosemary.webp', alt: 'A bunch of fresh rosemary', cutout: true }] },
+  { slug: 'chives', name: 'Chives', group: 'range', category: 'Herb', tag: 'Herb', description: 'Mild, onion-flavoured herb for garnishing and flavouring.', facts: [], photos: [{ src: '/img/products/chives.webp', alt: 'A bunch of fresh chives', cutout: true }] },
 ]
 
 export const tones: Record<string, string> = {
