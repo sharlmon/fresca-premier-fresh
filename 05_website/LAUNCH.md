@@ -5,7 +5,7 @@ Everything below can be done from cPanel File Manager and Terminal. Nothing need
 
 ## 0. Decide first
 - [x] Team confirmed by the client (7 people). Still to receive: profiles for everyone, and photos (Allan and Dominic are sending theirs). Put photos in `site/public/img/team/` and set `photo` in `app/pages/team.vue`.
-- [ ] Confirm +254 700 752 341 is on WhatsApp (floating button uses it).
+- [x] +254 700 752 341 confirmed as a WhatsApp number (floating button uses it).
 - [ ] Client reviews the Privacy Policy (and decides if the company must register with the Data Protection Commissioner).
 - [ ] Client OKs the product list (11 products shown) and the "GLOBALG.A.P. / SMETA" wording.
 

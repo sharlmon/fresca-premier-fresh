@@ -15,7 +15,7 @@ const leaders: Member[] = [
 ]
 const team: Member[] = [
   { slug: 'allan', name: 'Allan Omondi', role: 'Logistics & Compliance', dept: 'Logistics' },
-  { slug: 'dominic', name: 'Dominic', role: 'Production & Compliance', dept: 'Production' },
+  { slug: 'dominic', name: 'Dominic Mwanya', role: 'Production & Compliance', dept: 'Production' },
   { slug: 'benson', name: 'Benson', role: 'Finance', dept: 'Finance' },
   { slug: 'sharlmon', name: 'Sharlmon Junior', role: 'ICT & Technical Lead', dept: 'Technology' },
 ]
