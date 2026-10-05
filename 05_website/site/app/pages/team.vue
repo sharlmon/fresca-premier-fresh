@@ -58,7 +58,7 @@ const initials = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((w)
           <h2 class="mt-5 text-4xl sm:text-6xl font-semibold">Experience that <span class="serif font-normal">delivers</span></h2>
         </div>
         <div class="mt-12 grid gap-5 grid-cols-[minmax(0,1fr)] md:grid-cols-2">
-          <article v-for="(m, n) in team" :key="m.n" class="reveal rounded-[1.75rem] bg-surface border border-fg/10 p-6 sm:p-7 flex gap-5" :style="{ transitionDelay: (n % 2) * 80 + 'ms' }">
+          <article v-for="(m, n) in team" :key="m.n" class="reveal rounded-[1.75rem] bg-surface border border-fg/10 p-6 sm:p-7 flex flex-col sm:flex-row gap-5" :style="{ transitionDelay: (n % 2) * 80 + 'ms' }">
             <span class="icon-circle h-16 w-16 shrink-0 text-xl font-semibold">{{ initials(m.n) }}</span>
             <div class="min-w-0">
               <h3 class="text-xl font-semibold">{{ m.n }}</h3>

@@ -24,7 +24,7 @@
       </div>
       <div class="border-t border-white/10 px-7 sm:px-12 py-5 text-xs text-white/50 flex flex-wrap justify-between gap-2">
         <span>© {{ new Date().getFullYear() }} Fresca Premier Fresh Ltd. All rights reserved.</span>
-        <span class="flex flex-wrap gap-x-5 gap-y-1"><NuxtLink to="/privacy/" class="hover:text-lime transition">Privacy Policy</NuxtLink><span>Quality · Reliability · Trust</span></span>
+        <span class="flex flex-wrap gap-x-5 gap-y-1"><NuxtLink to="/privacy/" class="hover:text-lime transition">Privacy Policy</NuxtLink><NuxtLink to="/accessibility/" class="hover:text-lime transition">Accessibility</NuxtLink><span>Quality · Reliability · Trust</span></span>
       </div>
     </div>
   </footer>

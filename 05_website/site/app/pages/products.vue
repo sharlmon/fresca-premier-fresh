@@ -90,7 +90,7 @@ const pack = [
       <div class="mt-12 grid gap-5 md:grid-cols-3">
         <figure v-for="(p, n) in pack" :key="p.t" class="reveal" :style="{ transitionDelay: n * 80 + 'ms' }">
           <div class="overflow-hidden rounded-[1.75rem] aspect-[4/3] bg-card"><img :src="$img(p.img)" :alt="p.t" class="h-full w-full object-cover" width="1000" height="700" loading="lazy"></div>
-          <figcaption class="mt-4 px-1"><span class="font-semibold">{{ p.t }}</span><span class="block text-sm text-fg/60">{{ p.s }}</span></figcaption>
+          <figcaption class="mt-4 px-1"><span class="font-semibold">{{ p.t }}</span><span class="block text-sm text-fg/72">{{ p.s }}</span></figcaption>
         </figure>
       </div>
     </section>

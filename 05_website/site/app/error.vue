@@ -10,7 +10,7 @@ const links = [['/', 'Home'], ['/products/', 'Our products'], ['/about/', 'About
 <template>
   <div class="min-h-screen flex flex-col bg-surface text-fg">
     <SiteHeader />
-    <main class="flex-1">
+    <main id="main" class="flex-1">
       <section class="relative isolate mx-3 sm:mx-4 mt-3 sm:mt-4 overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] min-h-[88svh] flex items-center">
         <img :src="$img('/img/stock/crop-rows.webp')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="1920" height="1439">
         <div class="absolute inset-0 -z-10 bg-gradient-to-br from-forest/92 via-forest/75 to-forest/55" />

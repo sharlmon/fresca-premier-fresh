@@ -26,12 +26,12 @@ watch(() => route.fullPath, () => (open.value = false))
         <img :src="$img('/img/logo.webp')" alt="" class="h-11 w-auto rounded-full bg-white p-1" width="52" height="40">
         <span class="font-semibold tracking-tight hidden sm:block">Fresca <span class="serif font-normal">Premier Fresh</span></span>
       </NuxtLink>
-      <nav class="hidden lg:flex items-center gap-1 text-sm font-medium" aria-label="Main">
-        <NuxtLink v-for="l in links" :key="l.to" :to="l.to" class="rounded-full px-4 py-2 opacity-80 hover:opacity-100 transition" active-class="!opacity-100 font-semibold">{{ l.label }}</NuxtLink>
+      <nav class="hidden lg:flex items-center gap-1 text-sm font-medium shrink-0" aria-label="Main">
+        <NuxtLink v-for="l in links" :key="l.to" :to="l.to" class="rounded-full px-4 py-2 whitespace-nowrap opacity-80 hover:opacity-100 transition" active-class="!opacity-100 font-semibold">{{ l.label }}</NuxtLink>
       </nav>
       <div class="flex items-center gap-1">
         <ThemeToggle />
-        <NuxtLink to="/contact" class="btn btn-white hidden sm:inline-flex !py-1 !pr-1">Contact us <span class="arr">↗</span></NuxtLink>
+        <NuxtLink to="/contact" class="btn btn-white hidden sm:inline-flex whitespace-nowrap !py-1 !pr-1">Contact us <span class="arr">↗</span></NuxtLink>
         <button class="lg:hidden grid place-items-center h-10 w-10 rounded-full" :aria-expanded="open" aria-label="Menu" @click="open = !open">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path v-if="!open" d="M3 6h18M3 12h18M3 18h18"/><path v-else d="M6 6l12 12M18 6L6 18"/></svg>
         </button>

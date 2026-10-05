@@ -14,7 +14,9 @@ const slides = [
 ]
 const cur = ref(0)
 let timer: ReturnType<typeof setInterval> | undefined
-const restart = () => { clearInterval(timer); timer = setInterval(() => (cur.value = (cur.value + 1) % slides.length), 4500) }
+const paused = ref(false)
+const motionOff = () => paused.value || document.documentElement.classList.contains('a11y-still') || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const restart = () => { clearInterval(timer); timer = setInterval(() => { if (!motionOff()) cur.value = (cur.value + 1) % slides.length }, 4500) }
 const go = (i: number) => { cur.value = i; restart() }
 onMounted(restart)
 onBeforeUnmount(() => clearInterval(timer))
@@ -78,8 +80,14 @@ const real = [
             </div>
             <NuxtLink to="/about" class="grid place-items-center h-9 w-9 shrink-0 rounded-full bg-white text-forest hover:rotate-45 transition" aria-label="Learn more">↗</NuxtLink>
           </div>
-          <div class="flex gap-1.5 px-2 pt-2 pb-1">
-            <button v-for="(s, i) in slides" :key="s.t" class="h-1 flex-1 rounded-full transition" :class="i === cur ? 'bg-white' : 'bg-white/35'" :aria-label="'Slide ' + (i + 1)" @click="go(i)" />
+          <div class="flex items-center gap-2 px-2 pt-2 pb-1">
+            <button type="button" class="grid place-items-center h-7 w-7 shrink-0 rounded-full bg-white/20 text-white hover:bg-white/35" :aria-label="paused ? 'Play slideshow' : 'Pause slideshow'" @click="paused = !paused">
+              <svg v-if="!paused" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
+              <svg v-else width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
+            </button>
+            <div class="flex flex-1 gap-1.5">
+              <button v-for="(s, i) in slides" :key="s.t" class="h-1.5 flex-1 rounded-full transition" :class="i === cur ? 'bg-white' : 'bg-white/35'" :aria-label="'Show slide ' + (i + 1) + ': ' + s.t" :aria-current="i === cur" @click="go(i)" />
+            </div>
           </div>
         </div>
       </div>
@@ -88,10 +96,10 @@ const real = [
     <!-- TRUST / STATS -->
     <section class="mx-auto max-w-6xl px-5 py-14 text-center">
       <p class="reveal text-sm font-semibold text-fg/70">Trusted by importers, retailers &amp; food-service companies across Europe</p>
-      <div class="reveal mt-8 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
-        <div v-for="s in stats" :key="s[1]">
+      <div class="reveal mt-8 flex flex-wrap justify-center gap-x-8 gap-y-6 max-w-3xl mx-auto">
+        <div v-for="s in stats" :key="s[1]" class="flex-1 basis-24">
           <div class="text-4xl sm:text-6xl font-semibold text-fg tracking-tight">{{ s[0] }}</div>
-          <div class="mt-1 text-xs sm:text-sm font-medium text-fg/60">{{ s[1] }}</div>
+          <div class="mt-1 text-xs sm:text-sm font-medium text-fg/72">{{ s[1] }}</div>
         </div>
       </div>
     </section>
@@ -132,7 +140,7 @@ const real = [
               <img :src="$img(p.img)" :alt="p.t" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" width="800" height="1000" loading="lazy">
             </div>
             <div class="mt-4 flex items-center justify-between gap-3 px-1">
-              <div><h3 class="font-semibold text-fg">{{ p.t }}</h3><p class="text-sm text-fg/60">{{ p.s }}</p></div>
+              <div><h3 class="font-semibold text-fg">{{ p.t }}</h3><p class="text-sm text-fg/72">{{ p.s }}</p></div>
               <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-fg text-surface group-hover:bg-lime group-hover:text-forest group-hover:rotate-45 transition">↗</span>
             </div>
           </NuxtLink>

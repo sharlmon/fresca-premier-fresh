@@ -12,7 +12,7 @@ const updated = '5 October 2026'
       Privacy <span class="serif font-normal">policy.</span>
     </PageHero>
 
-    <article class="mx-auto max-w-3xl px-5 py-20 [&_h2]:text-2xl [&_h2]:sm:text-3xl [&_h2]:font-semibold [&_h2]:mt-12 [&_h2]:mb-3 [&_p]:text-fg/75 [&_p]:leading-relaxed [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:grid [&_ul]:gap-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:text-fg/75 [&_a]:text-accent [&_a]:font-semibold [&_a]:underline">
+    <article class="mx-auto max-w-3xl px-5 py-20 [&_h2]:text-2xl [&_h2]:sm:text-3xl [&_h2]:font-semibold [&_h2]:mt-12 [&_h2]:mb-3 [&_p]:text-fg/75 [&_p]:leading-relaxed [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:grid [&_ul]:gap-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:text-fg/75 [&_a]:text-accent [&_a]:font-semibold [&_a]:underline [&_a]:[overflow-wrap:anywhere]">
       <p class="!mt-0">Fresca Premier Fresh Ltd (“we”, “us”) respects your privacy. This policy explains what personal information we collect through this website, why, and the choices you have. We handle personal data in line with Kenya’s Data Protection Act, 2019.</p>
 
       <h2>Who is responsible</h2>

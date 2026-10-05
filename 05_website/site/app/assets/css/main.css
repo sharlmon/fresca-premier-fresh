@@ -48,6 +48,7 @@ h1, h2, h3 { letter-spacing: -.02em; }
 .glass { background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.08)); border: 1px solid rgba(255,255,255,.35);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.4); -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%); }
 
+@layer components {
 .chip { display: inline-flex; align-items: center; gap: .5rem; border-radius: 9999px; padding: .4rem .9rem; font-size: .72rem; font-weight: 600; }
 .chip i { height: .5rem; width: .5rem; border-radius: 9999px; background: var(--color-leaf-400); }
 .chip-soft { background: var(--soft); color: var(--accent); }
@@ -63,6 +64,8 @@ h1, h2, h3 { letter-spacing: -.02em; }
 .btn-dark .arr { background: var(--color-lime); color: var(--color-forest); }
 .dark .btn-dark { background: var(--color-lime); color: var(--color-forest); }
 .dark .btn-dark .arr { background: var(--color-forest); color: var(--color-lime); }
+
+}
 
 .icon-circle { display: grid; place-items: center; border-radius: 9999px; background: var(--color-forest); color: var(--color-lime); }
 .dark .icon-circle { background: var(--color-lime); color: var(--color-forest); }
@@ -82,3 +85,53 @@ textarea.field { resize: vertical; min-height: 9rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } * { transition: none !important; animation: none !important; }
 }
+
+/* ---------- accessibility ---------- */
+.skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 100; padding: .85rem 1.4rem; border-radius: 9999px; background: var(--color-lime); color: var(--color-forest); font-weight: 700; transition: top .15s; }
+.skip-link:focus { top: 1rem; }
+:focus-visible { outline: 3px solid var(--color-sun-400); outline-offset: 3px; box-shadow: 0 0 0 6px var(--color-forest); border-radius: inherit; }
+.field:focus-visible { outline-offset: 0; box-shadow: 0 0 0 3px var(--color-forest); }
+
+/* text size (everything is sized in rem, so this scales the whole site) */
+html.a11y-text-1 { font-size: 112.5%; }
+html.a11y-text-2 { font-size: 125%; }
+html.a11y-text-3 { font-size: 150%; }
+
+/* readable font + spacing */
+html.a11y-font body, html.a11y-font body * { font-family: "Atkinson Hyperlegible", system-ui, sans-serif !important; font-style: normal !important; }
+html.a11y-spacing body * { letter-spacing: .06em !important; word-spacing: .14em !important; }
+html.a11y-spacing p, html.a11y-spacing li { line-height: 1.85 !important; }
+
+/* high contrast (placed after .dark so it wins) */
+html.a11y-contrast { --surface: #000; --fg: #fff; --soft: #000; --card: #0a0a0a; --accent: #ffe600; color-scheme: dark; }
+html.a11y-contrast .glass { background: rgba(0,0,0,.9); border-color: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+html.a11y-contrast a:not(.btn) { text-decoration: underline; }
+html.a11y-contrast [class*="border-fg"] { border-color: #fff !important; }
+
+/* links */
+html.a11y-links main a:not(.btn), html.a11y-links footer a:not(.btn) { text-decoration: underline !important; text-underline-offset: 3px; text-decoration-thickness: 2px; font-weight: 700; }
+
+/* stop motion */
+html.a11y-still *, html.a11y-still *::before, html.a11y-still *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.a11y-still .reveal { opacity: 1 !important; transform: none !important; }
+
+/* large cursor */
+html.a11y-cursor, html.a11y-cursor * { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24'><path d='M3 2l7.5 19 2.7-8 8-2.8z' fill='black' stroke='white' stroke-width='1.6' stroke-linejoin='round'/></svg>") 4 3, auto !important; }
+
+/* let grid/flex children shrink to the screen instead of stretching it, and wrap long emails */
+.grid > *, .flex > * { min-width: 0; }
+address a, footer a, address { overflow-wrap: anywhere; }
+h1, h2, h3, h4, .serif { overflow-wrap: anywhere; hyphens: auto; }
+
+/* with enlarged text on small screens, two-column card grids become one column */
+@media (max-width: 639px) {
+  html.a11y-text-2 .grid-cols-2, html.a11y-text-3 .grid-cols-2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* with enlarged text the full desktop menu no longer fits: use the compact menu instead */
+@media (max-width: 1535px) {
+  html.a11y-text-2 header nav[aria-label="Main"], html.a11y-text-3 header nav[aria-label="Main"] { display: none !important; }
+  html.a11y-text-2 header button[aria-label="Menu"], html.a11y-text-3 header button[aria-label="Menu"] { display: grid !important; }
+  html.a11y-text-2 header nav[aria-label="Mobile"], html.a11y-text-3 header nav[aria-label="Mobile"] { display: grid !important; }
+}
+a[href^="mailto:"], a[href^="tel:"] { overflow-wrap: anywhere; }

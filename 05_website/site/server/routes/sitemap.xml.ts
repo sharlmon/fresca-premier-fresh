@@ -1,5 +1,5 @@
 // Generated at build time (nuxt generate) -> /sitemap.xml
-const pages = ['/', '/about/', '/products/', '/quality/', '/sustainability/', '/team/', '/contact/', '/privacy/']
+const pages = ['/', '/about/', '/products/', '/quality/', '/sustainability/', '/team/', '/contact/', '/privacy/', '/accessibility/']
 
 export default defineEventHandler((event) => {
   const root = String(useRuntimeConfig(event).public.siteUrl).replace(/\/$/, '')
