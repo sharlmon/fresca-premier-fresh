@@ -122,7 +122,7 @@ html.a11y-cursor, html.a11y-cursor * { cursor: url("data:image/svg+xml;utf8,<svg
 /* let grid/flex children shrink to the screen instead of stretching it, and wrap long emails */
 .grid > *, .flex > * { min-width: 0; }
 address a, footer a, address { overflow-wrap: anywhere; }
-h1, h2, h3, h4, .serif { overflow-wrap: anywhere; hyphens: auto; }
+h1, h2, h3, h4, .serif { overflow-wrap: anywhere; }
 
 /* with enlarged text on small screens, two-column card grids become one column */
 @media (max-width: 639px) {
@@ -136,3 +136,7 @@ h1, h2, h3, h4, .serif { overflow-wrap: anywhere; hyphens: auto; }
   html.a11y-text-2 header nav[aria-label="Mobile"], html.a11y-text-3 header nav[aria-label="Mobile"] { display: grid !important; }
 }
 a[href^="mailto:"], a[href^="tel:"] { overflow-wrap: anywhere; }
+
+/* frosted plate over a photo; falls back to a solid dark plate if blur is unsupported */
+.glass-plate { background: rgba(7, 42, 27, .55); border: 1px solid rgba(255,255,255,.22); -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%); }
+html.a11y-contrast .glass-plate { background: #000; border-color: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
