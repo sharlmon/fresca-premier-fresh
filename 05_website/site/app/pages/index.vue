@@ -7,21 +7,42 @@ usePageSeo({
 import { products as allProducts } from '~/data/products'
 const coreProducts = allProducts.filter((p) => p.group === 'core')
 const { $img } = useNuxtApp()
-useHead({ link: [{ rel: 'preload', as: 'image', href: $img('/img/stock/bean-plant.webp'), fetchpriority: 'high' }] })
+useHead({ link: [{ rel: 'preload', as: 'image', href: $img('/img/hero/snow-peas.webp'), fetchpriority: 'high' }] })
 
+// Hero slideshow. Photos are 2000px wide so they stay sharp full-bleed. Order: product first, then the farm.
 const slides = [
-  { t: 'From the farm', s: 'Trusted growers, picked at peak freshness', img: '/img/stock/crop-rows.webp' },
-  { t: 'In our packhouse', s: 'Graded and packed to your specification', img: '/img/packhouse.webp' },
-  { t: 'Out to the world', s: 'Cold-chain delivery to international markets', img: '/img/truckload.webp' },
+  { img: '/img/hero/snow-peas.webp', macro: true, t: 'Snow peas', s: 'Mangetout, sorted and packed for freshness', alt: 'Snow peas packed in a tray', to: '/products/?p=snow-peas', pos: 'center 50%' },
+  { img: '/img/hero/farmer.webp', t: 'From our growers', s: 'Trusted farmers, picked at peak freshness', alt: 'A farmer tending green crops in the field', to: '/about/', pos: 'center 38%' },
+  { img: '/img/hero/french-beans.webp', macro: true, t: 'French beans', s: 'Extra fine and fine, graded for consistency', alt: 'Extra fine French beans packed in a tray', to: '/products/?p=french-beans', pos: 'center 50%' },
+  { img: '/img/hero/field-hills.webp', macro: true, t: 'Grown in Kenya', s: 'Fertile fields, responsibly farmed', alt: 'Green crop fields below rolling hills', to: '/sustainability/', pos: 'center 55%' },
+  { img: '/img/hero/sugar-snaps.webp', macro: true, t: 'Sugar snap peas', s: 'Crisp and sweet, packed to your specification', alt: 'Sugar snap peas packed in a tray', to: '/products/?p=sugar-snap-peas', pos: 'center 50%' },
 ]
+const DWELL = 6500
 const cur = ref(0)
-let timer: ReturnType<typeof setInterval> | undefined
 const paused = ref(false)
-const motionOff = () => paused.value || document.documentElement.classList.contains('a11y-still') || window.matchMedia('(prefers-reduced-motion: reduce)').matches
-const restart = () => { clearInterval(timer); timer = setInterval(() => { if (!motionOff()) cur.value = (cur.value + 1) % slides.length }, 4500) }
-const go = (i: number) => { cur.value = i; restart() }
-onMounted(restart)
-onBeforeUnmount(() => clearInterval(timer))
+const still = ref(false)                       // reduced motion / accessibility "pause animations"
+let timer: ReturnType<typeof setTimeout> | undefined
+const schedule = () => {
+  clearTimeout(timer)
+  if (paused.value || still.value) return
+  timer = setTimeout(() => { cur.value = (cur.value + 1) % slides.length; schedule() }, DWELL)
+}
+const go = (i: number) => { cur.value = i; schedule() }
+const toggle = () => { paused.value = !paused.value; schedule() }
+let x0 = 0
+const swipeStart = (e: TouchEvent) => { x0 = e.changedTouches[0].clientX }
+const swipeEnd = (e: TouchEvent) => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 60) go((cur.value + (dx < 0 ? 1 : slides.length - 1)) % slides.length) }
+onMounted(() => {
+  const root = document.documentElement
+  const check = () => { still.value = root.classList.contains('a11y-still') || matchMedia('(prefers-reduced-motion: reduce)').matches; schedule() }
+  check()
+  new MutationObserver(check).observe(root, { attributes: true, attributeFilter: ['class'] })
+  document.addEventListener('visibilitychange', () => (document.hidden ? clearTimeout(timer) : schedule()))
+  // warm the remaining photos so the crossfade never shows a blank frame
+  const warm = () => slides.slice(1).forEach((sl) => { const i = new Image(); i.src = $img(sl.img) })
+  'requestIdleCallback' in window ? requestIdleCallback(warm) : setTimeout(warm, 1500)
+})
+onBeforeUnmount(() => clearTimeout(timer))
 
 const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['100%', 'Quality & food safety']]
 const products = coreProducts.map((p) => ({ slug: p.slug, t: p.name, s: p.tag, img: p.photos[0].src, alt: p.photos[0].alt }))
@@ -46,44 +67,49 @@ const real = [
 
 <template>
   <div>
-    <!-- HERO -->
-    <section class="relative isolate mx-3 sm:mx-4 mt-3 sm:mt-4 overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] min-h-[640px] h-[calc(100svh-1.5rem)] max-h-[900px] flex flex-col justify-end">
-      <img :src="$img('/img/stock/bean-plant.webp')" alt="Green bean plant with pods and orange flowers in daylight" class="absolute inset-0 -z-20 h-full w-full object-cover" width="2400" height="1600" fetchpriority="high">
-      <div class="absolute inset-0 -z-10 bg-gradient-to-r from-forest/62 via-forest/15 to-transparent" />
-      <div class="absolute inset-0 -z-10 bg-gradient-to-t from-forest/45 via-transparent to-transparent" />
+    <!-- HERO: full-bleed slideshow -->
+    <section class="relative isolate mx-3 sm:mx-4 mt-3 sm:mt-4 overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] min-h-[640px] h-[calc(100svh-1.5rem)] max-h-[900px] flex flex-col justify-end bg-forest" role="group" aria-roledescription="carousel" aria-label="Fresca produce and farms" @touchstart.passive="swipeStart" @touchend.passive="swipeEnd">
+      <div class="absolute inset-0 -z-20" aria-hidden="true">
+        <img v-for="(sl, i) in slides" :key="sl.img" :src="$img(sl.img)" alt="" class="hero-slide absolute inset-0 h-full w-full object-cover" :class="{ 'is-active': i === cur }" :style="{ objectPosition: sl.pos }" width="2000" height="1125" :loading="i === 0 ? 'eager' : 'lazy'" :fetchpriority="i === 0 ? 'high' : 'auto'" decoding="async">
+      </div>
+      <!-- shade only where the text sits (bottom-left), so the photo stays bright elsewhere -->
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(95%_85%_at_0%_100%,rgba(7,42,27,.94)_0%,rgba(7,42,27,.72)_38%,rgba(7,42,27,.18)_72%,transparent_100%)] max-lg:bg-[linear-gradient(to_top,rgba(7,42,27,.96)_0%,rgba(7,42,27,.82)_42%,rgba(7,42,27,.2)_75%,rgba(7,42,27,.12)_100%)]" />
+      <!-- product close-ups have bright, glossy highlights, so they get a stronger shade behind the text -->
+      <div class="absolute inset-0 -z-10 transition-opacity duration-[1400ms] ease-in-out bg-[radial-gradient(130%_115%_at_0%_100%,rgba(7,42,27,.95)_0%,rgba(7,42,27,.86)_52%,rgba(7,42,27,.45)_82%,rgba(7,42,27,.12)_100%)] max-lg:bg-[linear-gradient(to_top,rgba(7,42,27,.97)_0%,rgba(7,42,27,.9)_55%,rgba(7,42,27,.5)_85%,rgba(7,42,27,.25)_100%)]" :class="slides[cur].macro ? 'opacity-100' : 'opacity-0'" />
+      <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-forest/35 to-transparent" />
 
       <div class="mx-auto w-full max-w-6xl px-5 sm:px-8 pt-28 pb-10 sm:pb-14 grid lg:grid-cols-[1.3fr_.7fr] gap-10 items-end">
         <div class="reveal in">
           <span class="chip glass text-white"><i />Premium Kenyan produce</span>
-          <h1 class="mt-5 text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.02] text-white">
+          <h1 class="mt-5 text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.02] text-white [text-shadow:0_2px_24px_rgba(4,23,15,.45)]">
             Fresh from Kenya<br><span class="serif font-normal">to the world.</span>
           </h1>
-          <p class="mt-5 max-w-lg text-white/85 sm:text-lg">Premium-quality vegetables, responsibly grown and carefully delivered to international markets.</p>
+          <p class="mt-5 max-w-lg text-white sm:text-lg [text-shadow:0_1px_14px_rgba(4,23,15,.5)]">Premium-quality vegetables, responsibly grown and carefully delivered to international markets.</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <NuxtLink to="/contact" class="btn btn-lime">Request a quote <span class="arr">↗</span></NuxtLink>
             <NuxtLink to="/products" class="btn btn-white">Our products <span class="arr">↗</span></NuxtLink>
           </div>
         </div>
 
-        <!-- glass carousel card -->
-        <div class="reveal in glass rounded-[1.75rem] p-3 w-full max-w-sm lg:justify-self-end">
-          <div class="relative overflow-hidden rounded-[1.25rem] aspect-[16/10]">
-            <img v-for="(s, i) in slides" :key="s.t" :src="$img(s.img)" :alt="s.t" class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700" :class="i === cur ? 'opacity-100' : 'opacity-0'" width="640" height="400">
-          </div>
-          <div class="flex items-center justify-between gap-3 px-2 pt-3 pb-1 text-white">
-            <div class="min-w-0">
-              <p class="font-semibold text-sm">{{ slides[cur].t }}</p>
-              <p class="text-xs text-white/75 truncate">{{ slides[cur].s }}</p>
+        <!-- slide caption + controls -->
+        <div class="reveal in glass-plate rounded-[1.75rem] p-5 w-full max-w-sm lg:justify-self-end text-white">
+          <div class="flex items-center justify-between gap-4">
+            <div class="min-w-0" :aria-live="paused || still ? 'polite' : 'off'" aria-atomic="true">
+              <p class="text-[11px] font-bold uppercase tracking-[.2em] text-lime">Now showing</p>
+              <p class="mt-1 text-xl font-semibold leading-tight">{{ slides[cur].t }}</p>
+              <p class="mt-0.5 text-sm text-white/85">{{ slides[cur].s }}</p>
             </div>
-            <NuxtLink to="/about" class="grid place-items-center h-9 w-9 shrink-0 rounded-full bg-white text-forest hover:rotate-45 transition" aria-label="Learn more">↗</NuxtLink>
+            <NuxtLink :to="slides[cur].to" class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-forest transition hover:rotate-45" :aria-label="'View: ' + slides[cur].t">↗</NuxtLink>
           </div>
-          <div class="flex items-center gap-2 px-2 pt-2 pb-1">
-            <button type="button" class="grid place-items-center h-7 w-7 shrink-0 rounded-full bg-white/20 text-white hover:bg-white/35" :aria-label="paused ? 'Play slideshow' : 'Pause slideshow'" @click="paused = !paused">
-              <svg v-if="!paused" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
+          <div class="mt-4 flex items-center gap-3">
+            <button type="button" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20 transition hover:bg-white/35" :aria-label="paused ? 'Play slideshow' : 'Pause slideshow'" @click="toggle">
+              <svg v-if="!(paused || still)" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
               <svg v-else width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
             </button>
-            <div class="flex flex-1 gap-1.5">
-              <button v-for="(s, i) in slides" :key="s.t" class="h-1.5 flex-1 rounded-full transition" :class="i === cur ? 'bg-white' : 'bg-white/35'" :aria-label="'Show slide ' + (i + 1) + ': ' + s.t" :aria-current="i === cur" @click="go(i)" />
+            <div class="flex flex-1 gap-2" role="group" aria-label="Choose slide">
+              <button v-for="(sl, i) in slides" :key="sl.img" type="button" class="hero-bar relative h-2 flex-1 overflow-hidden rounded-full bg-white/30" :aria-label="'Show slide ' + (i + 1) + ' of ' + slides.length + ': ' + sl.t" :aria-current="i === cur ? 'true' : undefined" @click="go(i)">
+                <span class="absolute inset-y-0 left-0 rounded-full bg-white" :class="i === cur ? (paused || still ? 'w-full' : 'hero-fill') : (i < cur ? 'w-full' : 'w-0')" :style="{ animationDuration: DWELL + 'ms', animationPlayState: paused ? 'paused' : 'running' }" />
+              </button>
             </div>
           </div>
         </div>
