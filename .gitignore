@@ -16,3 +16,9 @@ _archive/
 # Website: raw crawl dumps (rebuildable, large)
 05_website/legacy-wordpress/html/
 05_website/legacy-wordpress/media/
+
+# Client original photos (large, unpublished) – never commit
+frescaimages/
+
+# Retouched client photos (unpublished, large) – kept local until used on the site
+01_client-assets/factory-photos-retouched/

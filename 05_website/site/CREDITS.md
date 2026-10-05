@@ -1,9 +1,7 @@
 # Photo credits (Unsplash – free for commercial use, attribution appreciated)
 - `farmer.jpg` – https://unsplash.com/photos/1AoGjqdyDLU (richard-nyoni-1AoGjqdyDLU)
-- `beans-dark.jpg` – https://unsplash.com/photos/bEnSMaiHeX0 (matilda-bellman-bEnSMaiHeX0)
-- `snow-peas-dew.jpg` – https://unsplash.com/photos/JxG6HuFLok4 (zoshua-colah-JxG6HuFLok4)
-- `snap-pea-vine.jpg` – https://unsplash.com/photos/DW-iZYLjYco (michelle-tresemer-DW-iZYLjYco)
-- `beans-noir.jpg` – https://unsplash.com/photos/WnGrgIPFfkA (freddie-collins-WnGrgIPFfkA)
 - `crop-rows.jpg` – https://unsplash.com/photos/IQVFVH0ajag (dan-meyers-IQVFVH0ajag)
 - `bean-plant.jpg` – https://unsplash.com/photos/L6P3qjUtbAo (elly-m-L6P3qjUtbAo)
 - `field-hills.jpg` – https://unsplash.com/photos/nZvjBMO5p_0 (tim-mossholder-nZvjBMO5p_0)
+
+Product and factory photos in `public/img/factory/`, `baby-corn`, `retail`, `crates`, `packhouse`, `truckload` are Fresca's own photographs.

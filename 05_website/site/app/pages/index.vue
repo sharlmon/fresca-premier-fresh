@@ -4,6 +4,8 @@ usePageSeo({
   description: 'Fresca Premier Fresh Ltd exports premium Kenyan French beans, snow peas, sugar snaps and fresh vegetables to international markets. Quality, reliability, trust.',
 })
 
+import { products as allProducts } from '~/data/products'
+const coreProducts = allProducts.filter((p) => p.group === 'core')
 const { $img } = useNuxtApp()
 useHead({ link: [{ rel: 'preload', as: 'image', href: $img('/img/stock/bean-plant.webp'), fetchpriority: 'high' }] })
 
@@ -22,12 +24,7 @@ onMounted(restart)
 onBeforeUnmount(() => clearInterval(timer))
 
 const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['100%', 'Quality & food safety']]
-const products = [
-  { t: 'French Beans', s: 'Extra fine & fine', img: '/img/stock/beans-dark.webp' },
-  { t: 'Snow Peas', s: 'Mangetout', img: '/img/stock/snow-peas-dew.webp' },
-  { t: 'Sugar Snap Peas', s: 'Crisp & sweet', img: '/img/stock/snap-pea-vine.webp' },
-  { t: 'Baby Corn', s: 'Fresh, tray-packed', img: '/img/baby-corn.webp' },
-]
+const products = coreProducts.map((p) => ({ slug: p.slug, t: p.name, s: p.tag, img: p.photos[0].src, alt: p.photos[0].alt }))
 const pillars = [
   { t: 'Premium Quality', d: 'Carefully selected and graded vegetables that meet the highest international standards.', i: '<circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/>' },
   { t: 'Food Safety', d: 'Strict quality control and full traceability at every step of the supply chain.', i: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>' },
@@ -109,11 +106,11 @@ const real = [
       <span class="chip chip-soft reveal"><i />About us</span>
       <h2 class="reveal mt-6 text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.2] text-fg">
         Premium vegetables from Kenyan
-        <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/stock/beans-dark.webp')})` }" />
+        <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/factory/french-beans-tray.webp')})` }" />
         farms, graded and packed for
         <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/truckload.webp')})` }" />
         markets across the
-        <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/stock/snow-peas-dew.webp')})` }" />
+        <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/factory/snow-peas-tray.webp')})` }" />
         <span class="serif font-normal">world.</span>
       </h2>
       <div class="reveal mt-10 grid md:grid-cols-[1fr_auto] gap-8 items-end">
@@ -135,9 +132,9 @@ const real = [
           <NuxtLink to="/products" class="btn btn-dark">View all products <span class="arr">↗</span></NuxtLink>
         </div>
         <div class="mt-12 grid gap-5 grid-cols-2 lg:grid-cols-4">
-          <NuxtLink v-for="(p, n) in products" :key="p.t" to="/products" class="reveal group block" :style="{ transitionDelay: n * 80 + 'ms' }">
+          <NuxtLink v-for="(p, n) in products" :key="p.t" :to="{ path: '/products/', query: { p: p.slug } }" class="reveal group block" :aria-label="'View ' + p.t" :style="{ transitionDelay: n * 80 + 'ms' }">
             <div class="overflow-hidden rounded-[1.75rem] aspect-[4/5] bg-surface">
-              <img :src="$img(p.img)" :alt="p.t" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" width="800" height="1000" loading="lazy">
+              <img :src="$img(p.img)" :alt="p.alt" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" width="800" height="1000" loading="lazy">
             </div>
             <div class="mt-4 flex items-center justify-between gap-3 px-1">
               <div><h3 class="font-semibold text-fg">{{ p.t }}</h3><p class="text-sm text-fg/72">{{ p.s }}</p></div>
@@ -197,7 +194,7 @@ const real = [
           <figcaption class="glass absolute left-3 bottom-3 rounded-full px-4 py-2 text-sm font-semibold text-white">{{ r.cap }}</figcaption>
         </figure>
         <figure class="reveal relative overflow-hidden rounded-[1.75rem] aspect-[4/5] md:aspect-auto md:col-span-2 bg-forest flex items-center">
-          <img :src="$img('/img/stock/beans-noir.webp')" alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" width="1800" height="1200" loading="lazy">
+          <img :src="$img('/img/factory/sugar-snaps-closeup.webp')" alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" width="1800" height="1200" loading="lazy">
           <div class="relative p-8 sm:p-12 text-white">
             <p class="serif text-3xl sm:text-5xl leading-tight">Every carton, traced<br>from farm to destination.</p>
             <p class="mt-4 text-sm text-white/70">Strict quality control and full traceability at every step.</p>

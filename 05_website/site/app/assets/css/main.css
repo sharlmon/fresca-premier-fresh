@@ -140,3 +140,9 @@ a[href^="mailto:"], a[href^="tel:"] { overflow-wrap: anywhere; }
 /* frosted plate over a photo; falls back to a solid dark plate if blur is unsupported */
 .glass-plate { background: rgba(7, 42, 27, .55); border: 1px solid rgba(255,255,255,.22); -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%); }
 html.a11y-contrast .glass-plate { background: #000; border-color: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* expanded product view */
+.pm-panel { animation: pm-in .28s cubic-bezier(.2, .8, .2, 1) both; }
+.pm-img { animation: pm-fade .35s ease both; }
+@keyframes pm-in { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes pm-fade { from { opacity: 0; } to { opacity: 1; } }

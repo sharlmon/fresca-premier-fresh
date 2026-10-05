@@ -33,7 +33,7 @@ const items = [
     </section>
 
     <section class="relative isolate overflow-hidden mx-3 sm:mx-4 rounded-[2rem] sm:rounded-[3rem]">
-      <img :src="$img('/img/sustainability.webp')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="1600" height="900" loading="lazy">
+      <img :src="$img('/img/stock/field-hills.webp')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="1600" height="900" loading="lazy">
       <div class="absolute inset-0 -z-10 bg-gradient-to-r from-forest/95 via-forest/75 to-forest/30" />
       <div class="mx-auto max-w-6xl px-6 sm:px-10 py-24 text-white">
         <p class="reveal serif text-3xl sm:text-5xl leading-tight max-w-2xl">Growing together with our farmers, season after season.</p>

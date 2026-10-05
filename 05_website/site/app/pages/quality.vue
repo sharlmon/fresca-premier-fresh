@@ -17,7 +17,7 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
 
 <template>
   <div>
-    <PageHero eyebrow="Quality & Safety" image="/img/stock/beans-noir.webp" alt="Fresh green beans" text="Food safety and quality are at the heart of everything we do.">
+    <PageHero eyebrow="Quality & Safety" image="/img/factory/french-beans-bunch.webp" alt="A bunch of fresh French beans on a packing table" pos="center 60%" text="Food safety and quality are at the heart of everything we do.">
       Quality you can <span class="serif font-normal">trace.</span>
     </PageHero>
 
