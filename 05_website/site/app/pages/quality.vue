@@ -26,7 +26,7 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
         <span class="chip chip-soft"><i />Our commitment</span>
         <h2 class="mt-5 text-4xl sm:text-5xl font-semibold leading-[1.08]">Safe, <span class="serif font-normal">sustainable,</span> ethical.</h2>
         <p class="mt-5 text-fg/70 leading-relaxed">We work closely with growers and packhouses that comply with internationally recognised standards, and we continuously strive to meet customer requirements on food safety, sustainability and ethical sourcing.</p>
-        <p class="mt-4 text-fg/70 leading-relaxed">Our compliance team supports partner farms in meeting standards such as <b class="text-fg">GLOBALG.A.P.</b> and <b class="text-fg">SMETA</b>, with the documentation and training that go with them.</p>
+        <p class="mt-4 text-fg/70 leading-relaxed">We hold <b class="text-fg">GLOBALG.A.P.</b> certification, alongside <b class="text-fg">KEPHIS</b> and <b class="text-fg">AFA</b> credentials, and keep the documentation and training that go with them.</p>
         <NuxtLink to="/team" class="btn btn-dark mt-8">Meet the team <span class="arr">↗</span></NuxtLink>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
@@ -37,6 +37,8 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
         </article>
       </div>
     </section>
+
+    <TrustBand parts="certs" />
 
     <!-- chain -->
     <section class="relative isolate overflow-hidden mx-3 sm:mx-4 rounded-[2rem] sm:rounded-[3rem]">

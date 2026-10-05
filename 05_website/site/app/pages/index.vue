@@ -112,6 +112,8 @@ const real = [
       </div>
     </section>
 
+    <TrustBand />
+
     <!-- ABOUT / STORY -->
     <section class="mx-auto max-w-6xl px-5 pb-24">
       <span class="chip chip-soft reveal"><i />About us</span>

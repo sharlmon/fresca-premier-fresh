@@ -79,6 +79,8 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
       </ul>
     </section>
 
+    <TrustBand parts="network" />
+
     <DownloadCard />
 
     <CtaBand image="/img/stock/crop-rows.webp" />
