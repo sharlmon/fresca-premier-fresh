@@ -1,7 +1,6 @@
 <script setup lang="ts">
 type Prefs = { size: number; spacing: boolean; font: boolean; contrast: boolean; links: boolean; still: boolean; cursor: boolean }
 const KEY = 'a11y'
-const FONT_URL = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap'
 const defaults = (): Prefs => ({ size: 0, spacing: false, font: false, contrast: false, links: false, still: false, cursor: false })
 
 const prefs = reactive<Prefs>(defaults())
@@ -22,11 +21,6 @@ function apply() {
   const h = document.documentElement
   ;[0, 1, 2, 3].forEach((n) => h.classList.toggle('a11y-text-' + n, prefs.size === n && n > 0))
   ;(['spacing', 'font', 'contrast', 'links', 'still', 'cursor'] as const).forEach((k) => h.classList.toggle('a11y-' + k, prefs[k]))
-  if (prefs.font && !document.getElementById('a11y-font')) {
-    const l = document.createElement('link')
-    l.id = 'a11y-font'; l.rel = 'stylesheet'; l.href = FONT_URL
-    document.head.appendChild(l)
-  }
   try {
     const any = prefs.size > 0 || toggles.some((t) => prefs[t.key])
     any ? localStorage.setItem(KEY, JSON.stringify(prefs)) : localStorage.removeItem(KEY)

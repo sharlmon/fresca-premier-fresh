@@ -1,0 +1,29 @@
+name: Uptime check
+
+# Every 30 minutes, check that the live site and the digital business cards (which the printed QR codes
+# point to) respond. If any check fails the run is marked failed and GitHub emails the repository owner.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check live URLs
+        run: |
+          fail=0
+          for url in \
+            https://frescapremierfresh.com/ \
+            https://frescapremierfresh.com/card/lucas/ \
+            https://frescapremierfresh.com/card/judy/ ; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 2 --retry-delay 15 --max-time 25 "$url" || echo 000)
+            if [ "$code" = 200 ]; then echo "OK    $code $url"; else echo "DOWN  $code $url"; fail=1; fi
+          done
+          curl -s --max-time 25 https://frescapremierfresh.com/ | grep -qi 'fresca' || { echo "DOWN  home page does not mention Fresca"; fail=1; }
+          exit $fail

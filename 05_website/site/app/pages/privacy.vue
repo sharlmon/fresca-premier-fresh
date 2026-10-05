@@ -38,7 +38,7 @@ const updated = '5 October 2026'
       <ul>
         <li>This website does not use advertising or analytics cookies.</li>
         <li>If you switch between light and dark mode, your choice is saved in your own browser (local storage) so the site remembers it. It is not sent to us.</li>
-        <li>Fonts are loaded from Google Fonts, so your browser contacts Google when a page loads.</li>
+        <li>The fonts used on this website are served from our own server, so your browser does not contact Google or any other font service.</li>
         <li>If you click the WhatsApp button or a map link, you leave this site and WhatsApp or Google apply their own privacy terms.</li>
       </ul>
 

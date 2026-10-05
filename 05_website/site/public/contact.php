@@ -70,11 +70,15 @@ $name    = field('name', 100);
 $company = field('company', 120);
 $email   = field('email', 150);
 $phone   = field('phone', 40);
-$product = field('product', 80);
-$message = field('message', 3000, true);
+$products = field('products', 1500, true);   // one product per line: "Name — quantity"
+$market   = field('market', 120);
+$message  = field('message', 3000, true);
 
-if ($name === '' || $message === '' || mb_strlen($message) < 5) {
-    out(422, ['ok' => false, 'error' => 'Please fill in your name and a short message.']);
+if ($name === '') {
+    out(422, ['ok' => false, 'error' => 'Please tell us your name.']);
+}
+if ($products === '' && mb_strlen($message) < 5) {
+    out(422, ['ok' => false, 'error' => 'Please choose at least one product or write a short message.']);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     out(422, ['ok' => false, 'error' => 'Please enter a valid email address.']);
@@ -87,8 +91,9 @@ $body = "New enquiry from the Fresca Premier Fresh website\n"
       . "Company: $company\n"
       . "Email:   $email\n"
       . "Phone:   $phone\n"
-      . "Product: $product\n\n"
-      . "Message:\n$message\n\n"
+      . "Market:  $market\n\n"
+      . "Products requested:\n" . ($products !== '' ? $products : '-') . "\n\n"
+      . "Message:\n" . ($message !== '' ? $message : '-') . "\n\n"
       . "------------------------------------------------\n"
       . 'Sent ' . gmdate('Y-m-d H:i') . " UTC from IP $ip\n";
 

@@ -23,6 +23,7 @@ frescape/
 │                              img/ (assets used) and photos/ (photos used)
 │
 ├── 04_tools/                build scripts (see below)
+├── 05_website/              new Nuxt website: site/ (source), legacy-wordpress/ (old-site crawl), LAUNCH.md (go-live plan)
 └── _archive/                superseded files – safe to delete once you are sure
 ```
 
@@ -41,6 +42,7 @@ Run `npm install` once in 04_tools.
 | Printable card PDFs | `./ecard-print-cards.sh` |
 | Web e-cards (HTML, QR codes, .vcf) | `node ecard-build.js` then re-zip `02_ecards/web/card` |
 | Check every e-card QR still decodes | `node ecard-qr-check.js` |
+| Health / launch check of the website | `./check-launch.sh https://frescapremierfresh.com` |
 | Demo video | `node ecard-demo-video.js` (needs ffmpeg-static, see script) |
 
 Edit content in `brochure-build.js` (text, photos, colours) or `ecard-build.js` (people, links), then rebuild.

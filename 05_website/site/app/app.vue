@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import montserratUrl from '~/assets/fonts/montserrat-latin.woff2?url'
+import serifUrl from '~/assets/fonts/dm-serif-display-latin.woff2?url'
+import serifItalicUrl from '~/assets/fonts/dm-serif-display-italic-latin.woff2?url'
 const root = String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')
 useHead({
+  link: [montserratUrl, serifUrl, serifItalicUrl].map((href) => ({ rel: 'preload', as: 'font', type: 'font/woff2', href, crossorigin: 'anonymous' })),
   script: [{
     type: 'application/ld+json',
     innerHTML: JSON.stringify({
