@@ -38,7 +38,7 @@ usePageSeo({
   <div>
     <!-- header panel: text on the left, the photo (not cropped) in a frame on the right -->
     <section class="relative isolate mx-3 sm:mx-4 mt-3 sm:mt-4 overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] bg-forest text-white">
-      <img :src="$img(product.photos[0].src)" alt="" aria-hidden="true" class="absolute inset-0 -z-20 h-full w-full scale-110 object-cover opacity-60 blur-2xl saturate-150" width="1200" height="900">
+      <img :src="$img(product.photos[0].src)" alt="" aria-hidden="true" class="absolute inset-0 -z-20 h-full w-full scale-110 object-cover opacity-60 blur-2xl saturate-150" width="1200" height="900" fetchpriority="high" decoding="async">
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(7,42,27,.94)_0%,rgba(7,42,27,.78)_50%,rgba(7,42,27,.45)_100%)]" />
       <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-14 pt-32 sm:px-8 lg:grid-cols-[1.1fr_.9fr]">
         <div>
@@ -58,7 +58,7 @@ usePageSeo({
           </div>
           <div v-if="product.photos.length > 1" class="mt-3 flex gap-2" role="group" aria-label="Product photos">
             <button v-for="(ph, i) in product.photos" :key="ph.src" type="button" class="h-16 w-16 overflow-hidden rounded-xl ring-2 transition" :class="i === photo ? 'ring-lime' : 'ring-white/40 opacity-80 hover:opacity-100'" :aria-label="'Show photo ' + (i + 1) + ' of ' + product.photos.length" :aria-pressed="i === photo" @click="photo = i">
-              <img :src="$img(ph.src)" alt="" class="h-full w-full object-cover" width="64" height="64">
+              <img :src="$img(ph.src)" alt="" class="h-full w-full object-cover" width="64" height="64" :loading="i === 0 ? undefined : 'lazy'">
             </button>
           </div>
         </div>

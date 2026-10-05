@@ -20,6 +20,12 @@ const slides = [
 ]
 const DWELL = 6500
 const cur = ref(0)
+// only the first slide loads with the page; the rest follow once it is idle, so the first photo paints sooner on slow connections
+const spare = ref(false)
+onMounted(() => {
+  const go = () => ('requestIdleCallback' in window ? requestIdleCallback(() => { spare.value = true }, { timeout: 2500 }) : setTimeout(() => { spare.value = true }, 1500))
+  document.readyState === 'complete' ? go() : window.addEventListener('load', go, { once: true })
+})
 const paused = ref(false)
 const still = ref(false)                       // reduced motion / accessibility "pause animations"
 let timer: ReturnType<typeof setTimeout> | undefined
@@ -72,7 +78,7 @@ const real = [
     <section class="relative isolate mx-3 sm:mx-4 mt-3 sm:mt-4 overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] min-h-[640px] h-[calc(100svh-1.5rem)] max-h-[900px] flex flex-col justify-end bg-forest" role="group" aria-roledescription="carousel" aria-label="Fresca produce" @touchstart.passive="swipeStart" @touchend.passive="swipeEnd">
       <!-- backdrop: the same photo, full-bleed on phones, blurred and dimmed on desktop -->
       <div class="absolute inset-0 -z-20 overflow-hidden" aria-hidden="true">
-        <img v-for="(sl, i) in slides" :key="sl.img" :src="$img(sl.img)" alt="" class="hero-slide absolute inset-0 h-full w-full object-cover lg:scale-105 lg:blur-[3px] lg:saturate-125" :class="{ 'is-active': i === cur }" width="1200" height="1500" :loading="i === 0 ? 'eager' : 'lazy'" :fetchpriority="i === 0 ? 'high' : 'auto'" decoding="async">
+        <img v-for="(sl, i) in slides" :key="sl.img" :src="i === 0 || spare ? $img(sl.img) : undefined" alt="" class="hero-slide absolute inset-0 h-full w-full object-cover lg:scale-105 lg:blur-[3px] lg:saturate-125" :class="{ 'is-active': i === cur }" width="1200" height="1500" :loading="i === 0 ? 'eager' : 'lazy'" :fetchpriority="i === 0 ? 'high' : 'auto'" decoding="async">
       </div>
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(7,42,27,.97)_0%,rgba(7,42,27,.9)_50%,rgba(7,42,27,.45)_82%,rgba(7,42,27,.2)_100%)] lg:bg-[linear-gradient(100deg,rgba(7,42,27,.82)_0%,rgba(7,42,27,.42)_38%,rgba(7,42,27,0)_75%)]" />
       <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-forest/35 to-transparent" />
@@ -95,7 +101,7 @@ const real = [
         <!-- desktop: the framed photo -->
         <div class="hidden lg:block lg:justify-self-end w-[min(100%,calc((100svh-14rem)*.8),32rem)]">
           <div class="relative aspect-[4/5] w-full overflow-hidden rounded-[2.25rem] ring-1 ring-white/25 shadow-2xl shadow-black/40">
-            <img v-for="(sl, i) in slides" :key="sl.img" :src="$img(sl.img)" :alt="i === cur ? sl.alt : ''" :aria-hidden="i === cur ? undefined : 'true'" class="hero-slide absolute inset-0 h-full w-full object-cover" :class="{ 'is-active': i === cur }" width="1200" height="1500" loading="lazy" decoding="async">
+            <img v-for="(sl, i) in slides" :key="sl.img" :src="i === 0 || spare ? $img(sl.img) : undefined" :alt="i === cur ? sl.alt : ''" :aria-hidden="i === cur ? undefined : 'true'" class="hero-slide absolute inset-0 h-full w-full object-cover" :class="{ 'is-active': i === cur }" width="1200" height="1500" loading="lazy" decoding="async">
             <HeroControls compact class="absolute inset-x-3 bottom-3" :slides="slides" :cur="cur" :paused="paused" :still="still" :dwell="DWELL" @go="go" @toggle="toggle" />
           </div>
         </div>
@@ -107,7 +113,7 @@ const real = [
       <p class="reveal text-sm font-semibold text-fg/70">Trusted by importers, retailers &amp; food-service companies across Europe</p>
       <div class="reveal mt-8 flex flex-wrap justify-center gap-x-8 gap-y-6 max-w-3xl mx-auto">
         <div v-for="s in stats" :key="s[1]" class="flex-1 basis-24">
-          <div class="text-4xl sm:text-6xl font-semibold text-fg tracking-tight">{{ s[0] }}</div>
+          <div class="text-4xl sm:text-6xl font-semibold text-fg tracking-tight"><CountUp :value="s[0]" /></div>
           <div class="mt-1 text-xs sm:text-sm font-medium text-fg/72">{{ s[1] }}</div>
         </div>
       </div>

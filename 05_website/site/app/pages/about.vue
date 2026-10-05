@@ -46,7 +46,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
     <section class="mx-auto max-w-6xl px-5">
       <div class="reveal flex flex-wrap justify-center gap-x-10 gap-y-6 rounded-[2rem] bg-soft px-4 py-10 text-center">
         <div v-for="s in stats" :key="s[1]" class="flex-1 basis-24">
-          <div class="text-4xl sm:text-6xl font-semibold tracking-tight">{{ s[0] }}</div>
+          <div class="text-4xl sm:text-6xl font-semibold tracking-tight"><CountUp :value="s[0]" /></div>
           <div class="mt-1 text-xs sm:text-sm font-medium text-fg/72">{{ s[1] }}</div>
         </div>
       </div>

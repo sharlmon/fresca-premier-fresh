@@ -32,14 +32,14 @@ withDefaults(defineProps<{ parts?: 'all' | 'certs' | 'network' }>(), { parts: 'a
         <div v-if="parts !== 'certs'">
           <h3 class="font-sans text-xs font-bold uppercase tracking-[.2em] text-accent">Our partner</h3>
           <ul class="mt-4 grid gap-4">
-            <li v-for="n in network" :key="n.key" class="flex flex-col items-center gap-5 rounded-[1.5rem] border border-fg/10 bg-white p-5 text-forest sm:flex-row sm:p-6">
-              <component :is="n.href ? 'a' : 'div'" :href="n.href" :target="n.href ? '_blank' : undefined" :rel="n.href ? 'noopener' : undefined" :aria-label="n.href ? n.name + ' (opens in a new tab)' : undefined" class="grid h-28 w-28 shrink-0 place-items-center">
+            <li v-for="n in network" :key="n.key" class="flex flex-col items-center gap-5 rounded-[1.5rem] border border-fg/10 bg-surface p-5 sm:flex-row sm:p-6">
+              <component :is="n.href ? 'a' : 'div'" :href="n.href" :target="n.href ? '_blank' : undefined" :rel="n.href ? 'noopener' : undefined" :aria-label="n.href ? n.name + ' (opens in a new tab)' : undefined" class="grid h-28 w-28 shrink-0 place-items-center rounded-2xl bg-white p-1.5">
                 <img :src="$img(n.logo)" :alt="n.name + ' logo'" class="max-h-28 w-auto object-contain" :width="n.w" :height="n.h" loading="lazy">
               </component>
               <div class="text-center sm:text-left">
-                <p class="text-[11px] font-bold uppercase tracking-[.2em] text-leaf-700">{{ n.role }}</p>
+                <p class="text-[11px] font-bold uppercase tracking-[.2em] text-accent">{{ n.role }}</p>
                 <p class="text-xl font-semibold">{{ n.name }}</p>
-                <p class="mt-1 max-w-xl text-sm text-forest/75">{{ n.blurb }}</p>
+                <p class="mt-1 max-w-xl text-sm text-fg/72">{{ n.blurb }}</p>
               </div>
             </li>
           </ul>
