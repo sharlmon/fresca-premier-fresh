@@ -17,11 +17,11 @@ const info = [
       Let’s <span class="serif font-normal">talk produce.</span>
     </PageHero>
 
-    <section class="mx-auto max-w-6xl px-5 py-24 grid lg:grid-cols-[.85fr_1.15fr] gap-10 items-start">
-      <div class="reveal grid gap-4">
+    <section class="mx-auto max-w-6xl px-5 py-24 grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[.85fr_1.15fr] gap-10 items-start">
+      <div class="reveal grid grid-cols-[minmax(0,1fr)] gap-4">
         <a v-for="c in info" :key="c.t" :href="c.h" :target="c.t === 'Visit' ? '_blank' : undefined" rel="noopener" class="rounded-[1.75rem] bg-card border border-fg/10 p-6 flex gap-4 items-start hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 transition">
           <span class="icon-circle h-12 w-12 shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" v-html="c.i" /></span>
-          <span><span class="block text-xs font-bold uppercase tracking-[.2em] text-accent">{{ c.t }}</span><span class="mt-1 block font-semibold break-words">{{ c.v }}</span></span>
+          <span class="min-w-0"><span class="block text-xs font-bold uppercase tracking-[.2em] text-accent">{{ c.t }}</span><span class="mt-1 block font-semibold break-words [overflow-wrap:anywhere]">{{ c.v }}</span></span>
         </a>
         <div class="rounded-[1.75rem] bg-forest text-white p-6">
           <p class="text-xs font-bold uppercase tracking-[.2em] text-lime">Prefer a person?</p>

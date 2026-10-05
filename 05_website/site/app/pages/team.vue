@@ -30,7 +30,7 @@ const initials = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((w)
         <span class="chip chip-soft"><i />Get in touch directly</span>
         <h2 class="mt-5 text-4xl sm:text-6xl font-semibold">Your <span class="serif font-normal">contacts</span></h2>
       </div>
-      <div class="mt-12 grid gap-5 md:grid-cols-2">
+      <div class="mt-12 grid gap-5 grid-cols-[minmax(0,1fr)] md:grid-cols-2">
         <article v-for="(l, n) in leads" :key="l.n" class="reveal rounded-[2rem] bg-forest text-white p-7 sm:p-9 relative overflow-hidden" :style="{ transitionDelay: n * 90 + 'ms' }">
           <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-leaf-500/30 blur-3xl" aria-hidden="true" />
           <div class="relative">
@@ -57,14 +57,14 @@ const initials = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((w)
           <span class="chip bg-surface text-accent"><i />The wider team</span>
           <h2 class="mt-5 text-4xl sm:text-6xl font-semibold">Experience that <span class="serif font-normal">delivers</span></h2>
         </div>
-        <div class="mt-12 grid gap-5 md:grid-cols-2">
+        <div class="mt-12 grid gap-5 grid-cols-[minmax(0,1fr)] md:grid-cols-2">
           <article v-for="(m, n) in team" :key="m.n" class="reveal rounded-[1.75rem] bg-surface border border-fg/10 p-6 sm:p-7 flex gap-5" :style="{ transitionDelay: (n % 2) * 80 + 'ms' }">
             <span class="icon-circle h-16 w-16 shrink-0 text-xl font-semibold">{{ initials(m.n) }}</span>
-            <div>
+            <div class="min-w-0">
               <h3 class="text-xl font-semibold">{{ m.n }}</h3>
               <p class="text-sm font-semibold text-accent">{{ m.r }}</p>
               <p class="mt-3 text-sm text-fg/70 leading-relaxed">{{ m.b }}</p>
-              <a v-if="m.e" :href="'mailto:' + m.e" class="mt-3 inline-block text-sm font-semibold text-accent hover:underline">{{ m.e }}</a>
+              <a v-if="m.e" :href="'mailto:' + m.e" class="mt-3 inline-block text-sm font-semibold text-accent hover:underline break-all">{{ m.e }}</a>
             </div>
           </article>
         </div>

@@ -11,6 +11,8 @@ const mailto = computed(() => 'mailto:info@frescapremierfresh.com?subject=' + en
 
 async function submit() {
   err.value = ''
+  if (!f.name || f.message.length < 5) { err.value = 'Please fill in your name and a short message.'; state.value = 'error'; return }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) { err.value = 'Please enter a valid email address.'; state.value = 'error'; return }
   state.value = 'sending'
   try {
     const body = new FormData()
@@ -18,8 +20,9 @@ async function submit() {
     body.append('elapsed', String(Date.now() - opened))
     const res = await fetch(base + 'contact.php', { method: 'POST', body, headers: { Accept: 'application/json' } })
     const ct = res.headers.get('content-type') || ''
-    if (!ct.includes('json')) { state.value = 'offline'; return }          // static preview: no PHP here
+    if (res.status === 404 || res.status === 405 || !ct.includes('json')) { state.value = 'offline'; return }   // static preview: no PHP here
     const j = await res.json()
+    if (typeof j.ok !== 'boolean') { state.value = 'offline'; return }       // not our script answering
     if (j.ok) { state.value = 'sent'; return }
     err.value = j.error || 'Something went wrong. Please try again.'
     state.value = 'error'
