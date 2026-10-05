@@ -86,6 +86,7 @@ onBeforeUnmount(() => {
 
           <div class="mt-auto flex flex-wrap items-center gap-3 pt-8">
             <NuxtLink :to="{ path: '/contact/', query: { product: product.name } }" class="btn btn-dark">Request a quote <span class="arr">↗</span></NuxtLink>
+            <NuxtLink :to="`/products/${product.slug}/`" class="text-sm font-semibold text-accent underline underline-offset-4">Full details</NuxtLink>
             <div class="ml-auto flex items-center gap-2" role="group" aria-label="Browse products">
               <button type="button" class="grid h-11 w-11 place-items-center rounded-full border border-fg/20 hover:bg-soft" aria-label="Previous product" @click="emit('prev')">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>

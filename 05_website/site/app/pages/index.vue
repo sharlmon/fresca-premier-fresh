@@ -1,7 +1,8 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Fresh from Kenya to the World',
-  description: 'Fresca Premier Fresh Ltd exports premium Kenyan French beans, snow peas, sugar snaps and fresh vegetables to international markets. Quality, reliability, trust.',
+  title: 'Fresca Premier Fresh · Kenyan Fresh Vegetable Exporter',
+  fullTitle: true,
+  description: 'Fresca Premier Fresh Ltd exports premium Kenyan French beans, snow peas, sugar snap peas and baby corn to importers and retailers worldwide. Request a quote.',
 })
 
 import { products as allProducts } from '~/data/products'
@@ -11,9 +12,9 @@ useHead({ link: [{ rel: 'preload', as: 'image', href: $img('/img/hero/p-snow-pea
 
 // Hero slideshow. Photos are 2000px wide so they stay sharp full-bleed. Order: product first, then the farm.
 const slides = [
-  { img: '/img/hero/p-snow-peas.webp', t: 'Snow peas', s: 'Mangetout, sorted and packed for freshness', alt: 'Snow peas packed in a tray', to: '/products/?p=snow-peas' },
-  { img: '/img/hero/p-french-beans.webp', t: 'French beans', s: 'Extra fine and fine, graded for consistency', alt: 'Extra fine French beans packed in a tray', to: '/products/?p=french-beans' },
-  { img: '/img/hero/p-sugar-snaps.webp', t: 'Sugar snap peas', s: 'Crisp and sweet, packed to your specification', alt: 'Sugar snap peas packed in a tray', to: '/products/?p=sugar-snap-peas' },
+  { img: '/img/hero/p-snow-peas.webp', t: 'Snow peas', s: 'Mangetout, sorted and packed for freshness', alt: 'Snow peas packed in a tray', to: '/products/snow-peas/' },
+  { img: '/img/hero/p-french-beans.webp', t: 'French beans', s: 'Extra fine and fine, graded for consistency', alt: 'Extra fine French beans packed in a tray', to: '/products/french-beans/' },
+  { img: '/img/hero/p-sugar-snaps.webp', t: 'Sugar snap peas', s: 'Crisp and sweet, packed to your specification', alt: 'Sugar snap peas packed in a tray', to: '/products/sugar-snap-peas/' },
   { img: '/img/hero/p-sugar-snaps-closeup.webp', t: 'Picked at peak freshness', s: 'Crisp, sweet and carefully graded', alt: 'Close-up of fresh sugar snap peas', to: '/quality/' },
   { img: '/img/hero/p-french-beans-harvest.webp', t: 'Fresh from the harvest', s: 'French beans, ready for grading and packing', alt: 'A bunch of freshly harvested French beans on a packing table', to: '/about/' },
 ]
@@ -82,10 +83,10 @@ const real = [
           <h1 class="mt-5 text-5xl sm:text-6xl font-semibold leading-[1.02] text-white [text-shadow:0_2px_24px_rgba(4,23,15,.45)]">
             Fresh from Kenya<br><span class="serif font-normal">to the world.</span>
           </h1>
-          <p class="mt-5 max-w-lg text-white sm:text-lg [text-shadow:0_1px_14px_rgba(4,23,15,.5)]">Premium-quality vegetables, responsibly grown and carefully delivered to international markets.</p>
+          <p class="mt-5 max-w-lg text-white sm:text-lg [text-shadow:0_1px_14px_rgba(4,23,15,.5)]">Premium Kenyan French beans, snow peas, sugar snap peas and fresh vegetables, responsibly grown and carefully delivered to international markets.</p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <NuxtLink to="/contact" class="btn btn-lime">Request a quote <span class="arr">↗</span></NuxtLink>
-            <NuxtLink to="/products" class="btn btn-white">Our products <span class="arr">↗</span></NuxtLink>
+            <NuxtLink to="/contact/" class="btn btn-lime">Request a quote <span class="arr">↗</span></NuxtLink>
+            <NuxtLink to="/products/" class="btn btn-white">Our products <span class="arr">↗</span></NuxtLink>
           </div>
           <!-- phones: controls sit under the buttons -->
           <HeroControls class="mt-8 max-w-sm lg:hidden" :slides="slides" :cur="cur" :paused="paused" :still="still" :dwell="DWELL" @go="go" @toggle="toggle" />
@@ -128,11 +129,13 @@ const real = [
       </h2>
       <div class="reveal mt-10 grid md:grid-cols-[1fr_auto] gap-8 items-end">
         <p class="max-w-2xl text-fg/70 leading-relaxed">Fresca Premier Fresh is a Kenyan fresh produce export company. We specialise in the production, sourcing, packing and export of vegetables that meet the highest international standards for quality, food safety and traceability.</p>
-        <NuxtLink to="/about" class="btn btn-dark">Learn more about us <span class="arr">↗</span></NuxtLink>
+        <NuxtLink to="/about/" class="btn btn-dark">Learn more about us <span class="arr">↗</span></NuxtLink>
       </div>
     </section>
 
     <DownloadCard />
+
+    <AtAGlance />
 
     <!-- PRODUCTS -->
     <section class="bg-soft rounded-[2rem] sm:rounded-[3rem] mx-3 sm:mx-4">
@@ -142,10 +145,10 @@ const real = [
             <span class="chip bg-surface text-accent"><i />What we grow</span>
             <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-fg">Our <span class="serif font-normal">products</span></h2>
           </div>
-          <NuxtLink to="/products" class="btn btn-dark">View all products <span class="arr">↗</span></NuxtLink>
+          <NuxtLink to="/products/" class="btn btn-dark">View all products <span class="arr">↗</span></NuxtLink>
         </div>
         <div class="mt-12 grid gap-5 grid-cols-2 lg:grid-cols-4">
-          <NuxtLink v-for="(p, n) in products" :key="p.t" :to="{ path: '/products/', query: { p: p.slug } }" class="reveal group block" :aria-label="'View ' + p.t" :style="{ transitionDelay: n * 80 + 'ms' }">
+          <NuxtLink v-for="(p, n) in products" :key="p.t" :to="`/products/${p.slug}/`" class="reveal group block" :aria-label="'View ' + p.t" :style="{ transitionDelay: n * 80 + 'ms' }">
             <div class="overflow-hidden rounded-[1.75rem] aspect-[4/5] bg-surface">
               <img :src="$img(p.img)" :alt="p.alt" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" width="800" height="1000" loading="lazy">
             </div>

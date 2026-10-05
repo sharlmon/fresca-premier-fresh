@@ -5,11 +5,11 @@ const scrolled = ref(false)
 const overHero = computed(() => !scrolled.value && !open.value)
 const route = useRoute()
 const links = [
-  { to: '/about', label: 'About' },
-  { to: '/products', label: 'Products' },
-  { to: '/quality', label: 'Quality & Safety' },
-  { to: '/sustainability', label: 'Sustainability' },
-  { to: '/team', label: 'Team' },
+  { to: '/about/', label: 'About' },
+  { to: '/products/', label: 'Products' },
+  { to: '/quality/', label: 'Quality & Safety' },
+  { to: '/sustainability/', label: 'Sustainability' },
+  { to: '/team/', label: 'Team' },
 ]
 onMounted(() => {
   const f = () => (scrolled.value = window.scrollY > 40)
@@ -31,7 +31,7 @@ watch(() => route.fullPath, () => (open.value = false))
       </nav>
       <div class="flex items-center gap-1">
         <ThemeToggle />
-        <NuxtLink to="/contact" class="btn btn-white hidden sm:inline-flex whitespace-nowrap !py-1 !pr-1">Contact us <span class="arr">↗</span></NuxtLink>
+        <NuxtLink to="/contact/" class="btn btn-white hidden sm:inline-flex whitespace-nowrap !py-1 !pr-1">Contact us <span class="arr">↗</span></NuxtLink>
         <button class="lg:hidden grid place-items-center h-10 w-10 rounded-full" :aria-expanded="open" aria-label="Menu" @click="open = !open">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path v-if="!open" d="M3 6h18M3 12h18M3 18h18"/><path v-else d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
@@ -39,7 +39,7 @@ watch(() => route.fullPath, () => (open.value = false))
     </div>
     <nav v-if="open" class="lg:hidden mx-auto max-w-6xl mt-2 rounded-3xl bg-surface text-fg p-5 grid gap-1 font-semibold shadow-xl border border-fg/10" aria-label="Mobile">
       <NuxtLink v-for="l in links" :key="l.to" :to="l.to" class="rounded-2xl px-4 py-3 hover:bg-soft">{{ l.label }}</NuxtLink>
-      <NuxtLink to="/contact" class="btn btn-dark justify-between mt-2">Contact us <span class="arr">↗</span></NuxtLink>
+      <NuxtLink to="/contact/" class="btn btn-dark justify-between mt-2">Contact us <span class="arr">↗</span></NuxtLink>
     </nav>
   </header>
 </template>

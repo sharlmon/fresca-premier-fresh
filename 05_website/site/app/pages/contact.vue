@@ -1,6 +1,8 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Contact us',
+  title: 'Contact & Request a Quote · Fresca Premier Fresh',
+  fullTitle: true,
+  type: 'ContactPage',
   description: 'Contact Fresca Premier Fresh Ltd in Nairobi for enquiries, orders and quotes. Email info@frescapremierfresh.com or call +254 700 752 341.',
 })
 const map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Trystar Go Down, Airport North Road, Nairobi, Kenya')
@@ -32,7 +34,7 @@ const info = [
         <div class="rounded-[1.75rem] bg-forest text-white p-6">
           <p class="text-xs font-bold uppercase tracking-[.2em] text-lime">Prefer a person?</p>
           <p class="mt-2 text-sm text-white/80 leading-relaxed">Reach our Director or Commercial &amp; Operations Manager directly.</p>
-          <NuxtLink to="/team" class="btn btn-lime mt-4">Meet the team <span class="arr">↗</span></NuxtLink>
+          <NuxtLink to="/team/" class="btn btn-lime mt-4">Meet the team <span class="arr">↗</span></NuxtLink>
         </div>
       </div>
       <div class="reveal"><ContactForm /></div>

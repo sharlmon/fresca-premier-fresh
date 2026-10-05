@@ -9,6 +9,7 @@ defineProps<{ eyebrow: string; image: string; alt?: string; text?: string; pos?:
     <div class="absolute inset-0 -z-10 bg-gradient-to-r from-forest/75 via-forest/35 to-transparent" />
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-forest/55 via-transparent to-transparent" />
     <div class="mx-auto w-full max-w-6xl px-5 sm:px-8 pt-32 pb-10 sm:pb-14 text-white">
+      <Breadcrumbs class="mb-5" />
       <span class="chip glass"><i />{{ eyebrow }}</span>
       <h1 class="mt-5 max-w-3xl text-4xl sm:text-6xl lg:text-7xl font-semibold leading-[1.04]"><slot /></h1>
       <p v-if="text" class="mt-5 max-w-xl text-white/85 sm:text-lg">{{ text }}</p>

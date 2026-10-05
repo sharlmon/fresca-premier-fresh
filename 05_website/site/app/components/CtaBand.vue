@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { $img } = useNuxtApp()
-withDefaults(defineProps<{ image?: string }>(), { image: '/img/stock/farmer.webp' })
+withDefaults(defineProps<{ image?: string; quote?: string }>(), { image: '/img/stock/farmer.webp' })
 </script>
 
 <template>
@@ -12,7 +12,7 @@ withDefaults(defineProps<{ image?: string }>(), { image: '/img/stock/farmer.webp
         <h2 class="text-4xl sm:text-6xl font-semibold leading-[1.05] max-w-xl">Let’s grow <span class="serif font-normal">together.</span></h2>
         <p class="mt-5 max-w-md text-white/80">Tell us about your market requirements and we’ll respond quickly.</p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <NuxtLink to="/contact" class="btn btn-lime">Request a quote <span class="arr">↗</span></NuxtLink>
+          <NuxtLink :to="quote ? { path: '/contact/', query: { product: quote } } : '/contact/'" class="btn btn-lime">Request a quote <span class="arr">↗</span></NuxtLink>
           <a href="mailto:info@frescapremierfresh.com" class="btn btn-white">Email us <span class="arr">↗</span></a>
         </div>
       </div>

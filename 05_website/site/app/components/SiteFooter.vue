@@ -1,16 +1,23 @@
 <template>
   <footer class="px-3 sm:px-4 pb-4 pt-6">
     <div class="mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] bg-forest text-white border border-white/10">
-      <div class="px-7 sm:px-12 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div class="px-7 sm:px-12 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <img :src="$img('/img/logo.webp')" alt="Fresca Premier Fresh" class="h-16 w-auto rounded-2xl bg-white p-2" width="80" height="64">
           <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/70">Premium Kenyan fresh vegetables, responsibly grown and carefully delivered to international markets.</p>
-          <NuxtLink to="/contact" class="btn btn-lime mt-6">Request a quote <span class="arr">↗</span></NuxtLink>
+          <NuxtLink to="/contact/" class="btn btn-lime mt-6">Request a quote <span class="arr">↗</span></NuxtLink>
         </div>
         <div class="text-sm">
           <h3 class="font-semibold text-white mb-4">Explore</h3>
           <ul class="grid gap-2.5 text-white/70">
-            <li v-for="l in [['/about','About us'],['/products','Products'],['/quality','Quality & Safety'],['/sustainability','Sustainability'],['/team','Team'],['/contact','Contact']]" :key="l[0]"><NuxtLink :to="l[0]" class="hover:text-lime transition">{{ l[1] }}</NuxtLink></li>
+            <li v-for="l in [['/about/','About us'],['/products/','Products'],['/quality/','Quality & Safety'],['/sustainability/','Sustainability'],['/team/','Team'],['/faq/','FAQ'],['/contact/','Contact']]" :key="l[0]"><NuxtLink :to="l[0]" class="hover:text-lime transition">{{ l[1] }}</NuxtLink></li>
+          </ul>
+        </div>
+        <div class="text-sm">
+          <h3 class="font-semibold text-white mb-4">Products</h3>
+          <ul class="grid gap-2.5 text-white/70">
+            <li v-for="p in [['french-beans','French beans'],['snow-peas','Snow peas'],['sugar-snap-peas','Sugar snap peas'],['baby-corn','Baby corn'],['avocados','Avocados'],['chillies','Chillies']]" :key="p[0]"><NuxtLink :to="`/products/${p[0]}/`" class="hover:text-lime transition">{{ p[1] }}</NuxtLink></li>
+            <li><NuxtLink to="/products/" class="hover:text-lime transition">All products →</NuxtLink></li>
           </ul>
         </div>
         <div class="text-sm">

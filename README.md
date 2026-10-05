@@ -42,6 +42,7 @@ Run `npm install` once in 04_tools.
 | Printable card PDFs | `./ecard-print-cards.sh` |
 | Web e-cards (HTML, QR codes, .vcf) | `node ecard-build.js` then re-zip `02_ecards/web/card` |
 | Check every e-card QR still decodes | `node ecard-qr-check.js` |
+| SEO / AEO audit of the built website | `python3 seo-audit.py` (see `05_website/SEO.md`) |
 | Health / launch check of the website | `./check-launch.sh https://frescapremierfresh.com` |
 | Demo video | `node ecard-demo-video.js` (needs ffmpeg-static, see script) |
 

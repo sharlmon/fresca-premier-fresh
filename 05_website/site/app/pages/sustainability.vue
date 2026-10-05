@@ -1,6 +1,7 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Sustainability',
+  title: 'Sustainable Farming in Kenya · Fresca Premier Fresh',
+  fullTitle: true,
   description: 'We work with local farmers and communities to promote sustainable agriculture, protect the environment and deliver goodness that lasts.',
 })
 const { $img } = useNuxtApp()

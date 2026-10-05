@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import { products } from './app/data/products'
 
 // Static site: `npm run generate` outputs plain files to .output/public
 const base = process.env.NUXT_APP_BASE_URL || '/'
@@ -11,14 +12,17 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   vite: { plugins: [tailwindcss()] },
   runtimeConfig: { public: { siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://frescapremierfresh.com', preview } },
-  nitro: { prerender: { crawlLinks: true, routes: ['/', '/sitemap.xml', '/robots.txt', '/404.html'] } },
+  nitro: { prerender: { crawlLinks: true, routes: ['/', '/faq/', '/sitemap.xml', '/robots.txt', '/llms.txt', '/404.html', ...products.map((p) => `/products/${p.slug}/`)] } },
   app: {
     baseURL: base,
     head: {
       htmlAttrs: { lang: 'en' },
       titleTemplate: '%s · Fresca Premier Fresh Ltd',
       link: [
-        { rel: 'icon', href: base + 'img/logo.png' },
+        { rel: 'icon', href: base + 'favicon.ico', sizes: '48x48' },
+        { rel: 'icon', type: 'image/png', href: base + 'icon-192.png', sizes: '192x192' },
+        { rel: 'apple-touch-icon', href: base + 'apple-touch-icon.png' },
+        { rel: 'manifest', href: base + 'manifest.webmanifest' },
       ],
       script: [{
         innerHTML: "try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}try{var a=JSON.parse(localStorage.getItem('a11y')||'{}'),h=document.documentElement;if(a.size)h.classList.add('a11y-text-'+a.size);['spacing','font','contrast','links','still','cursor'].forEach(function(k){if(a[k])h.classList.add('a11y-'+k)});}catch(e){}",

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'About us',
-  description: 'Fresca Premier Fresh Ltd is a Kenyan fresh produce export company supplying premium-quality vegetables to international markets.',
+  title: 'About Fresca Premier Fresh · Nairobi Produce Exporter',
+  fullTitle: true,
+  type: 'AboutPage',
+  description: 'Fresca Premier Fresh Ltd is a Nairobi-based Kenyan exporter of premium French beans, snow peas and fresh vegetables, built on quality and traceability.',
 })
 const { $img } = useNuxtApp()
 const offer = [
@@ -30,7 +32,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
         <h2 class="mt-5 text-3xl sm:text-5xl font-semibold leading-[1.1]">Fresh vegetables that meet the <span class="serif font-normal">highest standards.</span></h2>
         <p class="mt-6 text-fg/70 leading-relaxed">Fresca Premier Fresh Ltd is a Kenyan fresh produce export company committed to supplying premium-quality vegetables to international markets. We specialise in the production, sourcing, packing and export of fresh vegetables that meet the highest international standards for quality, food safety and traceability.</p>
         <p class="mt-4 text-fg/70 leading-relaxed">Our mission is to build long-term partnerships by consistently delivering fresh, safe and high-quality produce while supporting sustainable agriculture and responsible farming practices.</p>
-        <NuxtLink to="/products" class="btn btn-dark mt-8">See what we grow <span class="arr">↗</span></NuxtLink>
+        <NuxtLink to="/products/" class="btn btn-dark mt-8">See what we grow <span class="arr">↗</span></NuxtLink>
       </div>
       <div class="reveal relative">
         <img :src="$img('/img/packhouse.webp')" alt="Packhouse team grading green beans" class="w-full aspect-[4/5] object-cover rounded-[2rem]" width="960" height="1280" loading="lazy">

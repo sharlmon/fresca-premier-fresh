@@ -2,8 +2,11 @@
 import { products, tones, type Product } from '~/data/products'
 
 usePageSeo({
-  title: 'Products',
-  description: 'French beans, snow peas, sugar snap peas, baby corn and a wider range of fresh produce, packed to your specification and exported from Kenya.',
+  title: 'Kenyan Fresh Vegetables · French Beans, Snow Peas | Fresca',
+  fullTitle: true,
+  type: 'CollectionPage',
+  description: 'French beans, snow peas, sugar snap peas, baby corn, avocados, mangoes, chillies and herbs, packed to your specification and exported from Kenya.',
+  nodes: [itemListNode(`${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}/products/`, 'Fresca Premier Fresh products', products.map((p) => ({ name: p.name, url: `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}/products/${p.slug}/` })))],
 })
 const { $img } = useNuxtApp()
 const route = useRoute()
@@ -105,12 +108,26 @@ onMounted(() => {
               <span class="mt-1 block text-sm leading-relaxed text-fg/72">{{ p.description }}</span>
             </span>
           </button>
-          <NuxtLink to="/contact" class="reveal rounded-[1.75rem] bg-forest text-white p-6 flex flex-col justify-between min-h-[260px] hover:-translate-y-1 transition">
+          <NuxtLink to="/contact/" class="reveal rounded-[1.75rem] bg-forest text-white p-6 flex flex-col justify-between min-h-[260px] hover:-translate-y-1 transition">
             <p class="serif text-2xl leading-snug">Looking for something specific?</p>
             <span class="btn btn-lime self-start">Ask us <span class="arr">↗</span></span>
           </NuxtLink>
         </div>
       </div>
+    </section>
+
+    <!-- every product page, as plain links (crawlable) -->
+    <section class="mx-auto max-w-6xl px-5 pt-24" aria-labelledby="all-title">
+      <h2 id="all-title" class="text-3xl font-semibold sm:text-5xl">Every product, <span class="serif font-normal">in detail</span></h2>
+      <p class="mt-3 max-w-xl text-fg/72">Each product has its own page with packing, facts and answers to common questions.</p>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <li v-for="p in products" :key="p.slug">
+          <NuxtLink :to="`/products/${p.slug}/`" class="group flex items-center justify-between gap-3 rounded-2xl border border-fg/10 bg-card px-5 py-4 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5">
+            <span><span class="block font-semibold">{{ p.name }}</span><span class="block text-sm text-fg/72">{{ p.group === 'core' ? p.tag : p.category }}</span></span>
+            <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-fg text-surface transition group-hover:rotate-45" aria-hidden="true">↗</span>
+          </NuxtLink>
+        </li>
+      </ul>
     </section>
 
     <!-- packaging -->

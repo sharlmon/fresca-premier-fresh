@@ -1,7 +1,8 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Quality & Safety',
-  description: 'Strict quality control, full traceability and international food safety compliance at every step from farm to export.',
+  title: 'Quality & Food Safety · GLOBALG.A.P. Certified Exporter',
+  fullTitle: true,
+  description: 'Strict quality control, full traceability and GLOBALG.A.P. certification at every step from farm to export, with KEPHIS and AFA credentials.',
 })
 const { $img } = useNuxtApp()
 const items = [
@@ -27,7 +28,7 @@ const steps = ['Sourcing', 'Grading', 'Packing', 'Delivery']
         <h2 class="mt-5 text-4xl sm:text-5xl font-semibold leading-[1.08]">Safe, <span class="serif font-normal">sustainable,</span> ethical.</h2>
         <p class="mt-5 text-fg/70 leading-relaxed">We work closely with growers and packhouses that comply with internationally recognised standards, and we continuously strive to meet customer requirements on food safety, sustainability and ethical sourcing.</p>
         <p class="mt-4 text-fg/70 leading-relaxed">We hold <b class="text-fg">GLOBALG.A.P.</b> certification, alongside <b class="text-fg">KEPHIS</b> and <b class="text-fg">AFA</b> credentials, and keep the documentation and training that go with them.</p>
-        <NuxtLink to="/team" class="btn btn-dark mt-8">Meet the team <span class="arr">↗</span></NuxtLink>
+        <NuxtLink to="/team/" class="btn btn-dark mt-8">Meet the team <span class="arr">↗</span></NuxtLink>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         <article v-for="(p, n) in items" :key="p.t" class="reveal rounded-[1.75rem] bg-card border border-fg/10 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 transition" :style="{ transitionDelay: (n % 2) * 80 + 'ms' }">
