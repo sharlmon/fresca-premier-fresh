@@ -10,7 +10,7 @@ const { $img } = useNuxtApp()
       <div class="relative">
         <span class="chip glass"><i />Company profile</span>
         <h2 class="mt-4 text-3xl sm:text-4xl font-semibold leading-tight">Take us <span class="serif font-normal">with you.</span></h2>
-        <p class="mt-3 max-w-lg text-white/75 text-sm sm:text-base">Our products, standards and process in six pages, ready to share with your buying team. PDF, 5.7 MB.</p>
+        <p class="mt-3 max-w-lg text-white/75 text-sm sm:text-base">Our products, standards and process in six pages, ready to share with your buying team. PDF, 3.7 MB.</p>
       </div>
       <a :href="$img('/downloads/Fresca-Premier-Fresh-Company-Profile.pdf')" download class="relative btn btn-lime">Download PDF <span class="arr">↓</span></a>
     </div>
