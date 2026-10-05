@@ -72,13 +72,13 @@ const real = [
     <section class="relative isolate mx-3 sm:mx-4 mt-3 sm:mt-4 overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] min-h-[640px] h-[calc(100svh-1.5rem)] max-h-[900px] flex flex-col justify-end bg-forest" role="group" aria-roledescription="carousel" aria-label="Fresca produce" @touchstart.passive="swipeStart" @touchend.passive="swipeEnd">
       <!-- backdrop: the same photo, full-bleed on phones, blurred and dimmed on desktop -->
       <div class="absolute inset-0 -z-20 overflow-hidden" aria-hidden="true">
-        <img v-for="(sl, i) in slides" :key="sl.img" :src="$img(sl.img)" alt="" class="hero-slide absolute inset-0 h-full w-full object-cover lg:scale-105 lg:blur-[6px] lg:saturate-125" :class="{ 'is-active': i === cur }" width="1200" height="1500" :loading="i === 0 ? 'eager' : 'lazy'" :fetchpriority="i === 0 ? 'high' : 'auto'" decoding="async">
+        <img v-for="(sl, i) in slides" :key="sl.img" :src="$img(sl.img)" alt="" class="hero-slide absolute inset-0 h-full w-full object-cover lg:scale-105 lg:blur-[3px] lg:saturate-125" :class="{ 'is-active': i === cur }" width="1200" height="1500" :loading="i === 0 ? 'eager' : 'lazy'" :fetchpriority="i === 0 ? 'high' : 'auto'" decoding="async">
       </div>
-      <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(7,42,27,.97)_0%,rgba(7,42,27,.9)_50%,rgba(7,42,27,.45)_82%,rgba(7,42,27,.2)_100%)] lg:bg-[linear-gradient(100deg,rgba(7,42,27,.9)_0%,rgba(7,42,27,.55)_40%,rgba(7,42,27,.08)_100%)]" />
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(7,42,27,.97)_0%,rgba(7,42,27,.9)_50%,rgba(7,42,27,.45)_82%,rgba(7,42,27,.2)_100%)] lg:bg-[linear-gradient(100deg,rgba(7,42,27,.82)_0%,rgba(7,42,27,.42)_38%,rgba(7,42,27,0)_75%)]" />
       <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-forest/35 to-transparent" />
 
       <div class="mx-auto w-full max-w-6xl px-5 sm:px-8 pt-28 pb-10 sm:pb-14 grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
-        <div class="reveal in">
+        <div class="reveal in [text-shadow:0_1px_16px_rgba(4,23,15,.55)]">
           <span class="chip glass text-white">Premium Kenyan produce</span>
           <h1 class="mt-5 text-5xl sm:text-6xl font-semibold leading-[1.02] text-white [text-shadow:0_2px_24px_rgba(4,23,15,.45)]">
             Fresh from Kenya<br><span class="serif font-normal">to the world.</span>
