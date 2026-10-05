@@ -28,7 +28,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
     <!-- overview -->
     <section class="mx-auto max-w-6xl px-5 py-24 grid lg:grid-cols-2 gap-12 items-center">
       <div class="reveal">
-        <span class="chip chip-soft"><i />Company overview</span>
+        <span class="chip chip-soft">Company overview</span>
         <h2 class="mt-5 text-3xl sm:text-5xl font-semibold leading-[1.1]">Fresh vegetables that meet the <span class="serif font-normal">highest standards.</span></h2>
         <p class="mt-6 text-fg/70 leading-relaxed">Fresca Premier Fresh Ltd is a Kenyan fresh produce export company committed to supplying premium-quality vegetables to international markets. We specialise in the production, sourcing, packing and export of fresh vegetables that meet the highest international standards for quality, food safety and traceability.</p>
         <p class="mt-4 text-fg/70 leading-relaxed">Our mission is to build long-term partnerships by consistently delivering fresh, safe and high-quality produce while supporting sustainable agriculture and responsible farming practices.</p>
@@ -55,13 +55,11 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
     <!-- vision + mission -->
     <section class="mx-auto max-w-6xl px-5 pt-24 grid md:grid-cols-2 gap-5">
       <article class="reveal rounded-[2rem] bg-card border border-fg/10 p-8 sm:p-10">
-        <span class="icon-circle h-12 w-12"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
-        <h3 class="mt-6 text-3xl font-semibold">Our <span class="serif font-normal">vision</span></h3>
+        <h3 class="text-3xl font-semibold">Our <span class="serif font-normal">vision</span></h3>
         <p class="mt-3 text-fg/70 leading-relaxed">To become a trusted supplier of premium Kenyan fresh vegetables to international markets by delivering quality, consistency and exceptional customer service.</p>
       </article>
       <article class="reveal rounded-[2rem] bg-card border border-fg/10 p-8 sm:p-10">
-        <span class="icon-circle h-12 w-12"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-        <h3 class="mt-6 text-3xl font-semibold">Our <span class="serif font-normal">mission</span></h3>
+        <h3 class="text-3xl font-semibold">Our <span class="serif font-normal">mission</span></h3>
         <p class="mt-3 text-fg/70 leading-relaxed">To provide fresh, safe and high-quality vegetables while building long-term partnerships based on trust, integrity and reliability.</p>
       </article>
     </section>
@@ -69,7 +67,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
     <!-- why us -->
     <section class="mx-auto max-w-6xl px-5 pt-24 grid lg:grid-cols-[.9fr_1.1fr] gap-12">
       <div class="reveal">
-        <span class="chip chip-soft"><i />Why Fresca Premier Fresh</span>
+        <span class="chip chip-soft">Why Fresca Premier Fresh</span>
         <h2 class="mt-5 text-4xl sm:text-5xl font-semibold leading-[1.08]">Built for importers who <span class="serif font-normal">can’t compromise.</span></h2>
         <p class="mt-5 max-w-md text-fg/70 leading-relaxed">Our products are carefully selected, graded, packed and prepared to meet the specifications of wholesale importers, retailers and food-service companies across Europe and other international markets.</p>
       </div>
@@ -81,7 +79,7 @@ const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['
       </ul>
     </section>
 
-    <TrustBand parts="network" />
+    <TrustBand parts="network" class="mt-24" />
 
     <DownloadCard />
 

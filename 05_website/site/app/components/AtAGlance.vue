@@ -17,7 +17,7 @@ const rows = [
   <section class="mx-auto max-w-6xl px-5 pb-24" aria-labelledby="glance-title">
     <div class="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
       <div class="reveal">
-        <span class="chip chip-soft"><i />At a glance</span>
+        <span class="chip chip-soft">At a glance</span>
         <h2 id="glance-title" class="mt-5 text-3xl font-semibold leading-[1.1] sm:text-5xl">Fresca Premier Fresh, <span class="serif font-normal">in brief.</span></h2>
         <p class="mt-5 max-w-md leading-relaxed text-fg/80">{{ site.description }}</p>
         <div class="mt-7 flex flex-wrap gap-3">

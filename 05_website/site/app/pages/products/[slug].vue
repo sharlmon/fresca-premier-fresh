@@ -43,7 +43,7 @@ usePageSeo({
       <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-14 pt-32 sm:px-8 lg:grid-cols-[1.1fr_.9fr]">
         <div>
           <Breadcrumbs class="mb-5" />
-          <span class="chip glass"><i />{{ product.category }} · from Kenya</span>
+          <span class="chip glass">{{ product.category }} · from Kenya</span>
           <h1 class="mt-5 text-5xl font-semibold leading-[1.04] sm:text-6xl">{{ product.name }}</h1>
           <p v-if="product.aka" class="mt-2 text-sm font-bold uppercase tracking-[.2em] text-lime">Also known as {{ product.aka }}</p>
           <p class="mt-5 max-w-xl text-lg text-white/90">{{ product.intro[0] }}</p>
@@ -68,7 +68,7 @@ usePageSeo({
     <!-- about + specification -->
     <section class="mx-auto grid max-w-6xl gap-12 px-5 py-20 lg:grid-cols-[1.2fr_.8fr]">
       <div class="reveal">
-        <span class="chip chip-soft"><i />About {{ product.name.toLowerCase() }}</span>
+        <span class="chip chip-soft">About {{ product.name.toLowerCase() }}</span>
         <h2 class="mt-5 text-3xl font-semibold leading-[1.1] sm:text-5xl">{{ product.name }} <span class="serif font-normal">from Kenya.</span></h2>
         <p v-for="para in product.intro" :key="para" class="mt-5 leading-relaxed text-fg/80">{{ para }}</p>
         <ul class="mt-8 grid gap-3">
@@ -93,7 +93,7 @@ usePageSeo({
     <!-- FAQ -->
     <section class="mx-3 rounded-[2rem] bg-soft sm:mx-4 sm:rounded-[3rem]" aria-labelledby="faq-title">
       <div class="mx-auto max-w-4xl px-5 py-20">
-        <span class="chip bg-surface text-accent"><i />Questions</span>
+        <span class="chip bg-surface text-accent">Questions</span>
         <h2 id="faq-title" class="mt-5 text-3xl font-semibold leading-[1.1] sm:text-5xl">{{ product.name }}: <span class="serif font-normal">your questions answered.</span></h2>
         <div class="mt-10 grid gap-3">
           <details v-for="(f, i) in faq" :key="f.q" class="group rounded-2xl border border-fg/10 bg-surface px-5 py-4" :open="i === 0">

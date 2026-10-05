@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
         <!-- details -->
         <div class="flex min-h-0 flex-col overflow-y-auto p-6 sm:p-9">
           <div class="flex items-center justify-between gap-3">
-            <span class="chip chip-soft"><i />{{ product.category }}</span>
+            <span class="chip chip-soft">{{ product.category }}</span>
             <button ref="closeBtn" type="button" class="grid h-11 w-11 place-items-center rounded-full bg-soft hover:bg-fg/10" aria-label="Close product view" @click="emit('close')">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
             </button>

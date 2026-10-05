@@ -44,7 +44,7 @@ const info = [
     <section class="bg-soft rounded-[2rem] sm:rounded-[3rem] mx-3 sm:mx-4 mb-24">
       <div class="mx-auto max-w-6xl px-5 py-20">
         <div class="reveal max-w-2xl">
-          <span class="chip bg-surface text-accent"><i />Save our contacts</span>
+          <span class="chip bg-surface text-accent">Save our contacts</span>
           <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05]">Scan, save, <span class="serif font-normal">done.</span></h2>
           <p class="mt-4 text-fg/70 leading-relaxed">Point your phone camera at a code to open our digital business card. From there you can save the contact in one tap, call, email or WhatsApp.</p>
         </div>

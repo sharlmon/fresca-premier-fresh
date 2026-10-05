@@ -15,7 +15,7 @@ const links = [['/', 'Home'], ['/products/', 'Our products'], ['/about/', 'About
         <img :src="$img('/img/stock/crop-rows.webp')" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" width="1920" height="1439">
         <div class="absolute inset-0 -z-10 bg-gradient-to-br from-forest/92 via-forest/75 to-forest/55" />
         <div class="mx-auto w-full max-w-6xl px-5 sm:px-8 pt-32 pb-16 text-white">
-          <span class="chip glass"><i />{{ is404 ? 'Error 404' : 'Error ' + (error?.statusCode || '') }}</span>
+          <span class="chip glass">{{ is404 ? 'Error 404' : 'Error ' + (error?.statusCode || '') }}</span>
           <h1 class="mt-6 text-5xl sm:text-7xl font-semibold leading-[1.02] max-w-3xl">
             {{ is404 ? 'This page' : 'Something' }} <span class="serif font-normal">{{ is404 ? 'has been picked.' : 'went wrong.' }}</span>
           </h1>

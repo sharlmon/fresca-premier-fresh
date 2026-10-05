@@ -6,10 +6,10 @@ usePageSeo({
 })
 const { $img } = useNuxtApp()
 const items = [
-  { t: 'Responsible farming', d: 'We support sustainable agriculture and responsible farming practices across our growers.', i: '<path d="M12 22V8M12 8c0-4 3-6 7-6 0 4-3 6-7 6zM12 13c0-3-2-5-6-5 0 3 2 5 6 5z"/>' },
-  { t: 'Farmers & communities', d: 'Long-term partnerships with 500+ local farmers, built on trust, integrity and fair dealing.', i: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>' },
-  { t: 'Worker welfare', d: 'Ethical sourcing and worker welfare are part of how we train and audit farms and packhouses.', i: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/>' },
-  { t: 'Protecting the environment', d: 'We work with growers to protect the land and water our produce depends on, so goodness lasts.', i: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
+  { t: 'Responsible farming', d: 'We support sustainable agriculture and responsible farming practices across our growers.' },
+  { t: 'Farmers & communities', d: 'Long-term partnerships with 500+ local farmers, built on trust, integrity and fair dealing.' },
+  { t: 'Worker welfare', d: 'Ethical sourcing and worker welfare are part of how we train and audit farms and packhouses.' },
+  { t: 'Protecting the environment', d: 'We work with growers to protect the land and water our produce depends on, so goodness lasts.' },
 ]
 </script>
 
@@ -21,13 +21,13 @@ const items = [
 
     <section class="mx-auto max-w-6xl px-5 py-24">
       <div class="reveal max-w-2xl">
-        <span class="chip chip-soft"><i />Our approach</span>
+        <span class="chip chip-soft">Our approach</span>
         <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05]">Good for the land, <span class="serif font-normal">good for people.</span></h2>
       </div>
       <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <article v-for="(p, n) in items" :key="p.t" class="reveal rounded-[1.75rem] bg-card border border-fg/10 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 transition" :style="{ transitionDelay: n * 80 + 'ms' }">
-          <span class="icon-circle h-12 w-12"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" v-html="p.i" /></span>
-          <h3 class="mt-5 font-semibold text-lg">{{ p.t }}</h3>
+          <span class="block text-xs font-bold tracking-[.25em] text-accent" aria-hidden="true">{{ String(n + 1).padStart(2, '0') }}</span>
+          <h3 class="mt-3 font-semibold text-lg">{{ p.t }}</h3>
           <p class="mt-1.5 text-sm leading-relaxed text-fg/65">{{ p.d }}</p>
         </article>
       </div>

@@ -30,7 +30,7 @@ const team: Member[] = [
     <!-- leadership -->
     <section class="mx-auto max-w-6xl px-5 pt-24">
       <div class="reveal max-w-2xl">
-        <span class="chip chip-soft"><i />Leadership</span>
+        <span class="chip chip-soft">Leadership</span>
         <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05]">Guiding the <span class="serif font-normal">business</span></h2>
         <p class="mt-4 text-fg/72 leading-relaxed">The people to talk to about orders, partnerships and where Fresca is heading.</p>
       </div>
@@ -43,7 +43,7 @@ const team: Member[] = [
     <section class="bg-soft rounded-[2rem] sm:rounded-[3rem] mx-3 sm:mx-4 mt-24">
       <div class="mx-auto max-w-6xl px-5 py-20">
         <div class="reveal max-w-2xl">
-          <span class="chip bg-surface text-accent"><i />Operations &amp; support</span>
+          <span class="chip bg-surface text-accent">Operations &amp; support</span>
           <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05]">Keeping everything <span class="serif font-normal">moving</span></h2>
           <p class="mt-4 text-fg/72 leading-relaxed">From the farm and packhouse to the shipping dock, the books and the technology behind them.</p>
         </div>

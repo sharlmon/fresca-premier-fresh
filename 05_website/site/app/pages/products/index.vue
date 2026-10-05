@@ -65,7 +65,7 @@ onMounted(() => {
     <!-- core range -->
     <section class="mx-auto max-w-6xl px-5 py-24">
       <div class="reveal">
-        <span class="chip chip-soft"><i />Core range</span>
+        <span class="chip chip-soft">Core range</span>
         <h2 class="mt-5 text-4xl sm:text-6xl font-semibold">Our <span class="serif font-normal">specialities</span></h2>
         <p class="mt-4 text-fg/72">Select a product to see it in full.</p>
       </div>
@@ -88,7 +88,7 @@ onMounted(() => {
       <div class="mx-auto max-w-6xl px-5 py-20">
         <div class="reveal flex flex-wrap items-end justify-between gap-5">
           <div>
-            <span class="chip bg-surface text-accent"><i />Also from Fresca</span>
+            <span class="chip bg-surface text-accent">Also from Fresca</span>
             <h2 class="mt-5 text-4xl sm:text-6xl font-semibold">A wider <span class="serif font-normal">range</span></h2>
           </div>
           <p class="max-w-sm text-sm text-fg/70">Volumes and availability vary through the year. Ask us what is in season for your market.</p>
@@ -134,7 +134,7 @@ onMounted(() => {
     <section class="mx-auto max-w-6xl px-5 pt-24">
       <div class="reveal grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-end">
         <div>
-          <span class="chip chip-soft"><i />Packaging</span>
+          <span class="chip chip-soft">Packaging</span>
           <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05]">Packed <span class="serif font-normal">your way.</span></h2>
         </div>
         <p class="text-fg/70 leading-relaxed">We pack to your customer’s specification, from export cartons to retail-ready punnets, using food-safe materials that protect quality and freshness on the way to market.</p>

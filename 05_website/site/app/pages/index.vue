@@ -48,10 +48,10 @@ onBeforeUnmount(() => clearTimeout(timer))
 const stats = [['20+', 'International markets'], ['500+', 'Trusted farmers'], ['100%', 'Quality & food safety']]
 const products = coreProducts.map((p) => ({ slug: p.slug, t: p.name, s: p.tag, img: p.photos[0].src, alt: p.photos[0].alt }))
 const pillars = [
-  { t: 'Premium Quality', d: 'Carefully selected and graded vegetables that meet the highest international standards.', i: '<circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/>' },
-  { t: 'Food Safety', d: 'Strict quality control and full traceability at every step of the supply chain.', i: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>' },
-  { t: 'Reliable Supply', d: 'Consistent volumes, flexible solutions and on-time deliveries you can count on.', i: '<rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>' },
-  { t: 'Partnership Focused', d: 'Long-term relationships built on trust, integrity and exceptional service.', i: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>' },
+  { t: 'Premium Quality', d: 'Carefully selected and graded vegetables that meet the highest international standards.' },
+  { t: 'Food Safety', d: 'Strict quality control and full traceability at every step of the supply chain.' },
+  { t: 'Reliable Supply', d: 'Consistent volumes, flexible solutions and on-time deliveries you can count on.' },
+  { t: 'Partnership Focused', d: 'Long-term relationships built on trust, integrity and exceptional service.' },
 ]
 const steps = [
   { t: 'Sourcing', d: 'We work closely with trusted farmers to source the finest produce at peak freshness.' },
@@ -79,7 +79,7 @@ const real = [
 
       <div class="mx-auto w-full max-w-6xl px-5 sm:px-8 pt-28 pb-10 sm:pb-14 grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
         <div class="reveal in">
-          <span class="chip glass text-white"><i />Premium Kenyan produce</span>
+          <span class="chip glass text-white">Premium Kenyan produce</span>
           <h1 class="mt-5 text-5xl sm:text-6xl font-semibold leading-[1.02] text-white [text-shadow:0_2px_24px_rgba(4,23,15,.45)]">
             Fresh from Kenya<br><span class="serif font-normal">to the world.</span>
           </h1>
@@ -117,7 +117,7 @@ const real = [
 
     <!-- ABOUT / STORY -->
     <section class="mx-auto max-w-6xl px-5 pb-24">
-      <span class="chip chip-soft reveal"><i />About us</span>
+      <span class="chip chip-soft reveal">About us</span>
       <h2 class="reveal mt-6 text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.2] text-fg">
         Premium vegetables from Kenyan
         <span class="pillimg" :style="{ backgroundImage: `url(${$img('/img/factory/french-beans-tray.webp')})` }" />
@@ -142,7 +142,7 @@ const real = [
       <div class="mx-auto max-w-6xl px-5 py-20">
         <div class="reveal flex flex-wrap items-end justify-between gap-5">
           <div>
-            <span class="chip bg-surface text-accent"><i />What we grow</span>
+            <span class="chip bg-surface text-accent">What we grow</span>
             <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-fg">Our <span class="serif font-normal">products</span></h2>
           </div>
           <NuxtLink to="/products/" class="btn btn-dark">View all products <span class="arr">↗</span></NuxtLink>
@@ -164,16 +164,14 @@ const real = [
     <!-- WHY -->
     <section class="mx-auto max-w-6xl px-5 py-24 grid lg:grid-cols-[.9fr_1.1fr] gap-12">
       <div class="reveal">
-        <span class="chip chip-soft"><i />Why choose us</span>
+        <span class="chip chip-soft">Why choose us</span>
         <h2 class="mt-5 text-4xl sm:text-6xl font-semibold leading-[1.05] text-fg">Quality. Reliability. <span class="serif font-normal">Trust.</span></h2>
         <p class="mt-6 text-fg/70 leading-relaxed max-w-md">Our products are carefully selected, graded, packed and prepared to meet the specifications of wholesale importers, retailers and food-service companies.</p>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         <article v-for="(p, n) in pillars" :key="p.t" class="reveal rounded-[1.75rem] bg-card border border-fg/10 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-forest/5 transition" :style="{ transitionDelay: n * 80 + 'ms' }">
-          <span class="icon-circle h-12 w-12">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" v-html="p.i" />
-          </span>
-          <h3 class="mt-5 font-semibold text-lg text-fg">{{ p.t }}</h3>
+          <span class="block text-xs font-bold tracking-[.25em] text-accent" aria-hidden="true">{{ String(n + 1).padStart(2, '0') }}</span>
+          <h3 class="mt-3 font-semibold text-lg text-fg">{{ p.t }}</h3>
           <p class="mt-1.5 text-sm leading-relaxed text-fg/65">{{ p.d }}</p>
         </article>
       </div>
@@ -185,7 +183,7 @@ const real = [
       <div class="absolute inset-0 -z-10 bg-gradient-to-b from-forest/85 via-forest/70 to-forest/90" />
       <div class="mx-auto max-w-6xl px-5 py-20">
         <div class="reveal text-white">
-          <span class="chip glass"><i />Our process</span>
+          <span class="chip glass">Our process</span>
           <h2 class="mt-5 text-4xl sm:text-6xl font-semibold">From farm to <span class="serif font-normal">export</span></h2>
         </div>
         <ol class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -201,7 +199,7 @@ const real = [
     <!-- BEHIND THE SCENES -->
     <section class="mx-auto max-w-6xl px-5 py-24">
       <div class="reveal">
-        <span class="chip chip-soft"><i />Behind the scenes</span>
+        <span class="chip chip-soft">Behind the scenes</span>
         <h2 class="mt-5 text-4xl sm:text-6xl font-semibold text-fg">Our operation, <span class="serif font-normal">up close</span></h2>
       </div>
       <div class="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2 md:h-[640px]">

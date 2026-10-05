@@ -51,7 +51,6 @@ h1, h2, h3 { letter-spacing: -.02em; }
 
 @layer components {
 .chip { display: inline-flex; align-items: center; gap: .5rem; border-radius: 9999px; padding: .4rem .9rem; font-size: .72rem; font-weight: 600; }
-.chip i { height: .5rem; width: .5rem; border-radius: 9999px; background: var(--color-leaf-400); }
 .chip-soft { background: var(--soft); color: var(--accent); }
 
 /* pill buttons with a round arrow */
