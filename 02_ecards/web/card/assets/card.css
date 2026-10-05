@@ -1,0 +1,113 @@
+:root{--g:#487a49;--gd:#2f5a30;--gold:#eab420;--ink:#1d1d1d;--bg:#eef4ea}
+*{box-sizing:border-box;margin:0}
+body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:20px 16px 40px;background:linear-gradient(160deg,#f5faf1,var(--bg) 60%,#dcebd5);overflow-x:hidden;position:relative}
+.wrap{width:100%;max-width:420px;position:relative;z-index:1}
+
+/* ---------- intro: pea pod splits open, logo grows ---------- */
+.intro{position:fixed;inset:0;z-index:99;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#5d935e,var(--gd));animation:introOut .7s 3.1s ease forwards}
+.skip-intro .intro,.intro.gone{display:none}
+.pod{width:min(78vw,340px);overflow:visible;grid-area:1/1;animation:podIn .6s cubic-bezier(.3,1.4,.5,1) both}
+.half{transform-box:view-box;transform-origin:100px 50px}
+.h1{animation:open1 .9s 1s cubic-bezier(.5,0,.3,1) forwards}
+.h2{animation:open2 .9s 1s cubic-bezier(.5,0,.3,1) forwards}
+.peas circle{fill:#b8e08a;stroke:#7fb27f;stroke-width:2;transform-box:fill-box;transform-origin:center;transform:scale(0);animation:peaPop .5s both,peaOut .5s 2s forwards}
+.peas circle:nth-child(1){animation-delay:1s,2s}.peas circle:nth-child(2){animation-delay:1.08s,2.03s}.peas circle:nth-child(3){animation-delay:1.16s,2.06s}.peas circle:nth-child(4){animation-delay:1.24s,2.09s}.peas circle:nth-child(5){animation-delay:1.32s,2.12s}
+.intrologo{grid-area:1/1;width:min(52vw,210px);background:#fff;border-radius:50%;padding:7%;aspect-ratio:1;object-fit:contain;box-shadow:0 18px 50px rgba(0,0,0,.35);opacity:0;transform:scale(.2);animation:logoGrow .8s 1.9s cubic-bezier(.3,1.5,.5,1) forwards}
+.skip{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);background:none;border:0;color:rgba(255,255,255,.7);font:500 .75rem Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+@keyframes podIn{from{opacity:0;transform:scale(.3) rotate(-20deg)}to{opacity:1;transform:none}}
+@keyframes open1{to{transform:translate(-6px,-30px) rotate(-14deg);opacity:0}}
+@keyframes open2{to{transform:translate(6px,30px) rotate(14deg);opacity:0}}
+@keyframes peaPop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes peaOut{to{transform:scale(0);opacity:0}}
+@keyframes logoGrow{to{opacity:1;transform:scale(1)}}
+
+/* ---------- 3D flip card ---------- */
+.stage{text-align:center;padding:6px 0 18px;perspective:1100px;animation:drop .9s 3s cubic-bezier(.2,.8,.2,1) both}
+.skip-intro .stage{animation-delay:0s}
+.float{animation:bob 6s ease-in-out infinite}
+.tilt{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;transform-style:preserve-3d}
+.flip{position:relative;width:100%;aspect-ratio:90/55;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.5,-.2,.2,1.2);cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.flip.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;container-type:inline-size;box-shadow:0 22px 50px rgba(47,90,48,.3),0 2px 6px rgba(0,0,0,.08)}
+.front{background:#fff;display:grid;grid-template-columns:37% 1fr;text-align:left}
+.fl{background:linear-gradient(rgba(47,90,48,.8),rgba(47,90,48,.92)),url(hero.jpg) 40% 50%/cover;display:grid;place-items:center}
+.fl img{width:72%;aspect-ratio:1;background:#fff;border-radius:50%;padding:6%;object-fit:contain;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.fr{padding:3cqw 5cqw 3cqw 5.5cqw;align-self:center}
+.fr h1{font:700 5.6cqw Poppins,sans-serif;color:var(--gd);line-height:1.15}
+.frole{font-weight:600;font-size:3.1cqw;color:var(--g);margin-top:1.2cqw;line-height:1.25}
+.forg{font-size:2.6cqw;color:#777;margin-top:.8cqw}
+.fbar{display:block;width:9cqw;height:.9cqw;background:var(--gold);margin:3.2cqw 0 2.6cqw;border-radius:2px}
+.fc{font-size:2.6cqw;line-height:1.7;font-weight:500;word-break:break-all}
+.back{transform:rotateY(180deg);background:linear-gradient(135deg,#487a49,#2f5a30);display:flex;align-items:center;gap:5cqw;padding:0 6cqw;color:#fff;text-align:left}
+.qrbox{flex:none;width:47cqw;height:47cqw;background:#fff;border-radius:3cqw;position:relative;overflow:hidden;box-shadow:0 0 0 .9cqw var(--gold)}
+.qrimg{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.qrimg.on{opacity:1}
+.qrimg svg{width:100%;height:100%;display:block}
+.qc{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.js .qc{display:block}.js .qrimg svg{display:none}
+.scan{position:absolute;left:0;right:0;height:3px;top:-4px;background:linear-gradient(90deg,transparent,var(--gold),transparent);box-shadow:0 0 14px 3px rgba(234,180,32,.7);opacity:0;pointer-events:none}
+.qrbox.built .scan{animation:scan 3.6s ease-in-out infinite}
+.bt{display:flex;flex-direction:column;gap:1.6cqw}
+.bt strong{font:600 4.4cqw Poppins,sans-serif;line-height:1.2}
+.bt span{font-size:2.8cqw;opacity:.85;line-height:1.4}
+.bt em{font-style:normal;font-size:2.5cqw;color:var(--gold);margin-top:1.5cqw;letter-spacing:.04em}
+.shine{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,30%) var(--my,20%),rgba(255,255,255,.35),transparent 45%);mix-blend-mode:soft-light}
+.tap{font-size:.72rem;color:#777;margin-top:16px;letter-spacing:.06em}
+.tabs{display:inline-flex;background:#fff;border-radius:999px;padding:4px;margin-top:10px;box-shadow:0 4px 14px rgba(47,90,48,.12)}
+.tab{border:0;background:none;padding:8px 18px;border-radius:999px;font:600 .78rem Montserrat,sans-serif;color:var(--gd);cursor:pointer;transition:background .25s,color .25s}
+.tab.on{background:var(--g);color:#fff}
+
+/* ---------- content sheet ---------- */
+.sheet{background:#fff;border-radius:28px;box-shadow:0 24px 60px rgba(47,90,48,.2);overflow:hidden;padding-top:6px}
+.actions{padding:18px 24px 6px;display:grid;gap:10px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:14px;background:#eef4ea;color:var(--gd);text-decoration:none;font-weight:600;font-size:.9rem;transition:transform .2s,box-shadow .2s}
+.row .btn{flex-direction:column;gap:4px;font-size:.78rem}
+.btn:hover,.btn:active{transform:translateY(-3px);box-shadow:0 8px 18px rgba(72,122,73,.25)}
+.btn.primary{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;font-size:1rem;padding:16px;position:relative;overflow:hidden}
+.btn.primary::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3.5s 1.5s infinite}
+.pulse{animation:pulse 2.4s 2s infinite}
+.btn.site{background:#fff;border:2px solid var(--gold)}
+.ic{width:1.25rem;height:1.25rem;flex:none;display:block}
+.prods,.why{padding:18px 0 0}
+.prods h2,.why h2{font:600 .95rem Poppins,sans-serif;color:var(--gd);padding:0 24px 10px}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 10px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip a{flex:none;width:128px;scroll-snap-align:start;text-decoration:none;color:var(--ink);background:#f5faf1;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(47,90,48,.12);transition:transform .25s}
+.strip a:hover{transform:translateY(-4px) scale(1.03)}
+.strip img{width:100%;height:110px;object-fit:cover;display:block}
+.strip span{display:block;padding:8px 10px 10px;font-weight:600;font-size:.74rem;line-height:1.25}
+.strip small{display:block;font-weight:400;color:#777;font-size:.66rem;margin-top:2px}
+.more{display:block;text-align:right;padding:0 24px;font-size:.78rem;font-weight:600;color:var(--g);text-decoration:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px}
+.grid div{background:#f5faf1;border-radius:14px;padding:12px}
+.grid b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--g);color:#fff;margin-bottom:8px}
+.grid b .ic{width:16px;height:16px}
+.grid strong{display:block;font-size:.8rem;color:var(--gd)}.grid small{display:block;font-size:.68rem;color:#777;margin-top:2px;line-height:1.35}
+.info{list-style:none;padding:14px 24px 4px}
+.info li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #eef0ec;font-size:.85rem}
+.info span{color:#888;flex:none}.info a,.info em{color:var(--ink);text-decoration:none;font-style:normal;text-align:right;font-weight:500;word-break:break-word}
+footer{margin:18px 0 0;padding:14px;text-align:center;background:var(--gd);color:#dff0d6;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+.leaf{position:fixed;border-radius:0 100% 0 100%;background:radial-gradient(circle at 30% 30%,#7fb27f,var(--g));opacity:.22;z-index:0;animation:float 9s ease-in-out infinite}
+.l1{width:90px;height:90px;top:6%;left:4%}.l2{width:60px;height:60px;top:55%;right:5%;animation-delay:-3s}.l3{width:120px;height:120px;bottom:4%;left:8%;animation-delay:-6s}
+
+@keyframes drop{from{opacity:0;transform:translateY(-40px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes scan{0%{top:-4px;opacity:0}10%{opacity:1}50%{top:100%;opacity:1}60%,100%{top:100%;opacity:0}}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(72,122,73,.5)}50%{box-shadow:0 0 0 12px rgba(72,122,73,0)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-24px) rotate(25deg)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.intro{display:none}}
+
+/* ---------- laptop / desktop: card on the left, details on the right ---------- */
+@media(min-width:900px){
+  body{padding:48px 40px 60px;align-items:center}
+  .wrap{max-width:1020px;display:grid;grid-template-columns:minmax(0,470px) minmax(0,1fr);gap:48px;align-items:start}
+  .stage{position:sticky;top:48px;padding-top:0}
+  .sheet{padding-top:0}
+  .actions{padding-top:26px}
+  .strip{padding-bottom:14px}
+  .intro .pod{width:380px}
+}
+@media(min-width:900px) and (max-height:760px){.stage{top:24px}}

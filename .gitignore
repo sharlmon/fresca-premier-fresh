@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Superseded files (kept locally only)
+_archive/
+
+# Derived outputs that can be rebuilt from source
+*.zip
+03_brochure/final/*/pages/
+04_tools/print-*.html
