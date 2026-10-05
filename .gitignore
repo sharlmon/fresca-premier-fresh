@@ -12,3 +12,7 @@ _archive/
 *.zip
 03_brochure/final/*/pages/
 04_tools/print-*.html
+
+# Website: raw crawl dumps (rebuildable, large)
+05_website/legacy-wordpress/html/
+05_website/legacy-wordpress/media/
