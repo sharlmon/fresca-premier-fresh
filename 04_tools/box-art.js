@@ -327,11 +327,97 @@ const fam = {
 };
 const P2 = { beans: { name: 'FRENCH BEANS', aka: 'Haricots Verts · Sperziebonen · Feine Bohnen · Judías Verdes' } };
 
+// ---------- the approved family on the existing 12 × 250 g trays (stackable, same structure the client ships today) ----------
+// Same panel names and sizes as the kanga tray panels, so scenes.json places them unchanged (art/family/, falls back to kanga).
+A.side = '#1b6418'; // the approved carton's green side panels
+P2.mangetout = { name: 'MANGETOUT', aka: 'Snow Peas · Pois Gourmands · Peultjes · Zuckerschoten' };
+const logo = (cx, cy, w) => `<image href="${LOGO}" x="${f(cx - w / 2)}" y="${f(cy - w / LOGO_AR / 2)}" width="${w}" height="${f(w / LOGO_AR)}"/>`;
+// the oval logo badge from the approved carton's side: white oval, gold ring
+const badge = (cx, cy, rx) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${f(rx * .74)}" fill="${A.white}" stroke="${A.gold}" stroke-width="${f(rx * .05)}"/>${logo(cx, cy, rx * 1.55)}`;
+// the approved lid's pair of pods: one closed, one open; or three beans for French beans
+const produce = (p, x, y, L) => p === P2.beans
+  ? `<g transform="translate(${x} ${y - L * .1}) rotate(-6)">${bean(L, L * .09, { bend: .07 })}</g><g transform="translate(${x - L * .03} ${y + L * .06}) rotate(-2)">${bean(L * 1.04, L * .095, { bend: .09 })}</g><g transform="translate(${x + L * .02} ${y + L * .22}) rotate(2)">${bean(L * .96, L * .088, { bend: .06 })}</g>`
+  : `<g transform="translate(${x} ${y}) rotate(-14)">${pod(L, L * .1, { fill: A.forest, pea: A.mid, open: false })}</g><g transform="translate(${x + L * .04} ${y + L * .26}) rotate(-12)">${pod(L * 1.06, L * .11, { fill: A.forest, pea: A.mid, n: 6 })}</g>`;
+const fwhite = (W, H, band) => `<rect width="${W}" height="${H}" fill="${A.white}"/><rect x="40" y="40" width="${W - 80}" height="${H - band - 80}" fill="none" stroke="${A.gold}" stroke-width="9"/><rect y="${H - band}" width="${W}" height="${band}" fill="${A.side}"/><rect y="${H - band}" width="${W}" height="10" fill="${A.gold}"/>`;
+Object.assign(fam, {
+  // mangetout tray front, 4000 × 900; window cut from x 23 % to 80 %, down to 35 %
+  trayFront: (p) => {
+    const W = 4000, H = 900, band = 150;
+    let s = fwhite(W, H, band);
+    s += logo(470, 400, 700);
+    s += fitText(2060, 560, p.name, { size: 250, max: 2100, fill: A.forest, ls: 0.08 });
+    s += fitText(2060, 665, p.aka, { size: 70, max: 2100, weight: 500, fill: A.sub, ls: 0.01 });
+    s += produce(p, 3560, 300, 620);
+    s += fitText(W / 2, H - 52, 'PRODUCT OF KENYA  ·  CLASS I  ·  12 × 250 G', { size: 64, max: 3600, weight: 600, fill: A.white, ls: 0.16 });
+    return [W, H, s];
+  },
+  // mangetout tray end, 1600 × 900 (hand hole kept from the photo): like the approved carton's end
+  trayEnd: (p) => {
+    const W = 1600, H = 900;
+    let s = `<rect width="${W}" height="${H}" fill="${A.side}"/>`;
+    s += fitText(W / 2, 470, p.name, { size: 170, max: 1350, fill: A.white, ls: 0.06 });
+    s += `<rect x="${W / 2 - 90}" y="505" width="180" height="12" fill="${A.gold}"/>`;
+    s += fitText(W / 2, 640, 'NET 12 × 250 G  ·  CLASS I', { size: 70, max: 1300, weight: 600, fill: A.white, ls: 0.12 });
+    return [W, H, s];
+  },
+  // exporter sticker, 1000 × 600
+  label: (p) => {
+    const W = 1000, H = 600;
+    let s = `<rect width="${W}" height="${H}" fill="${A.side}"/><rect x="8" y="8" width="${W - 16}" height="${H - 16}" rx="60" fill="${A.white}" stroke="${A.gold}" stroke-width="10"/>`;
+    s += fitText(W / 2, 110, 'Packed &amp; exported by', { size: 46, max: 800, weight: 500, fill: A.sub, ls: 0.02 });
+    s += fitText(W / 2, 200, 'FRESCA PREMIER FRESH', { size: 78, max: 860, fill: A.forest, ls: 0.04 });
+    s += `<rect x="${W / 2 - 80}" y="228" width="160" height="8" fill="${A.gold}"/>`;
+    s += fitText(W / 2, 315, 'P.O. Box 3468 – 00200, Nairobi, Kenya', { size: 44, max: 860, weight: 500, fill: A.forest, ls: 0.01 });
+    s += fitText(W / 2, 390, 'frescapremierfresh.com', { size: 48, max: 860, weight: 600, fill: A.forest, ls: 0.02 });
+    s += fitText(W / 2, 520, `${p.name}  ·  12 × 250 G`, { size: 50, max: 860, fill: A.forest, ls: 0.06 });
+    return [W, H, s];
+  },
+  // French beans tray front, 4000 × 1250; window from x 18 % to 74 %, down to 36 %
+  tray2Front: (p) => {
+    const W = 4000, H = 1250, band = 170;
+    let s = fwhite(W, H, band);
+    s += logo(370, 560, 600);
+    s += fitText(1850, 830, p.name, { size: 290, max: 2050, fill: A.forest, ls: 0.07 });
+    s += fitText(1850, 945, p.aka, { size: 66, max: 2050, weight: 500, fill: A.sub, ls: 0.01 });
+    s += produce(p, 3460, 380, 760);
+    s += fitText(3460, 905, 'NET 12 × 250 G', { size: 92, max: 900, fill: A.forest, ls: 0.06 });
+    s += fitText(W / 2, H - 62, 'PRODUCT OF KENYA  ·  CLASS I', { size: 70, max: 3600, weight: 600, fill: A.white, ls: 0.18 });
+    return [W, H, s];
+  },
+  // end beside the front, 1000 × 1200: the approved side panel (oval badge, name, gold rule)
+  tray2End: (p) => {
+    const W = 1000, H = 1200;
+    let s = `<rect width="${W}" height="${H}" fill="${A.side}"/>` + badge(W / 2, 470, 330);
+    p.name.split(' ').forEach((w, i) => { s += fitText(W / 2, 880 + i * 135, w, { size: 125, max: 860, fill: A.white, ls: 0.06 }); });
+    s += `<rect x="${W / 2 - 70}" y="${p.name.includes(' ') ? 1060 : 925}" width="140" height="10" fill="${A.gold}"/>`;
+    return [W, H, s];
+  },
+  // tall end, 1000 × 1600 (hand cut at the foot)
+  tray2Tall: (p) => {
+    const W = 1000, H = 1600;
+    let s = `<rect width="${W}" height="${H}" fill="${A.side}"/>`;
+    p.name.split(' ').forEach((w, i) => { s += fitText(W / 2, 470 + i * 160, w, { size: 150, max: 860, fill: A.white, ls: 0.06 }); });
+    const y = 470 + (p.name.split(' ').length - 1) * 160 + 50;
+    s += `<rect x="${W / 2 - 80}" y="${y}" width="160" height="11" fill="${A.gold}"/>`;
+    p.aka.split(' · ').forEach((w, i) => { s += fitText(W / 2, y + 120 + i * 66, w, { size: 50, max: 860, weight: 500, fill: A.white, ls: 0.01 }); });
+    return [W, H, s];
+  },
+});
+
 // ---------- render ----------
 const JOBS = [
   ['approved', 'lid-beans', () => fam.lidPatch(P2.beans), true],
   ['approved', 'side-beans', () => fam.sidePatch(P2.beans), true],
   ['approved', 'end-beans', () => fam.endPatch(P2.beans), true],
+  ['family', 'tray-front-mangetout', () => fam.trayFront(P2.mangetout)],
+  ['family', 'tray-end-mangetout', () => fam.trayEnd(P2.mangetout)],
+  ['family', 'label-mangetout', () => fam.label(P2.mangetout)],
+  ['family', 'tray2-front-beans', () => fam.tray2Front(P2.beans)],
+  ['family', 'tray2-end-beans', () => fam.tray2End(P2.beans)],
+  ['family', 'tray2-tall-beans', () => fam.tray2Tall(P2.beans)],
+  ['family', 'solid', () => [400, 400, `<rect width="400" height="400" fill="${A.side}"/>`]],
+  // scenes repaint the old orange flaps with "gold.png"; in this family those flaps are the green side colour
+  ['family', 'gold', () => [400, 400, `<rect width="400" height="400" fill="${A.side}"/>`]],
   ['kanga', 'lid-mangetout', () => kanga.lid(P.mangetout)],
   ['kanga', 'side-mangetout', () => kanga.side(P.mangetout, { weight: 'NET 2 KG' })],
   ['kanga', 'end-mangetout', () => kanga.end(P.mangetout)],
