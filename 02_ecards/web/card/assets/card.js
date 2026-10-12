@@ -99,6 +99,15 @@
     }
   }
 
+  /* product tags swing on their twine the first time they scroll into view */
+  var strip = document.getElementById('strip');
+  if (strip && !reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { strip.classList.add('hung'); io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(strip);
+  }
+
   /* draw static QR once so nothing is blank, replayed on flip */
   window.addEventListener('load', function () { canvases.forEach(function (c) { prep(c); paint(c, c._d.order.length); }); });
 })();

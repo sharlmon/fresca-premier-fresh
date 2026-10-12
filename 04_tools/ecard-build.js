@@ -19,6 +19,13 @@ const I = {
   truck: ic('<rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>'),
   users: ic('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'),
 };
+// Product tags in the "Fresh from our farms" strip. Facts match 05_website/site/app/data/products.ts; r = resting tilt.
+const TAGS = [
+  { slug: 'french-beans', name: 'French Beans', img: 'tag-beans.jpg', alt: 'A bunch of freshly harvested French beans', k1: 'Grade', v1: 'Extra fine, fine', k2: 'Pack', v2: '12 × 250 g', r: -2.5 },
+  { slug: 'snow-peas', name: 'Snow Peas', img: 'tag-snow.jpg', alt: 'Snow peas (mangetout) close up', k1: 'Also', v1: 'Mangetout', k2: 'Pack', v2: '12 × 250 g', r: 1.8 },
+  { slug: 'sugar-snap-peas', name: 'Sugar Snaps', img: 'tag-snap.jpg', alt: 'Sugar snap peas close up', k1: 'Taste', v1: 'Crisp & sweet', k2: 'Pack', v2: 'Retail punnets', r: -1.2 },
+  { slug: 'baby-corn', name: 'Baby Corn', img: 'tag-corn.jpg', alt: 'Baby corn packed in trays', k1: 'Cobs', v1: 'Whole, tender', k2: 'Pack', v2: 'Retail punnets', r: 2.4 },
+];
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const vcard = p => ['BEGIN:VCARD', 'VERSION:3.0', `N:${p.last};${p.first};;;`, `FN:${p.first} ${p.last}`, `ORG:${ORG}`, `TITLE:${p.title}`,
   `TEL;TYPE=CELL,VOICE:${p.phone}`, `EMAIL;TYPE=WORK:${p.email}`, `URL:${SITE}`,
@@ -45,11 +52,20 @@ const vcardQR = p => ['BEGIN:VCARD', 'VERSION:3.0', `N:${p.last};${p.first}`, `F
 <meta property="og:title" content="${p.first} ${p.last} · ${ORG}"><meta property="og:description" content="${esc(p.title)}"><meta property="og:image" content="${BASE}/assets/logo.png">
 <link rel="icon" href="../assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 <script>try{if(sessionStorage.getItem("fresca_intro"))document.documentElement.classList.add("skip-intro")}catch(e){}</script>
-<link rel="stylesheet" href="../assets/card.css?v=3">
+<link rel="stylesheet" href="../assets/card.css?v=4">
 <noscript><style>.intro{display:none}</style></noscript>
 </head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.0"/><feComposite in="SourceGraphic" operator="in"/></filter>
+  <symbol id="stamp" viewBox="0 0 100 100"><g filter="url(#ink)" fill="none" stroke="currentColor">
+    <circle cx="50" cy="50" r="46" stroke-width="3"/><circle cx="50" cy="50" r="31" stroke-width="1.4"/>
+    <path id="ring" d="M50 12a38 38 0 1 1-.01 0" stroke="none"/>
+    <text fill="currentColor" stroke="none" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="9.4" letter-spacing="1.5"><textPath href="#ring">PRODUCE OF KENYA · PACKED FRESH ·</textPath></text>
+    <text x="50" y="57" fill="currentColor" stroke="none" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="700" font-size="21">KE</text>
+  </g></symbol>
+</svg>
 <div class="intro" id="intro" aria-hidden="true">
   <svg class="pod" viewBox="0 0 200 100">
     <defs>
@@ -109,11 +125,18 @@ const vcardQR = p => ['BEGIN:VCARD', 'VERSION:3.0', `N:${p.last};${p.first}`, `F
   </section>
   <section class="prods">
     <h2>Fresh from our farms</h2>
-    <div class="strip">
-      <a href="${SITE}/products/" target="_blank" rel="noopener"><img src="../assets/beans.jpg" alt="French beans" loading="lazy"><span>French Beans<small>Extra fine &amp; fine</small></span></a>
-      <a href="${SITE}/products/" target="_blank" rel="noopener"><img src="../assets/snow.jpg" alt="Snow peas" loading="lazy"><span>Snow Peas<small>Mangetout</small></span></a>
-      <a href="${SITE}/products/" target="_blank" rel="noopener"><img src="../assets/snap.jpg" alt="Sugar snap peas" loading="lazy"><span>Sugar Snap Peas</span></a>
-      <a href="${SITE}/products/" target="_blank" rel="noopener"><img src="../assets/veg.jpg" alt="Other fresh vegetables" loading="lazy"><span>Other Fresh Vegetables</span></a>
+    <div class="strip" id="strip">
+${TAGS.map((t, n) => `      <a class="tag" href="${SITE}/products/${t.slug}/" target="_blank" rel="noopener" style="--r:${t.r}deg;--d:${n * 90}ms">
+        <span class="tag-in">
+          <span class="tag-top"><b>Lot ${String(n + 1).padStart(2, '0')}</b><i class="eyelet"></i><b>KE · NBO</b></span>
+          <span class="tag-ph"><img src="../assets/${t.img}" alt="${esc(t.alt)}" width="480" height="600" loading="lazy"></span>
+          <span class="tag-nm">${esc(t.name)}</span>
+          <span class="tag-sp"><i>${t.k1}</i><em>${esc(t.v1)}</em></span>
+          <span class="tag-sp"><i>${t.k2}</i><em>${esc(t.v2)}</em></span>
+          <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><use href="#stamp"/></svg>
+          <span class="tag-stub"><span>View</span><i class="bars"></i></span>
+        </span>
+      </a>`).join('\n')}
     </div>
     <a class="more" href="${SITE}/products/" target="_blank" rel="noopener">View all products →</a>
   </section>
@@ -135,7 +158,7 @@ const vcardQR = p => ['BEGIN:VCARD', 'VERSION:3.0', `N:${p.last};${p.first}`, `F
   <footer>Quality · Reliability · Trust</footer>
 </div>
 </main>
-<script src="../assets/card.js?v=3"></script>
+<script src="../assets/card.js?v=4"></script>
 </body></html>`;
     fs.writeFileSync(path.join(dir, 'index.html'), html);
   }

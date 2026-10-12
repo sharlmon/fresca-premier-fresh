@@ -7,11 +7,20 @@
 <meta property="og:title" content="Lucas Omollo · Fresca Premier Fresh"><meta property="og:description" content="Director"><meta property="og:image" content="https://frescapremierfresh.com/card/assets/logo.png">
 <link rel="icon" href="../assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 <script>try{if(sessionStorage.getItem("fresca_intro"))document.documentElement.classList.add("skip-intro")}catch(e){}</script>
-<link rel="stylesheet" href="../assets/card.css?v=3">
+<link rel="stylesheet" href="../assets/card.css?v=4">
 <noscript><style>.intro{display:none}</style></noscript>
 </head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.0"/><feComposite in="SourceGraphic" operator="in"/></filter>
+  <symbol id="stamp" viewBox="0 0 100 100"><g filter="url(#ink)" fill="none" stroke="currentColor">
+    <circle cx="50" cy="50" r="46" stroke-width="3"/><circle cx="50" cy="50" r="31" stroke-width="1.4"/>
+    <path id="ring" d="M50 12a38 38 0 1 1-.01 0" stroke="none"/>
+    <text fill="currentColor" stroke="none" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="9.4" letter-spacing="1.5"><textPath href="#ring">PRODUCE OF KENYA · PACKED FRESH ·</textPath></text>
+    <text x="50" y="57" fill="currentColor" stroke="none" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="700" font-size="21">KE</text>
+  </g></symbol>
+</svg>
 <div class="intro" id="intro" aria-hidden="true">
   <svg class="pod" viewBox="0 0 200 100">
     <defs>
@@ -73,11 +82,51 @@
   </section>
   <section class="prods">
     <h2>Fresh from our farms</h2>
-    <div class="strip">
-      <a href="https://frescapremierfresh.com/products/" target="_blank" rel="noopener"><img src="../assets/beans.jpg" alt="French beans" loading="lazy"><span>French Beans<small>Extra fine &amp; fine</small></span></a>
-      <a href="https://frescapremierfresh.com/products/" target="_blank" rel="noopener"><img src="../assets/snow.jpg" alt="Snow peas" loading="lazy"><span>Snow Peas<small>Mangetout</small></span></a>
-      <a href="https://frescapremierfresh.com/products/" target="_blank" rel="noopener"><img src="../assets/snap.jpg" alt="Sugar snap peas" loading="lazy"><span>Sugar Snap Peas</span></a>
-      <a href="https://frescapremierfresh.com/products/" target="_blank" rel="noopener"><img src="../assets/veg.jpg" alt="Other fresh vegetables" loading="lazy"><span>Other Fresh Vegetables</span></a>
+    <div class="strip" id="strip">
+      <a class="tag" href="https://frescapremierfresh.com/products/french-beans/" target="_blank" rel="noopener" style="--r:-2.5deg;--d:0ms">
+        <span class="tag-in">
+          <span class="tag-top"><b>Lot 01</b><i class="eyelet"></i><b>KE · NBO</b></span>
+          <span class="tag-ph"><img src="../assets/tag-beans.jpg" alt="A bunch of freshly harvested French beans" width="480" height="600" loading="lazy"></span>
+          <span class="tag-nm">French Beans</span>
+          <span class="tag-sp"><i>Grade</i><em>Extra fine, fine</em></span>
+          <span class="tag-sp"><i>Pack</i><em>12 × 250 g</em></span>
+          <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><use href="#stamp"/></svg>
+          <span class="tag-stub"><span>View</span><i class="bars"></i></span>
+        </span>
+      </a>
+      <a class="tag" href="https://frescapremierfresh.com/products/snow-peas/" target="_blank" rel="noopener" style="--r:1.8deg;--d:90ms">
+        <span class="tag-in">
+          <span class="tag-top"><b>Lot 02</b><i class="eyelet"></i><b>KE · NBO</b></span>
+          <span class="tag-ph"><img src="../assets/tag-snow.jpg" alt="Snow peas (mangetout) close up" width="480" height="600" loading="lazy"></span>
+          <span class="tag-nm">Snow Peas</span>
+          <span class="tag-sp"><i>Also</i><em>Mangetout</em></span>
+          <span class="tag-sp"><i>Pack</i><em>12 × 250 g</em></span>
+          <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><use href="#stamp"/></svg>
+          <span class="tag-stub"><span>View</span><i class="bars"></i></span>
+        </span>
+      </a>
+      <a class="tag" href="https://frescapremierfresh.com/products/sugar-snap-peas/" target="_blank" rel="noopener" style="--r:-1.2deg;--d:180ms">
+        <span class="tag-in">
+          <span class="tag-top"><b>Lot 03</b><i class="eyelet"></i><b>KE · NBO</b></span>
+          <span class="tag-ph"><img src="../assets/tag-snap.jpg" alt="Sugar snap peas close up" width="480" height="600" loading="lazy"></span>
+          <span class="tag-nm">Sugar Snaps</span>
+          <span class="tag-sp"><i>Taste</i><em>Crisp &amp; sweet</em></span>
+          <span class="tag-sp"><i>Pack</i><em>Retail punnets</em></span>
+          <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><use href="#stamp"/></svg>
+          <span class="tag-stub"><span>View</span><i class="bars"></i></span>
+        </span>
+      </a>
+      <a class="tag" href="https://frescapremierfresh.com/products/baby-corn/" target="_blank" rel="noopener" style="--r:2.4deg;--d:270ms">
+        <span class="tag-in">
+          <span class="tag-top"><b>Lot 04</b><i class="eyelet"></i><b>KE · NBO</b></span>
+          <span class="tag-ph"><img src="../assets/tag-corn.jpg" alt="Baby corn packed in trays" width="480" height="600" loading="lazy"></span>
+          <span class="tag-nm">Baby Corn</span>
+          <span class="tag-sp"><i>Cobs</i><em>Whole, tender</em></span>
+          <span class="tag-sp"><i>Pack</i><em>Retail punnets</em></span>
+          <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><use href="#stamp"/></svg>
+          <span class="tag-stub"><span>View</span><i class="bars"></i></span>
+        </span>
+      </a>
     </div>
     <a class="more" href="https://frescapremierfresh.com/products/" target="_blank" rel="noopener">View all products →</a>
   </section>
@@ -99,5 +148,5 @@
   <footer>Quality · Reliability · Trust</footer>
 </div>
 </main>
-<script src="../assets/card.js?v=3"></script>
+<script src="../assets/card.js?v=4"></script>
 </body></html>

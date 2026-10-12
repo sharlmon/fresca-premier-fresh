@@ -72,13 +72,39 @@ body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);min-height:100
 .ic{width:1.25rem;height:1.25rem;flex:none;display:block}
 .prods,.why{padding:18px 0 0}
 .prods h2,.why h2{font:600 .95rem Poppins,sans-serif;color:var(--gd);padding:0 24px 10px}
-.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 10px;scrollbar-width:none}
+/* product strip: export consignment tags hung on a twine line */
+.strip{--kraft:#e6d5b3;--ink:#2f5a30;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 24px;padding:0 24px 18px;scrollbar-width:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='5'%3E%3Crect y='1' width='5' height='3' rx='1' fill='%23b8955c'/%3E%3Cpath d='M0 4 3 1M2.5 4 5.5 1' stroke='%237d5d30' stroke-width='.9'/%3E%3C/svg%3E") 0 8px/5px 5px repeat-x local}
 .strip::-webkit-scrollbar{display:none}
-.strip a{flex:none;width:128px;scroll-snap-align:start;text-decoration:none;color:var(--ink);background:#f5faf1;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(47,90,48,.12);transition:transform .25s}
-.strip a:hover{transform:translateY(-4px) scale(1.03)}
-.strip img{width:100%;height:110px;object-fit:cover;display:block}
-.strip span{display:block;padding:8px 10px 10px;font-weight:600;font-size:.74rem;line-height:1.25}
-.strip small{display:block;font-weight:400;color:#777;font-size:.66rem;margin-top:2px}
+.tag{flex:none;width:168px;scroll-snap-align:start;text-decoration:none;color:var(--ink);padding-top:30px;position:relative;
+  transform:rotate(var(--r));transform-origin:50% 12px;transition:transform .45s cubic-bezier(.3,1.6,.5,1);filter:drop-shadow(0 6px 8px rgba(70,50,20,.18)) drop-shadow(0 1px 1px rgba(70,50,20,.2))}
+.tag::before{content:"";position:absolute;left:50%;top:10px;width:1.6px;height:31px;margin-left:-.8px;background:#8d6a3c;border-radius:1px}
+.tag:hover,.tag:focus-visible{transform:rotate(0) translateY(3px)}
+.tag:focus-visible{outline:none}.tag:focus-visible .tag-in{box-shadow:inset 0 0 0 2px var(--ink)}
+.hung .tag{animation:swing 1.6s var(--d) cubic-bezier(.25,.6,.3,1) backwards}
+.tag-in{display:flex;flex-direction:column;position:relative;background:var(--kraft);border-radius:0 0 6px 6px;padding:0 10px;
+  clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%,0 16px)}
+.tag-in::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .25 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tag-top{display:flex;align-items:center;justify-content:space-between;height:30px;font:600 8.5px "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.eyelet{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #c4a052,0 0 0 4px #9c7a35,inset 0 1px 2px rgba(0,0,0,.35)}
+.tag-ph{display:block;aspect-ratio:4/5;overflow:hidden;border-radius:2px;outline:1px solid rgba(47,90,48,.25);outline-offset:2px}
+.tag-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.tag:hover .tag-ph img{transform:scale(1.06)}
+.tag-nm{font:700 1rem/1.1 Poppins,sans-serif;margin:11px 0 7px;letter-spacing:-.01em}
+.tag-sp{display:flex;align-items:baseline;gap:4px;font:500 9px/1.6 "IBM Plex Mono",monospace;color:#3b3325}
+.tag-sp i{font-style:normal;text-transform:uppercase;letter-spacing:.08em;opacity:.65;flex:none}
+.tag-sp::after{content:"";order:1;flex:1;border-bottom:1px dotted rgba(59,51,37,.45);min-width:6px;transform:translateY(-3px)}
+.tag-sp em{font-style:normal;order:2;white-space:nowrap}
+.stamp{position:absolute;left:50%;bottom:4px;width:52px;height:52px;margin-left:-30px;z-index:2;color:var(--ink);opacity:.6;mix-blend-mode:multiply;transform:rotate(-16deg);pointer-events:none}
+.tag:nth-child(even) .stamp{transform:rotate(12deg);margin-left:-20px;bottom:8px}
+.tag-stub{display:flex;align-items:center;justify-content:space-between;margin:12px -10px 0;padding:9px 10px 10px;position:relative;
+  font:600 9px "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+  background:radial-gradient(circle at 0 0,transparent 5px,#dcc8a0 5.5px) 0 0/51% 100% no-repeat,radial-gradient(circle at 100% 0,transparent 5px,#dcc8a0 5.5px) 100% 0/51% 100% no-repeat}
+.tag-stub::before{content:"";position:absolute;left:8px;right:8px;top:-.5px;border-top:1.5px dashed rgba(59,51,37,.4)}
+.tag-stub span::after{content:" \2197";letter-spacing:0}
+.bars{width:58px;height:15px;background:linear-gradient(90deg,#2b2519 0 2px,transparent 0 4px,#2b2519 0 5px,transparent 0 6px,#2b2519 0 9px,transparent 0 10px,#2b2519 0 11px,transparent 0 14px,#2b2519 0 16px,transparent 0 17px,#2b2519 0 18px,transparent 0 20px,#2b2519 0 23px,transparent 0 24px,#2b2519 0 25px,transparent 0 27px,#2b2519 0 28px,transparent 0 31px,#2b2519 0 33px,transparent 0 34px,#2b2519 0 35px,transparent 0 37px,#2b2519 0 40px,transparent 0 41px,#2b2519 0 42px,transparent 0 44px,#2b2519 0 46px,transparent 0 47px,#2b2519 0 48px,transparent 0 50px,#2b2519 0 51px,transparent 0 53px,#2b2519 0 56px,transparent 0 57px,#2b2519 0 58px);opacity:.78}
+@keyframes swing{0%{transform:rotate(calc(var(--r) * -4 + 9deg));opacity:0}15%{opacity:1}45%{transform:rotate(calc(var(--r) * 1.8 - 3deg))}70%{transform:rotate(calc(var(--r) * .6 + 1deg))}100%{transform:rotate(var(--r))}}
 .more{display:block;text-align:right;padding:0 24px;font-size:.78rem;font-weight:600;color:var(--g);text-decoration:none}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px}
 .grid div{background:#f5faf1;border-radius:14px;padding:12px}
@@ -107,7 +133,7 @@ footer{margin:18px 0 0;padding:14px;text-align:center;background:var(--gd);color
   .stage{position:sticky;top:48px;padding-top:0}
   .sheet{padding-top:0}
   .actions{padding-top:26px}
-  .strip{padding-bottom:14px}
+  .strip{padding-bottom:22px}
   .intro .pod{width:380px}
 }
 @media(min-width:900px) and (max-height:760px){.stage{top:24px}}
