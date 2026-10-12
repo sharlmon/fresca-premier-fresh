@@ -75,7 +75,7 @@ def whitish(med, counts):
 
 
 def render(scene, concept, out_path, preview=None):
-    img = cv2.imread(os.path.join(PK, 'photos', scene['photo']))[:, :, ::-1].astype(np.float32)
+    img = cv2.imread(os.path.join(PK, scene['photo'] if '/' in scene['photo'] else os.path.join('photos', scene['photo'])))[:, :, ::-1].astype(np.float32)
     H, W = img.shape[:2]
     orig = lin(img)
     out = orig.copy()
@@ -144,6 +144,38 @@ def render(scene, concept, out_path, preview=None):
     # pass 2: warp art, light it, composite
     for fc in scene['faces']:
         d = info[fc['name']]
+        if fc.get('overlay'):
+            # swap printed elements on an already-designed face: erase the old ink in the region from its own
+            # background (board texture kept), then lay the new elements (RGBA art) on top, lit like the face
+            dom = d['med'][int(np.argmax(d['counts']))]
+            reg = d['mask'] > 0.5
+            ink = (np.abs(orig - dom[None, None, :]).sum(2) > fc.get('ink', 0.06)) & reg
+            ink = cv2.dilate(ink.astype(np.uint8), np.ones((3, 3), np.uint8), iterations=fc.get('grow', 3)) & reg.astype(np.uint8)
+            ys, xs = np.nonzero(reg)
+            y0, y1, x0, x1 = max(ys.min() - 40, 0), min(ys.max() + 40, H), max(xs.min() - 40, 0), min(xs.max() + 40, W)
+            o8 = np.clip(srgb(out[y0:y1, x0:x1]), 0, 255).astype(np.uint8)
+            fill = lin(cv2.inpaint(o8, ink[y0:y1, x0:x1], 9, cv2.INPAINT_TELEA).astype(np.float32))
+            # the inpainted area is smooth: give it back the board's grain from the untouched surroundings
+            hp = orig[y0:y1, x0:x1] - cv2.GaussianBlur(orig[y0:y1, x0:x1], (0, 0), 2.5)
+            clean = (cv2.dilate(ink[y0:y1, x0:x1], np.ones((9, 9), np.uint8)) == 0) & reg[y0:y1, x0:x1]
+            sd = hp[clean].std(0) if clean.sum() > 500 else np.full(3, 0.004, np.float32)
+            n = cv2.GaussianBlur(np.random.default_rng(5).normal(0, 1, (y1 - y0, x1 - x0)).astype(np.float32), (0, 0), 0.8)
+            grain = (n / (n.std() + 1e-6))[..., None] * sd[None, None, :]
+            a = cv2.GaussianBlur(ink[y0:y1, x0:x1].astype(np.float32), (0, 0), 1.0)[..., None]
+            out[y0:y1, x0:x1] = out[y0:y1, x0:x1] * (1 - a) + (fill + grain) * a
+            art = cv2.imread(os.path.join(PK, 'art', fc['art']), cv2.IMREAD_UNCHANGED).astype(np.float32)
+            ah, aw = art.shape[:2]
+            q = np.array(fc['quad'], np.float32)
+            M = cv2.getPerspectiveTransform(np.float32([[0, 0], [aw, 0], [aw, ah], [0, ah]]), q)
+            wa = cv2.warpPerspective(art, M, (W, H), flags=cv2.INTER_AREA if aw > 2000 else cv2.INTER_LINEAR)
+            rgb, al = wa[..., 2::-1], wa[..., 3:4] / 255.0
+            rgb = cv2.GaussianBlur(rgb, (0, 0), fc.get('soft', 0.7)); al = cv2.GaussianBlur(al, (0, 0), fc.get('soft', 0.7))[..., None] if al.ndim == 2 else cv2.GaussianBlur(al[..., 0], (0, 0), fc.get('soft', 0.7))[..., None]
+            new = lin(rgb) / lin(BOARD) * d['wp'][None, None, :] * d['L'][..., None]
+            new = new * (1 + np.random.default_rng(3).normal(0, fc.get('grain', 0.015), (H, W, 1)).astype(np.float32))
+            a = al * d['mask'][..., None]
+            out = out * (1 - a) + new * a
+            d['new'] = out.copy()
+            continue
         if fc.get('art') == 'inpaint':  # erase a mark (old logo, QR) from its surroundings
             o8 = np.clip(srgb(out), 0, 255).astype(np.uint8)
             hm = (d['mask'] > 0.05).astype(np.uint8)
@@ -228,8 +260,10 @@ if __name__ == '__main__':
     concept = sys.argv[2] if len(sys.argv) > 2 else 'kanga'
     od = os.path.join(PK, 'mockups', concept); os.makedirs(od, exist_ok=True)
     for sc in scenes:
-        name = sc['photo'].split('.')[0]
+        name = sc.get('out', sc['photo'].split('/')[-1].split('.')[0])
         if only and only not in name:
             continue
-        render(sc, concept, os.path.join(od, f'{name}_fresca_{concept}.jpg'), os.environ.get('PREVIEW') and os.path.join(os.environ['PREVIEW'], f'{name}_{concept}.jpg'))
+        dst = os.path.join(PK, 'mockups', 'approved', f'{name}.jpg') if 'out' in sc else os.path.join(od, f'{name}_fresca_{concept}.jpg')
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        render(sc, concept, dst, os.environ.get('PREVIEW') and os.path.join(os.environ['PREVIEW'], f'{name}_{concept}.jpg'))
         print('done', name, concept)
