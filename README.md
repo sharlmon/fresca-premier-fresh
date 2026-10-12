@@ -24,6 +24,7 @@ frescape/
 │
 ├── 04_tools/                build scripts (see below)
 ├── 05_website/              new Nuxt website: site/ (source), legacy-wordpress/ (old-site crawl), LAUNCH.md (go-live plan)
+├── 06_packaging/            export carton redesign: flat print panels, mockups on the real box photos (see its README)
 └── _archive/                superseded files – safe to delete once you are sure
 ```
 
@@ -44,6 +45,8 @@ Run `npm install` once in 04_tools.
 | Check every e-card QR still decodes | `node ecard-qr-check.js` |
 | SEO / AEO audit of the built website | `python3 seo-audit.py` (see `05_website/SEO.md`) |
 | Health / launch check of the website | `./check-launch.sh https://frescapremierfresh.com` |
+| Carton artwork (flat panels) | `node box-art.js` |
+| Carton mockups on the photos | `.venv/bin/python box-mockup.py` (see `06_packaging/README.md`) |
 | Demo video | `node ecard-demo-video.js` (needs ffmpeg-static, see script) |
 
 Edit content in `brochure-build.js` (text, photos, colours) or `ecard-build.js` (people, links), then rebuild.

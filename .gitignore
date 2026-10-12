@@ -23,3 +23,4 @@ frescaimages/
 # Retouched client photos (unpublished, large) – kept local until used on the site
 01_client-assets/factory-photos-retouched/
 _upload/
+.venv/
