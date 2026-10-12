@@ -3,7 +3,10 @@
 ## Status (12 Oct 2026)
 - **2 kg lidded carton, mangetout:** approved by the client (`approved/`).
 - **2 kg lidded carton, French beans:** done in the same design (`mockups/approved/`).
-- **12 × 250 g display tray, mangetout and French beans:** a new structure (below), with die-lines and 3D renders.
+- **12 × 250 g trays, mangetout and French beans (current direction):** the approved carton design printed on the
+  trays the client ships today, which stack. Shown on the client's own photos in `mockups/family/`; the panels are in `art/family/`.
+  Rebuild: `node box-art.js family/` and then `.venv/bin/python box-mockup.py IMG_57 family` (in `04_tools`).
+- **12 × 250 g display tray (below):** an earlier proposal. The client turned it down because a tall header does not stack in shipping.
 - The "Kanga" and lid studies further down were earlier explorations; the client chose the approved design instead.
 
 ## New display tray (12 × 250 g)
