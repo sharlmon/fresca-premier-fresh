@@ -281,8 +281,57 @@ kanga.info = (p) => {
   return [W, H, s];
 };
 
+// ================= approved family (the client-approved 2 kg mangetout carton) =================
+// Avenir Next, forest #145211, mid green #408117, gold #e2a617 on white board. These are overlays (transparent background)
+// laid over the approved mockups in the flattened frames measured from them, so only the product-specific parts change.
+const A = { forest: '#145211', mid: '#408117', sub: '#3b7a1c', gold: '#e2a617', white: '#fbfaf5', font: "'Avenir Next', 'Avenir', sans-serif" };
+// text that is fitted to a width: size shrinks until it fits (letter-spacing is in em)
+const fitText = (x, y, txt, { size, max, weight = 700, fill, anchor = 'middle', ls = 0.06 }) =>
+  `<text class="fit" data-max="${max}" x="${x}" y="${y}" font-family="${A.font}" font-weight="${weight}" font-size="${size}" fill="${fill}" text-anchor="${anchor}" letter-spacing="${f(size * ls)}" data-ls="${ls}">${txt}</text>`;
+// one French bean: long, slim, gently curved, darker body with a lighter ridge and a thin stem
+function bean(L, W, { dark = A.forest, light = A.mid, bend = 0.06 } = {}) {
+  const h = L / 2, b = L * bend;
+  let s = `<path d="M${f(-h)} ${f(b * .2)} C${f(-h * .5)} ${f(-W * .9 + b)} ${f(h * .5)} ${f(-W * .7 + b)} ${f(h)} ${f(-b * .4)} C${f(h * .55)} ${f(W * .55 + b)} ${f(-h * .5)} ${f(W * .7 + b)} ${f(-h)} ${f(b * .2)}Z" fill="${dark}"/>`;
+  s += `<path d="M${f(-h * .78)} ${f(b * .3 - W * .08)} C${f(-h * .3)} ${f(-W * .42 + b)} ${f(h * .4)} ${f(-W * .32 + b)} ${f(h * .86)} ${f(-b * .3 - W * .05)}" fill="none" stroke="${light}" stroke-width="${f(W * .22)}" stroke-linecap="round"/>`;
+  s += `<path d="M${f(-h + 2)} ${f(b * .2)} q${f(-L * .05)} ${f(-W * .1)} ${f(-L * .085)} ${f(-W * .9)}" fill="none" stroke="${dark}" stroke-width="${f(W * .16)}" stroke-linecap="round"/>`;
+  s += `<path d="M${f(h - 2)} ${f(-b * .4)} l${f(L * .03)} ${f(-W * .18)}" fill="none" stroke="${dark}" stroke-width="${f(W * .12)}" stroke-linecap="round"/>`;
+  return s;
+}
+const fam = {
+  // lid, in the flattened frame of the approved photo (2000 × 1500): name block centred on x 1023, pods box 1053–1790 × 241–572
+  lidPatch: (p) => {
+    const W = 2000, H = 1500;
+    let s = fitText(1023, 1100, p.name, { size: 208, max: 1700, fill: A.forest, ls: 0.06 });
+    s += fitText(1015, 1200, p.aka, { size: 70, max: 1760, weight: 500, fill: A.sub, ls: 0.01 });
+    // three beans, fanned like a handful laid on the lid
+    s += `<g transform="translate(1440 300) rotate(-5)">${bean(690, 66, { bend: 0.07 })}</g>`;
+    s += `<g transform="translate(1415 415) rotate(-1.5)">${bean(730, 70, { bend: 0.09 })}</g>`;
+    s += `<g transform="translate(1450 528) rotate(2.5)">${bean(670, 62, { bend: 0.06 })}</g>`;
+    return [W, H, s];
+  },
+  // long side (2000 × 550 frame): name left-aligned at x 1093 between the logo and the hand hole
+  sidePatch: (p) => {
+    const W = 2000, H = 550;
+    let s = fitText(1093, 213, p.name, { size: 80, max: 525, fill: A.white, anchor: 'start', ls: 0.06 });
+    s += `<rect x="1091" y="232" width="110" height="6" fill="${A.gold}"/>`;
+    s += fitText(1093, 292, p.aka, { size: 20, max: 525, weight: 500, fill: A.white, anchor: 'start', ls: 0.01 });
+    return [W, H, s];
+  },
+  // end (1500 × 550 frame): centred name above the gold rule; NET 2 KG below is kept from the photo
+  endPatch: (p) => {
+    const W = 1500, H = 550;
+    let s = fitText(622, 248, p.name, { size: 106, max: 600, fill: A.white, ls: 0.06 });
+    s += `<rect x="567" y="255" width="110" height="7" fill="${A.gold}"/>`;
+    return [W, H, s];
+  },
+};
+const P2 = { beans: { name: 'FRENCH BEANS', aka: 'Haricots Verts · Sperziebonen · Feine Bohnen · Judías Verdes' } };
+
 // ---------- render ----------
 const JOBS = [
+  ['approved', 'lid-beans', () => fam.lidPatch(P2.beans), true],
+  ['approved', 'side-beans', () => fam.sidePatch(P2.beans), true],
+  ['approved', 'end-beans', () => fam.endPatch(P2.beans), true],
   ['kanga', 'lid-mangetout', () => kanga.lid(P.mangetout)],
   ['kanga', 'side-mangetout', () => kanga.side(P.mangetout, { weight: 'NET 2 KG' })],
   ['kanga', 'end-mangetout', () => kanga.end(P.mangetout)],
@@ -309,14 +358,22 @@ const JOBS = [
   const only = process.argv[2];
   const b = await chromium.launch();
   const page = await b.newPage();
-  for (const [concept, name, fn] of JOBS) {
+  for (const [concept, name, fn, transparent] of JOBS) {
     if (only && !`${concept}/${name}`.includes(only)) continue;
     const [W, H, svg] = fn();
     const dir = path.join(OUT, concept); fs.mkdirSync(dir, { recursive: true });
     await page.setViewportSize({ width: W, height: H });
-    await page.setContent(`<!doctype html><link href="${FONTS}" rel="stylesheet"><style>html,body{margin:0}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>`);
+    await page.setContent(`<!doctype html><link href="${FONTS}" rel="stylesheet"><style>html,body{margin:0;background:transparent}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>`);
     await page.evaluate(() => document.fonts.ready);
-    await page.screenshot({ path: path.join(dir, name + '.png') });
+    // shrink fitted text until it is no wider than its data-max
+    await page.evaluate(() => document.querySelectorAll('text.fit').forEach((t) => {
+      const max = +t.dataset.max, ls = +t.dataset.ls;
+      for (let i = 0; i < 60 && t.getBBox().width > max; i++) {
+        const sz = parseFloat(t.getAttribute('font-size')) * 0.97;
+        t.setAttribute('font-size', sz); t.setAttribute('letter-spacing', sz * ls);
+      }
+    }));
+    await page.screenshot({ path: path.join(dir, name + '.png'), omitBackground: !!transparent });
     console.log(concept + '/' + name, W + '×' + H);
   }
   await b.close();
