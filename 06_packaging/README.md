@@ -1,5 +1,28 @@
 # Fresca export cartons – redesign
 
+## Status (12 Oct 2026)
+- **2 kg lidded carton, mangetout:** approved by the client (`approved/`).
+- **2 kg lidded carton, French beans:** done in the same design (`mockups/approved/`).
+- **12 × 250 g display tray, mangetout and French beans:** a new structure (below), with die-lines and 3D renders.
+- The "Kanga" and lid studies further down were earlier explorations; the client chose the approved design instead.
+
+## New display tray (12 × 250 g)
+A shelf-ready tray replaces the old open tray. Outside 390 × 290 mm.
+- **Tall double-layer header (200 mm):** folds over its top crease and hangs inside, so the brand faces the shopper above the punnets. One-side print, two layers of board.
+- **Side walls sweep** from 200 mm at the back down to 75 mm at the front.
+- **Front lip (75 mm)** with an 18 mm thumb dip, so punnets lift out and the produce shows.
+- **Glue flaps** on the front and back walls, glued inside the side walls. No hand holes.
+- **Same look as the approved carton:** Avenir Next, forest / mid green / gold on white board, and a kraft inside.
+
+| | |
+|---|---|
+| `dielines/<product>-tray-dieline.pdf` | 1:1 flat blank, print side up: cut (black), crease (red dashed), glue (hatched), dimensions |
+| `art/tray/<product>/` | the panel artwork (10 px/mm) used by the die-line and the renders |
+| `mockups/trays/` | 3D renders: hero, front, back, from above, empty, and both trays together |
+
+Rebuild: `node tray-build.js && node tray-render.js && .venv/bin/python tray-finish.py` (in `04_tools`).
+Geometry and art live in `tray-spec.js`; change a dimension there and both the die-line and the renders follow.
+
 New artwork for the Fresca boxes, shown on the client's own photos of the current (Premier Veg Mondo / Mitrofresh) cartons.
 
 ![before and after](before-after.jpg)
