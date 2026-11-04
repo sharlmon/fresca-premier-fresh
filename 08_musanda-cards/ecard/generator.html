@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Invite link generator</title><meta name="robots" content="noindex">
+<style>:root{--bg:#fbf8ee;--ink:#2a2418;--soft:#6b6150;--green:#2f5a30;--line:#e2d9b8}
+@media(prefers-color-scheme:dark){:root{--bg:#1b1a14;--ink:#f1ead2;--soft:#b9b095;--green:#8fc48f;--line:#3a3727}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif;padding:16px}
+main{max-width:760px;margin:0 auto}h1{font-size:22px;margin:8px 0}p{color:var(--soft);margin:4px 0 14px}
+label{display:block;font-weight:600;margin:14px 0 4px}input,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:transparent;color:inherit;font:inherit}
+textarea{min-height:160px}button,.b{min-height:44px;padding:10px 16px;border-radius:999px;border:1.5px solid var(--green);background:var(--green);color:#fff;font:600 14px system-ui;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.alt{background:transparent;color:var(--green)}
+.item{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}.item b{display:block}.item code{display:block;word-break:break-all;color:var(--soft);font-size:13px;margin:4px 0 8px}
+:focus-visible{outline:3px solid #b8860b;outline-offset:2px}</style></head><body><main>
+<h1>Harambee invitation links</h1><p>One name per line. Optionally add a phone number after a comma to send straight to that person on WhatsApp.</p>
+<label for="base">Where the invitation page is hosted</label><input id="base" value="https://YOUR-SITE/invite/">
+<label for="names">Names</label><textarea id="names" placeholder="Hon. Joyce Atieno Bensouda, 0712345678&#10;Dr. Benard Olayo&#10;Mr. and Mrs. Otieno"></textarea>
+<div class="row"><button id="go" type="button">Make links</button><button id="all" class="alt" type="button">Copy all</button><button id="csv" class="alt" type="button">Download CSV</button></div>
+<div id="out"></div>
+<script>
+var base=document.getElementById('base'),names=document.getElementById('names'),out=document.getElementById('out'),rows=[];
+var MSG=function(n,l){return 'Dear '+n+', you are warmly invited to the Harambee of MUSANDA HOLY GHOST CHURCH OF E.A. on Saturday 5th December 2026 at The Church Precinct, Gongo. Your invitation: '+l};
+function norm(p){p=p.replace(/\D/g,'');return p.replace(/^0/,'254')}
+document.getElementById('go').onclick=function(){
+  out.innerHTML='';rows=[];
+  names.value.split('\n').map(function(s){return s.trim()}).filter(Boolean).forEach(function(line){
+    var i=line.lastIndexOf(','),n=line,ph='';
+    if(i>0&&/^[\d\s+]{9,}$/.test(line.slice(i+1).trim())){n=line.slice(0,i).trim();ph=norm(line.slice(i+1))}
+    var link=base.value.replace(/\?.*$/,'')+'?to='+encodeURIComponent(n).replace(/%20/g,'+');
+    rows.push({n:n,ph:ph,link:link});
+    var d=document.createElement('div');d.className='item';
+    var wl='https://wa.me/'+ph+'?text='+encodeURIComponent(MSG(n,link));
+    d.innerHTML='<b></b><code></code><div class="row"><button class="alt" type="button">Copy link</button>'+(ph?'<a class="b" target="_blank" rel="noopener">Send on WhatsApp</a>':'')+'</div>';
+    d.querySelector('b').textContent=n;d.querySelector('code').textContent=link;
+    d.querySelector('button').onclick=function(){navigator.clipboard.writeText(link)};
+    if(ph)d.querySelector('a').href=wl;out.appendChild(d);
+  });
+};
+document.getElementById('all').onclick=function(){navigator.clipboard.writeText(rows.map(function(r){return r.n+': '+r.link}).join('\n'))};
+document.getElementById('csv').onclick=function(){var c='Name,Phone,Link\n'+rows.map(function(r){return [r.n,r.ph,r.link].map(function(x){return '"'+x.replace(/"/g,'""')+'"'}).join(',')}).join('\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));a.download='invitation-links.csv';a.click()};
+</script></main></body></html>
