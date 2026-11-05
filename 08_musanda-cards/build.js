@@ -75,13 +75,13 @@ h4{font:600 10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:
 <main class="card" id="card">
 <div class="br tl">${branch('l1')}</div><div class="br rb">${branch('l2')}</div>
 <div class="cross" style="--i:0">${cross}</div>
-<h1 style="--i:1">${esc(C.church)}<br>${esc(C.project)}</h1>
+<h1 style="--i:1">${esc(C.church)}${C.project ? "<br>" + esc(C.project) : ""}</h1>
 <p class="sub" style="--i:1">${esc(C.place.toUpperCase())}</p>
 <div class="rule"></div>
 <p class="to" style="--i:2">cordially invites</p>
 <p class="name" id="who" style="--i:2">you and your family</p>
 <div class="script" style="--i:3">${esc(C.eventName)}</div>
-<p class="purpose" style="--i:3">${esc(C.purpose)}</p>
+<p class="purpose" style="--i:3">Fundraising towards ${esc(C.purpose)}</p>
 <div class="date" style="--i:4"><b>${esc(DATE_LONG)}</b><span>${esc(C.venue)}${C.time ? ' · ' + esc(C.time) : ''}</span></div>
 <p class="count" id="count" style="--i:5"></p>
 ${guestsBlock()}
@@ -150,77 +150,57 @@ document.getElementById('all').onclick=function(){navigator.clipboard.writeText(
 document.getElementById('csv').onclick=function(){var c='Name,Phone,Link\\n'+rows.map(function(r){return [r.n,r.ph,r.link].map(function(x){return '"'+x.replace(/"/g,'""')+'"'}).join(',')}).join('\\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));a.download='invitation-links.csv';a.click()};
 </script></main></body></html>`;
 
-/* ============================ PRINT A4 ============================ */
-const TABLE_ROWS = 15;
-const tbl = (start) => `<table class="t"><thead><tr><th class="n">No.</th><th>Name of contributor</th><th class="a">Amount (KES)</th></tr></thead><tbody>${Array.from({ length: TABLE_ROWS }, (_, i) => `<tr><td class="n">${start + i}</td><td></td><td></td></tr>`).join('')}</tbody></table>`;
+/* ============================ PRINT A4 (single page) ============================ */
+const ROWS = 11;
+const tbl = (start) => `<table class="t"><thead><tr><th class="n">No.</th><th>Name of contributor</th><th class="a">Amount (KES)</th></tr></thead><tbody>${Array.from({ length: ROWS }, (_, i) => `<tr><td class="n">${start + i}</td><td></td><td></td></tr>`).join('')}</tbody></table>`;
 const print = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Musanda Harambee card – A4</title>${FONTS}
 <style>${TOKENS}
 @page{size:210mm 297mm;margin:0}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{margin:0;background:#888}
-.pg{position:relative;width:210mm;height:297mm;background:var(--cream);overflow:hidden;page-break-after:always;text-align:center;color:var(--ink);font-family:var(--sans);margin:0 auto}
-.pg:last-child{page-break-after:auto}
-.f1{position:absolute;inset:8mm;border:1.2mm solid #b8860b}
-.f2{position:absolute;inset:12.5mm;border:.35mm solid var(--gold)}
-.br{position:absolute;width:40mm}.tl{top:13.5mm;left:13.5mm}.rb{bottom:13.5mm;right:13.5mm;transform:rotate(180deg)}
-.in{position:absolute;inset:24mm 24mm 38mm}
-.cross{margin-top:2mm}
-h1{font:700 19pt/1.2 var(--serif);letter-spacing:.04em;margin:3mm 0 0}
-.sub{font:600 8.5pt var(--sans);letter-spacing:.24em;color:var(--gold);margin:2mm 0 0}
-.rule{width:28mm;height:.7mm;margin:6mm auto;background:${gold}}
-.inv{font:500 11pt var(--sans);color:var(--soft);margin:0}
-.script{font:400 74pt/1 var(--script);color:var(--gold);margin:3mm 0 0}
-.purpose{font:600 17pt/1.3 var(--serif);max-width:130mm;margin:1mm auto 0}
-.date{margin:6mm auto 0;width:128mm;padding:5mm 0;border-top:.35mm solid var(--gold);border-bottom:.35mm solid var(--gold)}
-.date b{display:block;font:700 22pt var(--serif)}.date span{font:500 10.5pt var(--sans);color:var(--soft)}
-.name{margin:6mm auto 0;width:140mm;text-align:left;font:500 10pt var(--sans);color:var(--soft)}
-.name i{display:block;border-bottom:.3mm dotted var(--ink);height:8mm;margin-top:0}
-h3{font:700 9pt var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:6mm 0 4mm}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;text-align:center}
-.steps div{font:500 10pt/1.4 var(--sans)}
-.steps b{display:flex;width:10mm;height:10mm;margin:0 auto 2.5mm;border-radius:50%;background:#a8770a;color:#fff;font:700 15pt/1 var(--sans);align-items:center;justify-content:center}
-.verse{font:italic 500 14pt/1.3 var(--serif);color:var(--soft);margin:5mm 0 0}.verse small{display:block;font:600 7.5pt var(--sans);font-style:normal;letter-spacing:.18em;margin-top:1mm}
-.foot{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:4mm}
-.foot .rs{font:500 10.5pt/1.45 var(--sans)}.foot .rs b{display:block;font:700 9pt var(--sans);letter-spacing:.2em;color:var(--ink);margin-bottom:1mm}
-.foot .wel{font:400 34pt var(--script);color:var(--gold);line-height:1}
-/* back */
-.bh{font:700 25pt var(--serif);letter-spacing:.05em;margin:3mm 0 0;text-transform:uppercase}
-.bs{font:500 9.5pt var(--sans);color:var(--soft);margin:2mm 0 0}
-.tw{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:7mm}
+.pg{position:relative;width:210mm;height:297mm;background:var(--cream);overflow:hidden;text-align:center;color:var(--ink);font-family:var(--sans);margin:0 auto}
+.f1{position:absolute;inset:7mm;border:1.2mm solid #b8860b}.f2{position:absolute;inset:11.5mm;border:.35mm solid var(--gold)}
+.br{position:absolute;width:27mm}.tl{top:12.5mm;left:12.5mm}.rb{bottom:12.5mm;right:12.5mm;transform:rotate(180deg)}
+.in{position:absolute;inset:16mm 19mm 16mm}
+.cross{height:9mm;display:flex;justify-content:center}.cross svg{height:9mm;width:auto}
+h1{font:700 15pt/1.2 var(--serif);letter-spacing:.05em;margin:1.5mm 0 0}
+.sub{font:600 7.5pt var(--sans);letter-spacing:.24em;color:var(--gold);margin:1.2mm 0 0}
+.inv{font:500 8.5pt var(--sans);color:var(--soft);margin:2.5mm 0 0}.nl{display:flex;align-items:flex-end;gap:2mm;margin:1mm 14mm 0;font:500 8pt var(--sans);text-align:left}.nl span{flex:none}.nl i{flex:1;border-bottom:.35mm dotted var(--ink);height:5.5mm}
+.script{font:400 36pt/1.2 var(--script);color:var(--gold);margin:2.5mm 0 0}
+.purpose{font:600 11.5pt/1.25 var(--serif);margin:0 auto;max-width:150mm}
+.date{margin:3.5mm auto 0;width:140mm;padding:2.5mm 0;border-top:.35mm solid var(--gold);border-bottom:.35mm solid var(--gold);display:flex;justify-content:center;align-items:baseline;gap:5mm}
+.date b{font:700 16pt var(--serif)}.date span{font:500 9pt var(--sans);color:var(--soft)}
+.gh{margin:3mm auto 0;font:500 9pt/1.4 var(--sans);max-width:160mm}.gh b{font-weight:700}
+.how{margin:3mm auto 0;font:500 8.8pt/1.4 var(--sans);max-width:158mm}.how b{color:var(--gold)}
+.rsvp{margin:2mm auto 0;font:500 9pt var(--sans);display:flex;justify-content:center;gap:8mm}.rsvp b{letter-spacing:.2em;font-size:7.5pt;margin-right:1mm}
+.bh{font:700 15pt var(--serif);letter-spacing:.06em;margin:5mm 0 0;text-transform:uppercase}
+.bs{font:500 8pt var(--sans);color:var(--soft);margin:.5mm 0 0}
+.tw{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:3mm}
 .t{width:100%;border-collapse:collapse;font:500 9pt var(--sans)}
-.t th{background:var(--ink);color:#fff6d8;font:700 7.5pt var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:2mm 1mm;border:.35mm solid var(--ink)}
-.t td{border:.3mm solid #5b5340;height:10.3mm;padding:0 1.5mm;text-align:left;color:var(--soft)}
-.t .n{width:9mm;text-align:center}.t .a{width:27mm}
-.t td.n{color:var(--gold);font-weight:700}
-.tot{display:grid;grid-template-columns:1.4fr 1fr;gap:6mm;margin-top:6mm;text-align:left;font:600 9.5pt var(--sans)}
-.tot div{display:flex;align-items:flex-end;gap:2mm;border-bottom:.35mm solid var(--ink);height:9mm}.tot span{white-space:nowrap}
-.tot .big{background:#fbf1c9;border:.5mm solid var(--gold);padding:0 3mm;height:11mm;align-items:center;font-size:11pt}
-.thx{font:400 26pt var(--script);color:var(--gold);margin:5mm 0 0}.cn{font:500 8pt var(--sans);color:var(--soft);margin:0}
+.t th{background:var(--ink);color:#fff6d8;font:700 6.8pt var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:1.6mm 1mm;border:.3mm solid var(--ink)}
+.t td{border:.3mm solid #5b5340;height:9.4mm;padding:0 1.5mm;text-align:left;color:var(--soft)}
+.t .n{width:9mm;text-align:center}.t .a{width:27mm}.t td.n{color:var(--gold);font-weight:700;font-size:8pt}
+.tot{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:5mm;margin-top:4mm;text-align:left;font:600 8.5pt var(--sans);align-items:end}
+.tot div{display:flex;gap:2mm;border-bottom:.35mm solid var(--ink);height:8mm;align-items:flex-end}
+.tot .big{background:#fbf1c9;border:.5mm solid var(--gold);padding:0 3mm;height:9.5mm;align-items:center;font-size:10pt}
+.ft{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end}
+.ft .v{font:italic 500 9.5pt var(--serif);color:var(--soft);text-align:left}.ft .v small{display:block;font:600 6.5pt var(--sans);font-style:normal;letter-spacing:.16em}
+.ft .thx{font:400 22pt var(--script);color:var(--gold);line-height:1}
 </style></head><body>
 <section class="pg"><div class="f1"></div><div class="f2"></div><div class="br tl">${branch('p1')}</div><div class="br rb">${branch('p2')}</div>
 <div class="in">
 <div class="cross">${cross}</div>
-<h1>${esc(C.church)}<br>${esc(C.project)}</h1><p class="sub">${esc(C.place.toUpperCase())}</p>
-<div class="rule"></div>
-<p class="inv">warmly invites you, your family and friends to the</p>
+<h1>${esc(C.church)}${C.project ? '<br>' + esc(C.project) : ''}</h1><p class="sub">${esc(C.place.toUpperCase())}</p>
+<p class="inv">cordially invite</p><div class="nl"><span>${esc(C.inviteeLine)}</span><i></i></div>
 <div class="script">${esc(C.eventName)}</div>
-<p class="purpose">${esc(C.purpose)}</p>
+<p class="purpose">To a fundraising towards ${esc(C.purpose)}.</p>
 <div class="date"><b>${esc(DATE_LONG)}</b><span>${esc(C.venue)}${C.time ? ' · ' + esc(C.time) : ''}</span></div>
-${guestsBlock() ? `<div style="margin-top:6mm">${guestsBlock()}</div>` : ''}
-<div class="name">Card holder<i></i></div>
-<h3>How to take part</h3>
-<div class="steps"><div><b>1</b>Take this card and share it with your family and friends</div><div><b>2</b>Write each giver’s name and amount on the back</div><div><b>3</b>Bring your card to the church on ${esc(ord(DAY))} ${esc(MON)}</div></div>
-<p class="verse">“${esc(C.verse)}”<small>${esc(C.verseRef.toUpperCase())}</small></p>
-<div class="foot">${C.rsvp.map((r, i) => `<div class="rs" style="text-align:${i ? 'right' : 'left'}"><b>R.S.V.P</b>${esc(r.name)}<br>${esc(r.phone)}</div>`).join('').replace('</div><div', '</div><div class="wel">Welcome</div><div')}</div>
-</div></section>
-<section class="pg"><div class="f1"></div><div class="f2"></div><div class="br tl" style="width:34mm">${branch('p3')}</div><div class="br rb" style="width:34mm">${branch('p4')}</div>
-<div class="in" style="inset:22mm 20mm 22mm">
-<div class="cross" style="transform:scale(.8)">${cross}</div>
+${C.guestOfHonour ? `<p class="gh">Guest of honour will be <b>${esc(C.guestOfHonour)}</b>, assisted by <b>${esc(C.assistedBy)}</b></p>` : ''}
+<p class="how"><b>How to take part:</b> share this card with family &amp; friends · write each giver’s name and amount below · bring the card to church on ${esc(ord(DAY))} ${esc(MON)}.</p>
+<div class="rsvp">${C.rsvp.map(r => `<span><b>R.S.V.P</b>${esc(r.name)} ${esc(r.phone)}</span>`).join('')}</div>
 <div class="bh">Friends &amp; Family Contribution</div>
-<p class="bs">${esc(C.eventName)} · ${esc(DATE_LONG)} · ${esc(C.place)}</p>
-<div class="tw">${tbl(1)}${tbl(TABLE_ROWS + 1)}</div>
-<div class="tot"><div><span>Collected by:</span></div><div><span>Phone:</span></div></div>
-<div class="tot" style="grid-template-columns:1fr 1fr"><div class="big"><span>Total this card: KES</span></div><div><span>Signature:</span></div></div>
-<div class="thx">Thank you</div><p class="cn">Every gift, big or small, builds the house of the Lord.</p>
+<div class="tw">${tbl(1)}${tbl(ROWS + 1)}</div>
+<div class="tot"><div class="big"><span>Total this card: KES</span></div><div><span>Collected by:</span></div><div><span>Phone:</span></div></div>
+<div class="ft"><div class="v">“${esc(C.verse)}”<small>${esc(C.verseRef.toUpperCase())}</small></div><div class="thx">Thank you</div><div style="width:55mm"></div></div>
 </div></section></body></html>`;
 
 const w = (f, s) => { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };

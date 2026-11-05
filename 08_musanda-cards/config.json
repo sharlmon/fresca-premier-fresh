@@ -3,17 +3,24 @@
   "project": "AND ICT DIGITAL HUB",
   "place": "Gongo, Gem Constituency",
   "eventName": "Harambee",
-  "purpose": "Fund drive for the construction of the Church and ICT Digital Hub",
+  "purpose": "completion of construction, finishing and equipping of the Church and ICT Hub",
   "dateISO": "2026-12-05",
   "time": "",
-  "venue": "The Church Precinct, Gongo",
-  "guestOfHonour": "",
-  "assistedBy": "",
+  "venue": "The church’s Precinct, Gongo",
+  "guestOfHonour": "Hon. Elisha Ochieng Odhiambo (Akuba) - MP, Gem Constituency",
+  "assistedBy": "Mr. Francis Otieno - CEO, Teqova Business Solutions Limited",
   "otherGuests": [],
   "rsvp": [
-    { "name": "Bishop Meshack Otwo", "phone": "0726608360" },
-    { "name": "Hannington Odamna", "phone": "0724804232" }
+    {
+      "name": "Bishop Meshack Otwo",
+      "phone": "0726608360"
+    },
+    {
+      "name": "Emilly Odamna",
+      "phone": "0702822430"
+    }
   ],
   "verse": "God loves a cheerful giver.",
-  "verseRef": "2 Corinthians 9:7"
+  "verseRef": "2 Corinthians 9:7",
+  "inviteeLine": "Hon/Prof/Dr/Past/Rev/Bishop/Mr/Mrs"
 }
