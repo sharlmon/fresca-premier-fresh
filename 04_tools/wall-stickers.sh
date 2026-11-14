@@ -12,7 +12,7 @@ for f in "$ROOT"/07_wall-stickers/source/*.html; do
   "$CH" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf="$ROOT/07_wall-stickers/final/$out.pdf" "file://$f" >/dev/null 2>&1
 done
 # previews (small PNGs, not for print)
-for f in "$ROOT"/07_wall-stickers/source/0[1-7]-*.html; do
+for f in "$ROOT"/07_wall-stickers/source/[01][0-9]-*.html; do
   b=$(basename "$f" .html)
   "$CH" --headless --disable-gpu --hide-scrollbars --virtual-time-budget=8000 --window-size=2268,3201 --force-device-scale-factor=0.3 --screenshot="$ROOT/07_wall-stickers/preview/${b:0:2}.png" "file://$f" >/dev/null 2>&1
 done

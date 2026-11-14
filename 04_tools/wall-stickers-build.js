@@ -1,4 +1,4 @@
-// Wall stickers for the Fresca premises: 8 large posters, A1 portrait (594 x 841 mm) + 3 mm bleed = 600 x 847 mm.
+// Premier Veg wall stickers: 10 large posters, A1 portrait (594 x 841 mm) + 3 mm bleed = 600 x 847 mm.
 // Output: 07_wall-stickers/source/*.html, 07_wall-stickers/final/*.pdf (one per sticker + all together).
 // Run via wall-stickers.sh. Edit the text in STICKERS below and rebuild.
 const fs = require('fs'), path = require('path'), QR = require('qrcode');
@@ -6,6 +6,9 @@ const ROOT = '/Users/admin/Desktop/frescape';
 const OUT = `${ROOT}/07_wall-stickers/source`;
 const IMG = `file://${ROOT}/03_brochure/source/img`;
 const LOGO = `${IMG}/logo_t.png`;
+const WEB = 'file:///Users/admin/Desktop/premierveg/public/img'; // latest photos from the Premier Veg website
+const PH = `file://${ROOT}/07_wall-stickers/source/photos`;
+const TOTAL = '10';
 fs.mkdirSync(OUT, { recursive: true });
 
 const ic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -79,7 +82,7 @@ const wrap = (n, name, inner, bg = '') => `<!doctype html><html lang="en"><head>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>${CSS}</style></head><body>
 <section class="pg">${bg}${leaves}
-<div class="top"><div class="nm">Premier<small>${name}</small></div><div class="no">${n}<small> / 07</small></div></div>
+<div class="top"><div class="nm">Premier<small>${name}</small></div></div>
 <div class="body">${inner}</div>
 <div class="foot"><b>Fresh from Kenya to the World</b></div>
 </section></body></html>`;
@@ -88,7 +91,7 @@ const rules = (items, big = false) => `<div style="display:grid;gap:${big ? 10 :
   `<div class="glass" style="display:flex;align-items:center;gap:12mm;padding:${big ? 12 : 9}mm 12mm"><div class="ico" style="${big ? 'width:42mm;height:42mm' : ''}">${ICON[i]}</div><div><h3 style="font-size:${big ? 25 : 21}mm;line-height:1.05;color:var(--gm)">${h}</h3><p style="font-size:${big ? 12.5 : 11}mm;line-height:1.35;margin-top:2mm;font-weight:500;color:#44524a">${p}</p></div></div>`).join('')}</div>`;
 
 const U = f => `${IMG}/${f}`;
-const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
+const W = f => `${WEB}/products/${f}`;
 
 (async () => {
   const S = [];
@@ -97,18 +100,18 @@ const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
   S.push(['01', 'Welcome', 'welcome', `
   <div class="eyebrow abs" style="left:0;top:20mm;color:var(--gold);text-shadow:0 1mm 4mm rgba(0,0,0,.4)">Who we are</div>
   <h1 class="title wht abs" style="left:0;top:38mm;font-size:64mm">Premium produce,<br>grown with care.</h1>
-  <div class="circ" style="left:0;top:222mm;width:150mm;height:150mm;background-image:url(${U('field.jpg')})"></div>
+  <div class="circ" style="left:0;top:222mm;width:150mm;height:150mm;background-image:url(${WEB}/field-team.webp);background-position:50% 38%"></div>
   <div class="circ" style="left:192mm;top:222mm;width:150mm;height:150mm;background-image:url(${U('farmer.jpg')});background-position:35% 50%"></div>
-  <div class="circ" style="left:384mm;top:222mm;width:150mm;height:150mm;background-image:url(${U('beans2.jpg')})"></div>
+  <div class="circ" style="left:384mm;top:222mm;width:150mm;height:150mm;background-image:url(${WEB}/beans-tray.webp)"></div>
   <div class="glass abs" style="left:0;right:0;top:395mm;padding:9mm 12mm"><p class="lead" style="font-size:11.5mm">We are a Kenyan fresh produce export company. We supply premium-quality vegetables to international markets, packed to the highest standards for quality, food safety and traceability.</p></div>
   <div class="abs" style="left:0;right:0;top:505mm;display:grid;grid-template-columns:1fr 1fr;gap:12mm">
     <div class="glass" style="padding:9mm 12mm;border-left:5mm solid var(--gold)"><div style="display:flex;align-items:center;gap:6mm"><div class="ico" style="width:22mm;height:22mm">${ICON.eye}</div><h3 style="font-size:24mm;color:var(--gm)">Our Vision</h3></div><p style="font-size:9.5mm;line-height:1.4;margin-top:4mm;font-weight:500">To be a trusted supplier of premium Kenyan fresh vegetables to the world, through quality, consistency and exceptional service.</p></div>
     <div class="glass" style="padding:9mm 12mm;border-left:5mm solid var(--gold)"><div style="display:flex;align-items:center;gap:6mm"><div class="ico" style="width:22mm;height:22mm">${ICON.heart}</div><h3 style="font-size:24mm;color:var(--gm)">Our Mission</h3></div><p style="font-size:9.5mm;line-height:1.4;margin-top:4mm;font-weight:500">To provide fresh, safe, high-quality vegetables while building long-term partnerships on trust, integrity and reliability.</p></div>
   </div>
   <div class="glassd abs" style="left:0;right:0;bottom:14mm;height:54mm;display:grid;grid-template-columns:repeat(3,1fr);align-items:center;text-align:center">
-    ${[['20+', 'International markets'], ['500+', 'Trusted farmers'], ['100%', 'Quality & food safety']].map(([a, b]) => `<div><div class="serif" style="font-size:28mm;line-height:1;color:var(--gold)">${a}</div><div style="font-size:8.5mm;font-weight:600;margin-top:2mm">${b}</div></div>`).join('')}
+    ${[['3', 'Export markets: France, Netherlands, Switzerland'], ['2022', 'Established in Nairobi'], ['2', 'Audited standards: GlobalG.A.P. & SMETA']].map(([a, b]) => `<div><div class="serif" style="font-size:28mm;line-height:1;color:var(--gold)">${a}</div><div style="font-size:8.5mm;font-weight:600;margin-top:2mm">${b}</div></div>`).join('')}
   </div>`,
-    bgLayer(U('packhouseB.jpg'), '50% 25%', 'linear-gradient(180deg,rgba(20,90,44,.35) 0%,rgba(20,90,44,.45) 28%,rgba(255,247,224,.9) 52%,rgba(255,247,224,.96) 100%)')]);
+    bgLayer(`${WEB}/hero-workers.webp`, '50% 40%', 'linear-gradient(180deg,rgba(20,90,44,.35) 0%,rgba(20,90,44,.45) 28%,rgba(255,247,224,.9) 52%,rgba(255,247,224,.96) 100%)')]);
 
   // 02 process
   const step = (k, h, p, img, pos) => `<div class="glass" style="position:relative;height:100mm;padding:0 12mm;display:flex;align-items:center;gap:12mm;margin-bottom:10mm">
@@ -120,34 +123,34 @@ const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
   <h1 class="title wht abs" style="left:0;top:30mm;font-size:62mm">From Farm<br>to Export</h1>
   <div class="abs" style="left:0;right:0;top:182mm">
     ${step(1, 'Sourcing', 'Trusted farmers, finest produce, peak freshness.', U('farmer.jpg'), '35% 50%')}
-    ${step(2, 'Grading', 'Every harvest inspected and graded to international standards.', U('packhouseA.jpg'), '50% 60%')}
-    ${step(3, 'Packing', 'Packed with care in food-safe materials.', `file://${ROOT}/07_wall-stickers/source/photos/hero-workers.jpg`, '38% 66%')}
-    ${step(4, 'Delivery', 'On time, in perfect condition, to markets worldwide.', U('loading.png'), '50% 50%')}
+    ${step(2, 'Grading', 'Every harvest inspected and graded to international standards.', `${WEB}/export-mangetout-carton.webp`, '50% 60%')}
+    ${step(3, 'Packing', 'Packed with care in food-safe materials.', `${WEB}/hero-workers-900.webp`, '45% 55%')}
+    ${step(4, 'Delivery', 'On time, in perfect condition, to markets worldwide.', `${WEB}/export-pallet-strapped.webp`, '50% 45%')}
   </div>
   <div class="abs" style="left:0;right:0;bottom:12mm;text-align:center"><span style="display:inline-block;background:var(--or);color:#fff;border-radius:8mm;padding:5mm 12mm;font-weight:800;font-size:10mm;letter-spacing:.06em">FULL TRACEABILITY FROM FARM TO FINAL DELIVERY</span></div>`,
     bgLayer(U('field.jpg'), '50% 60%', 'linear-gradient(180deg,rgba(20,90,44,.78),rgba(20,90,44,.9))')]);
 
   // 03 products
-  const prods = [['French Beans', 'Extra fine & fine', 'tray-beans.jpg'], ['Snow Peas', 'Mangetout', 'tray-snow.jpg'], ['Sugar Snap Peas', 'Crisp & sweet', 'tray-snap.jpg'], ['Baby Corn', 'Fresh, tray-packed', 'corn.jpg']];
-  const range = [['Avocados', 'avocado.webp'], ['Mangoes', 'mango.webp'], ['Passion Fruit', 'passion-fruit.webp'], ['Carrots', 'carrots.webp'], ['Chillies', 'chillies.webp'], ['Rosemary', 'rosemary.webp'], ['Chives', 'chives.webp']];
+  const prods = [['Haricot Verts', 'Extra fine & fine', `${WEB}/beans-tray.webp`], ['Mangetouts', 'Flat-podded peas', `${WEB}/snow-peas.webp`], ['Sugar Snaps', 'Crisp & sweet', `${WEB}/sugar-snaps.webp`], ['Baby Corn', 'Fresh, tray-packed', U('corn.jpg')]];
+  const range = [['Avocados', 'avocados.webp'], ['Mangoes', 'mangoes.webp'], ['Passion Fruit', 'passion-fruits.webp'], ['Carrots', 'carrots.webp'], ['Chillies', 'chillies.webp'], ['Rosemary', 'rosemary.webp'], ['Chives', 'chives.webp']];
   S.push(['03', 'Our Products', 'products', `
   <div class="eyebrow abs" style="left:0;top:14mm">What we grow</div>
   <h1 class="title abs" style="left:0;top:30mm;font-size:62mm">Our Products</h1>
   <div class="abs" style="left:0;right:0;top:105mm;display:grid;grid-template-columns:1fr 1fr;gap:12mm">
-    ${prods.map(([n, t, f]) => `<div style="height:150mm;border-radius:10mm;overflow:hidden;position:relative;background:url(${U(f)}) center/cover;border:3mm solid #fff"><div style="position:absolute;left:0;right:0;bottom:0;padding:18mm 9mm 7mm;background:linear-gradient(0deg,rgba(20,90,44,.92),rgba(20,90,44,.55) 70%,rgba(20,90,44,0))"><h3 style="font-size:20mm;line-height:1;color:#fff">${n}</h3><div style="font-size:9.5mm;font-weight:700;color:var(--gold);margin-top:2mm">${t}</div></div></div>`).join('')}
+    ${prods.map(([n, t, f]) => `<div style="height:150mm;border-radius:10mm;overflow:hidden;position:relative;background:url(${f}) center/cover;border:3mm solid #fff"><div style="position:absolute;left:0;right:0;bottom:0;padding:18mm 9mm 7mm;background:linear-gradient(0deg,rgba(20,90,44,.92),rgba(20,90,44,.55) 70%,rgba(20,90,44,0))"><h3 style="font-size:20mm;line-height:1;color:#fff">${n}</h3><div style="font-size:9.5mm;font-weight:700;color:var(--gold);margin-top:2mm">${t}</div></div></div>`).join('')}
   </div>
   <div class="abs" style="left:0;top:432mm;font:400 22mm 'DM Serif Display';color:var(--gm)">Also from our range</div>
   <div class="abs" style="left:0;right:0;top:468mm;display:flex;justify-content:space-between">
     ${range.map(([n, f]) => `<div style="width:66mm;text-align:center"><div style="width:66mm;height:66mm;border-radius:50%;background:url(${W(f)}) center/cover;border:3mm solid #fff;box-shadow:0 0 0 1.5mm var(--gold)"></div><div style="font-weight:700;font-size:7.2mm;margin-top:4mm;color:var(--gm);line-height:1.15">${n}</div></div>`).join('')}
   </div>
   <div class="glassd abs" style="left:0;right:0;bottom:14mm;padding:9mm 12mm"><p style="font-size:10.5mm;line-height:1.4;font-weight:500">Selected, graded and packed for importers, retailers and food service across Europe and beyond, <b style="color:var(--gold)">to your specification</b>, with strict quality control and full traceability. Volumes vary through the year: ask what is in season.</p></div>`,
-    bgLayer(U('veg.png'), '50% 50%', 'linear-gradient(180deg,rgba(255,247,224,.93),rgba(255,247,224,.82))')]);
+    bgLayer(`${WEB}/beans-bunch.webp`, '50% 50%', 'linear-gradient(180deg,rgba(255,247,224,.95),rgba(255,247,224,.9))')]);
 
   // 04 hygiene
   S.push(['04', 'Food Safety', 'hygiene', `
   <div class="eyebrow abs" style="left:0;top:14mm;color:var(--gold);text-shadow:0 1mm 4mm rgba(0,0,0,.4)">Every worker, every day</div>
   <h1 class="title wht abs" style="left:0;top:30mm;font-size:62mm">Clean hands.<br>Safe food.</h1>
-  <div class="circ" style="right:0;top:6mm;width:140mm;height:140mm;background-image:url(file://${ROOT}/03_brochure/source/photos/w06.jpg);background-position:50% 60%"></div>
+  <div class="circ" style="right:0;top:6mm;width:140mm;height:140mm;background-image:url(${WEB}/hero-workers-2.webp);background-position:50% 55%"></div>
   <div class="abs" style="left:0;right:0;top:182mm">${rules([
     ['hands', 'Wash your hands', 'Before you start, after every break, and after using the toilet.'],
     ['hair', 'Hair net and clean coat', 'Hair fully covered. Clean coat on and buttoned. Closed shoes.'],
@@ -156,14 +159,14 @@ const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
     ['plaster', 'Cut or unwell? Tell your supervisor', 'Cover cuts with a blue plaster. Report any illness before you start work.'],
     ['sparkle', 'Keep your table clean', 'Clear waste, wipe down, and keep crates off the floor.'],
   ], true)}</div>`,
-    bgLayer(U('packhouseA.jpg'), '50% 35%', 'linear-gradient(180deg,rgba(20,90,44,.5) 0%,rgba(20,90,44,.45) 22%,rgba(255,247,224,.88) 40%,rgba(255,247,224,.93) 100%)')]);
+    bgLayer(`${WEB}/hero-workers-2.webp`, '50% 35%', 'linear-gradient(180deg,rgba(20,90,44,.5) 0%,rgba(20,90,44,.45) 22%,rgba(255,247,224,.88) 40%,rgba(255,247,224,.93) 100%)')]);
 
   // 05 quality
   S.push(['05', 'Quality & Packing', 'quality', `
   <div class="eyebrow abs" style="left:0;top:14mm;color:var(--gold)">Our standard</div>
   <h1 class="title wht abs" style="left:0;top:30mm;width:330mm;font-size:62mm">Grade it.<br>Pack it.<br>Trace it.</h1>
   <div class="circ" style="right:0;top:18mm;width:190mm;height:190mm;background-image:url(${U('beans2.jpg')});background-position:50% 55%"></div>
-  <div class="circ" style="right:128mm;top:200mm;width:90mm;height:90mm;background-image:url(${U('snowpacks.jpg')})"></div>
+  <div class="circ" style="right:128mm;top:200mm;width:90mm;height:90mm;background-image:url(${WEB}/export-mangetout-carton.webp);background-position:50% 45%"></div>
   <p class="abs" style="left:0;top:222mm;width:300mm;font:500 11mm/1.4 Montserrat;color:#fff;text-shadow:0 1mm 4mm rgba(0,0,0,.4)">Every pack carries our promise. Quality is everybody's job.</p>
   <div class="abs" style="left:0;right:0;top:310mm">${rules([
     ['search', 'Check every pod', 'Fresh, firm, bright green. Remove anything damaged, soft, or off-colour.'],
@@ -173,13 +176,13 @@ const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
     ['sun', 'Keep it cool', 'Never leave produce in the sun. Move packed boxes to the cold room quickly.'],
   ])}</div>
   <p class="abs" style="left:0;right:0;bottom:6mm;text-align:center;font:400 17mm 'DM Serif Display';color:var(--gm)">Not sure? Ask your supervisor before you pack.</p>`,
-    bgLayer(`file://${ROOT}/07_wall-stickers/source/photos/hero-workers.jpg`, '50% 55%', 'linear-gradient(180deg,rgba(20,90,44,.62) 0%,rgba(20,90,44,.5) 30%,rgba(255,247,224,.9) 48%,rgba(255,247,224,.94) 100%)')]);
+    bgLayer(`${WEB}/hero-workers.webp`, '50% 55%', 'linear-gradient(180deg,rgba(20,90,44,.62) 0%,rgba(20,90,44,.5) 30%,rgba(255,247,224,.9) 48%,rgba(255,247,224,.94) 100%)')]);
 
   // 06 safety
   S.push(['06', 'Workplace Safety', 'safety', `
   <div class="eyebrow abs" style="left:0;top:14mm;color:var(--gold);text-shadow:0 1mm 4mm rgba(0,0,0,.4)">Look after yourself and each other</div>
   <h1 class="title wht abs" style="left:0;top:30mm;font-size:62mm">Safety first,<br>always.</h1>
-  <div class="circ" style="right:0;top:44mm;width:112mm;height:112mm;background-image:url(${U('loading.png')});background-position:72% 50%"></div>
+  <div class="circ" style="right:0;top:44mm;width:112mm;height:112mm;background-image:url(${U('crates.jpg')});background-position:50% 40%"></div>
   <div class="abs" style="left:0;right:0;top:182mm">${rules([
     ['lift', 'Lift with your legs', 'Bend your knees, keep your back straight. Ask for help with heavy crates.'],
     ['stack', 'Stack crates safely', 'Stack straight and stable, never higher than the marked line.'],
@@ -188,7 +191,7 @@ const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
     ['exit', 'Know your exits', 'Find the nearest fire exit and assembly point. Never block a door.'],
     ['users', 'Report every accident', 'Tell your supervisor about injuries and near misses straight away.'],
   ], true)}</div>`,
-    bgLayer(U('packhouse.jpg'), '45% 50%', 'linear-gradient(180deg,rgba(20,90,44,.55) 0%,rgba(20,90,44,.45) 22%,rgba(255,247,224,.88) 40%,rgba(255,247,224,.93) 100%)')]);
+    bgLayer(`${WEB}/about/packhouse.jpg`, '45% 50%', 'linear-gradient(180deg,rgba(20,90,44,.55) 0%,rgba(20,90,44,.45) 22%,rgba(255,247,224,.88) 40%,rgba(255,247,224,.93) 100%)')]);
 
   // 07 promise
   const pill = (i, h, p, img, pos = 'center') => `<div class="glass" style="overflow:hidden"><div style="height:62mm;background:url(${img}) ${pos}/cover;position:relative"><div class="ico" style="position:absolute;left:10mm;bottom:-14mm;width:28mm;height:28mm;border:2.5mm solid #fff">${ICON[i]}</div></div><div style="padding:18mm 12mm 10mm"><h3 style="font-size:21mm;line-height:1;color:var(--gm)">${h}</h3><p style="font-size:9.5mm;line-height:1.4;margin-top:3mm;font-weight:500;color:#44524a">${p}</p></div></div>`;
@@ -196,13 +199,58 @@ const W = f => `file://${ROOT}/05_website/site/public/img/products/${f}`;
   <div class="eyebrow abs" style="left:0;top:14mm;color:var(--gold)">Why choose us</div>
   <h1 class="title wht abs" style="left:0;top:30mm;font-size:70mm">Quality.<br>Reliability.<br>Trust.</h1>
   <div class="abs" style="left:0;right:0;top:262mm;display:grid;grid-template-columns:1fr 1fr;gap:12mm">
-    ${pill('shield', 'Premium Quality', 'Carefully selected and graded to the highest international standards.', U('snowpacks.jpg'))}
-    ${pill('leaf', 'Food Safety', 'Strict quality control and full traceability at every step.', U('packhouseA.jpg'))}
-    ${pill('truck', 'Reliable Supply', 'Consistent volumes, flexible solutions and on-time delivery.', U('loading.png'), '75% 45%')}
-    ${pill('users', 'Partnership', 'Long-term relationships built on trust, integrity and service.', U('farmer.jpg'))}
+    ${pill('shield', 'Premium Quality', 'Carefully selected and graded to the highest international standards.', `${WEB}/beans-tray.webp`, '50% 50%')}
+    ${pill('leaf', 'Food Safety', 'Strict quality control and full traceability at every step.', `${WEB}/hero-workers-2.webp`, '50% 45%')}
+    ${pill('truck', 'Reliable Supply', 'Consistent volumes, flexible solutions and on-time delivery.', `${WEB}/export-pallet-strapped.webp`, '50% 40%')}
+    ${pill('users', 'Partnership', 'Long-term relationships built on trust, integrity and service.', `${WEB}/field-team.webp`, '50% 52%')}
   </div>
-  <div class="abs" style="left:0;right:0;bottom:14mm;height:92mm;border-radius:10mm;overflow:hidden;background:linear-gradient(90deg,rgba(20,90,44,.93) 55%,rgba(20,90,44,.3)),url(${U('sustain.png')}) 50% 30%/cover;border:1.5mm solid rgba(255,255,255,.3);padding:11mm 14mm"><h3 style="font-size:23mm;color:var(--gold);line-height:1;width:380mm">Sustainable today,<br>better tomorrow</h3><p style="font-size:9.5mm;line-height:1.4;margin-top:4mm;color:#e4f1dc;width:330mm">We work with local farmers and communities to promote sustainable agriculture and protect the environment.</p></div>`,
-    bgLayer(U('packhouseA.jpg'), '50% 30%', 'linear-gradient(180deg,rgba(20,90,44,.6),rgba(20,90,44,.88))')]);
+  <div class="abs" style="left:0;right:0;bottom:14mm;height:92mm;border-radius:10mm;overflow:hidden;background:linear-gradient(90deg,rgba(20,90,44,.93) 55%,rgba(20,90,44,.3)),url(${U('field.jpg')}) 50% 38%/cover;border:1.5mm solid rgba(255,255,255,.3);padding:11mm 14mm"><h3 style="font-size:23mm;color:var(--gold);line-height:1;width:380mm">Sustainable today,<br>better tomorrow</h3><p style="font-size:9.5mm;line-height:1.4;margin-top:4mm;color:#e4f1dc;width:330mm">We work with local farmers and communities to promote sustainable agriculture and protect the environment.</p></div>`,
+    bgLayer(`${WEB}/hero-workers-2.webp`, '50% 30%', 'linear-gradient(180deg,rgba(20,90,44,.6),rgba(20,90,44,.88))')]);
+
+  // ---- new in v2: pages 08-12 ----
+  const dark = (a = .5) => `linear-gradient(180deg,rgba(20,90,44,${a}) 0%,rgba(20,90,44,${a - .05}) 22%,rgba(255,247,224,.88) 40%,rgba(255,247,224,.93) 100%)`;
+  const photo = (img, l, t, w, h, pos = 'center', cap = '') => `<div class="abs" style="left:${l}mm;top:${t}mm;width:${w}mm;height:${h}mm;border-radius:10mm;overflow:hidden;border:3mm solid #fff;background:url(${img}) ${pos}/cover;box-shadow:0 3mm 10mm rgba(0,0,0,.25)">${cap}</div>`;
+  const capt = (tag, txt) => `<div style="position:absolute;left:0;right:0;bottom:0;padding:22mm 8mm 7mm;background:linear-gradient(0deg,rgba(20,90,44,.94),rgba(20,90,44,.6) 65%,rgba(20,90,44,0))"><span style="display:inline-block;background:var(--gold);color:var(--gd);font-weight:800;font-size:6.5mm;letter-spacing:.14em;text-transform:uppercase;border-radius:6mm;padding:1.6mm 4.5mm">${tag}</span><div style="font-size:8.6mm;line-height:1.25;font-weight:600;color:#fff;margin-top:2.5mm">${txt}</div></div>`;
+
+  // 08 crates
+  S.push(['08', 'Crates & Handling', 'crates', `
+  <div class="eyebrow abs" style="left:0;top:14mm;color:var(--gold);text-shadow:0 1mm 4mm rgba(0,0,0,.4)">Look after every crate</div>
+  <h1 class="title wht abs" style="left:0;top:30mm;font-size:62mm">Crates:<br>handle with care.</h1>
+  ${photo(U('trays.jpg'), 0, 164, 326, 172, '50% 50%')}
+  ${photo(U('crates.jpg'), 340, 164, 194, 172, '50% 30%')}
+  <div class="abs" style="left:0;right:0;top:352mm">${rules([
+    ['stack', 'Stack straight', 'Same-size crates together, never higher than the marked line.'],
+    ['box', 'Fill, do not overfill', 'Keep the top clear so the produce is never crushed.'],
+    ['sparkle', 'Clean crates only', 'No cracks, no dirt, no old produce. Damaged crates go to your supervisor.'],
+    ['lift', 'Lift together', 'Full crates are heavy. Bend your knees and ask for help.'],
+    ['layers', 'Crates off the floor', 'Use pallets or racks, never the bare floor.'],
+  ])}</div>`,
+    bgLayer(`${WEB}/about/packhouse.jpg`, '45% 50%', dark(.55))]);
+
+  // 09 packed and palletised
+  S.push(['09', 'Packed for Export', 'packed', `
+  <div class="eyebrow abs" style="left:0;top:14mm;color:var(--gold)">Packed for export</div>
+  <h1 class="title wht abs" style="left:0;top:30mm;font-size:62mm">Packed. Palletised.<br>Ready to fly.</h1>
+  ${photo(`${WEB}/export-haricot-pallet.webp`, 0, 172, 261, 205, '50% 45%', capt('Ready to ship', 'Haricot verts, palletised at the export office'))}
+  ${photo(`${WEB}/export-mangetout-pallet.webp`, 273, 172, 261, 205, '50% 45%', capt('Mangetouts', 'Cartons built and ready for the flight'))}
+  ${photo(`${WEB}/export-pallet-strapped.webp`, 0, 389, 261, 205, '50% 40%', capt('Secured', 'Strapped and corner-protected for the journey'))}
+  ${photo(`${WEB}/export-mangetout-carton.webp`, 273, 389, 261, 205, '50% 35%', capt('Inside the carton', 'Sorted, bagged and graded'))}
+  <div class="glass abs" style="left:0;right:0;top:608mm;padding:9mm 12mm"><p class="lead" style="font-size:11mm;line-height:1.4">Every order is graded, packed in branded cartons and built into secured pallets before it leaves our export office.</p></div>`,
+    bgLayer(`${WEB}/export-haricot-warehouse.webp`, '50% 30%', 'linear-gradient(180deg,rgba(20,90,44,.62),rgba(20,90,44,.9))')]);
+
+  // 10 markets and standards
+  const country = (c, city) => `<div class="glass" style="padding:7mm 8mm;text-align:center;border-bottom:4mm solid var(--gold)"><div class="ico" style="width:22mm;height:22mm;margin:0 auto 3mm">${ICON.pin}</div><h3 style="font-size:19mm;line-height:1;color:var(--gm)">${c}</h3><div style="font-size:8.5mm;font-weight:700;color:var(--or);margin-top:1.5mm;letter-spacing:.1em;text-transform:uppercase">${city}</div></div>`;
+  const cert = (logo, n, what, d) => `<div class="glass" style="padding:8mm 9mm;display:flex;gap:8mm;align-items:center"><div style="width:62mm;height:62mm;border-radius:6mm;background:#fff url(${logo}) center/78% no-repeat;flex:none;box-shadow:inset 0 0 0 1mm rgba(20,90,44,.12)"></div><div><h3 style="font-size:17mm;line-height:1;color:var(--gm)">${n}</h3><div style="font-size:7mm;font-weight:700;color:var(--or);letter-spacing:.08em;text-transform:uppercase;margin-top:1.5mm">${what}</div><p style="font-size:7.4mm;line-height:1.35;margin-top:2mm;font-weight:500;color:#44524a">${d}</p></div></div>`;
+  S.push(['10', 'Markets & Standards', 'markets', `
+  <div class="eyebrow abs" style="left:0;top:14mm">From Nairobi to your market</div>
+  <h1 class="title abs" style="left:0;top:30mm;font-size:62mm">Nairobi to the<br>world's tables.</h1>
+  <img class="abs" src="${PH}/globe.png" style="left:67mm;top:140mm;width:400mm;height:400mm" alt="">
+  <div class="abs" style="left:0;right:0;top:520mm;display:grid;grid-template-columns:repeat(3,1fr);gap:10mm">${country('France', 'Paris')}${country('Netherlands', 'Amsterdam')}${country('Switzerland', 'Zurich')}</div>
+  <div class="abs" style="left:0;right:0;top:612mm;display:grid;grid-template-columns:1fr 1fr;gap:10mm">
+    ${cert(`${WEB}/globalgap.svg`, 'GlobalG.A.P.', 'Good agricultural practice', 'Safe, sustainable farming from the farm through to harvest.')}
+    ${cert(`${WEB}/smeta.png`, 'SMETA', 'Ethical trade audit', 'Responsible labour, health and safety, and the environment.')}
+  </div>`,
+    bgLayer(`${WEB}/beans-bunch.webp`, '50% 50%', 'linear-gradient(180deg,rgba(255,247,224,.95),rgba(255,247,224,.9))')]);
 
   for (const [n, name, slug, inner, bg] of S) fs.writeFileSync(`${OUT}/${n}-${slug}.html`, wrap(n, name, inner, bg));
   const body = S.map(([n, name, slug, inner, bg]) => wrap(n, name, inner, bg).match(/<section[\s\S]*<\/section>/)[0]).join('\n');

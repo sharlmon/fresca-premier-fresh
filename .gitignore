@@ -25,3 +25,10 @@ frescaimages/
 _upload/
 .venv/
 __pycache__/
+
+# Heavy local-only files (not pushed)
+editfresca/
+07_wall-stickers/_v1-before-update/
+07_wall-stickers/panels/
+08_musanda-cards/whatsapp/
+07_wall-stickers/final/*.pdf
